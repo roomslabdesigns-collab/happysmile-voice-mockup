@@ -51,7 +51,7 @@ button:disabled{opacity:.45;cursor:not-allowed}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
 main{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--space-12);padding:var(--space-8) var(--space-4) var(--space-12);justify-items:center}
-@media (min-width:1180px){main{grid-template-columns:auto minmax(0,1fr);align-items:start;padding:var(--space-12);gap:var(--space-12);max-width:1600px;margin:0 auto}.phone{position:sticky;top:var(--space-12)}}
+@media (min-width:1180px){main{grid-template-columns:344px minmax(0,1fr);align-items:start;padding:var(--space-12);gap:var(--space-12);max-width:1600px;margin:0 auto}.phone{position:sticky;top:var(--space-12)}}
 
 /* ================= MOCKUP 1: Android phone ================= */
 .phone{position:relative;width:min(344px,100%);height:740px;background:var(--color-device);border-radius:44px;padding:9px;box-shadow:var(--shadow-device),inset 0 0 0 1.5px #3a3d43}
@@ -61,7 +61,7 @@ main{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--space-12);paddin
 .phone::after{top:232px;height:96px}
 .screen{position:relative;height:100%;border-radius:36px;overflow:hidden;background:var(--color-surface);font-family:Roboto,system-ui,sans-serif}
 .punch{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:13px;height:13px;border-radius:50%;background:#0c0d0f;z-index:3;box-shadow:inset 0 0 0 2px #1f2227}
-.abar{display:flex;justify-content:space-between;align-items:center;height:36px;padding:6px 22px 0;font-size:12.5px;font-weight:500;background:var(--color-chrome-bar)}
+.abar{display:flex;justify-content:space-between;align-items:center;height:36px;padding:6px 22px 0;font-size:12.5px;font-weight:500;background:var(--color-surface)}
 .abar .r{display:flex;gap:5px;align-items:center}
 .abar .ico{width:14px;height:14px;stroke-width:2.2}
 .chrome{display:flex;align-items:center;gap:10px;padding:6px 12px 8px;background:var(--color-chrome-bar)}
@@ -73,7 +73,17 @@ main{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--space-12);paddin
 .kebab{display:grid;gap:2.5px}
 .kebab i{width:3.5px;height:3.5px;border-radius:50%;background:#5f6368}
 
-.page{position:absolute;top:84px;left:0;right:0;bottom:0;overflow:hidden}
+.page{position:absolute;top:36px;left:0;right:0;bottom:0;overflow:hidden;font-family:"Inter Tight",system-ui,sans-serif}
+.appbar{display:flex;align-items:center;gap:var(--space-4);height:56px;padding:0 var(--space-4);font-size:var(--text-lg);font-weight:600}
+.appbar span{flex:1}
+.appbar .ico{width:22px;height:22px}
+.banner{height:120px;border-radius:var(--radius-lg);background:var(--color-primary-soft);color:var(--color-primary);display:grid;place-items:center;margin:var(--space-1) 0 var(--space-4)}
+.banner svg{width:150px}
+.tabbar{position:absolute;left:0;right:0;bottom:0;height:72px;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--color-border-subtle);background:var(--color-surface);padding-bottom:14px}
+.tabbar span{display:grid;justify-items:center;align-content:center;gap:2px;font-size:var(--text-xs);color:var(--color-text-tertiary)}
+.tabbar span.on{color:var(--color-primary);font-weight:600}
+.tabbar .ico{width:20px;height:20px}
+.link.sm{font-size:var(--text-xs);padding:0}
 .site{padding:0 var(--space-5);font-family:"Inter Tight",system-ui,sans-serif}
 .shead{display:flex;align-items:center;justify-content:space-between;height:52px;border-bottom:1px solid var(--color-border-subtle);margin:0 calc(var(--space-5)*-1);padding:0 var(--space-5)}
 .logo{display:flex;align-items:center;gap:var(--space-2);font-weight:600}
@@ -335,6 +345,8 @@ td.dim{color:var(--color-text-tertiary)}
   <symbol id="i-battery" viewBox="0 0 24 24"><rect x="2" y="7" width="16" height="10" rx="2"/><path d="M22 11v2M6 11v2"/></symbol>
   <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
   <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></symbol>
   <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
   <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></symbol>
   <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
@@ -363,24 +375,19 @@ td.dim{color:var(--color-text-tertiary)}
 
 <main>
   <!-- ============ MOCKUP 1: Android + Chrome ============ -->
-  <div class="phone" role="group" aria-label="Mockup 1: a patient's Android phone at the moment they ask HappySmile for a call">
+  <div class="phone" role="group" aria-label="Mockup 1: the HappySmile app on a patient's Android phone at the moment they ask for a call">
     <div class="screen">
       <div class="punch"></div>
       <div class="abar"><span class="num">7:42</span><span class="r"><svg class="ico"><use href="#i-wifi"/></svg><svg class="ico"><use href="#i-signal"/></svg><svg class="ico"><use href="#i-battery"/></svg><span class="num">78%</span></span></div>
-      <div class="chrome">
-        <svg class="ico home"><use href="#i-home"/></svg>
-        <div class="omni"><svg class="ico"><use href="#i-lock"/></svg><span>happysmile.in/braces</span></div>
-        <span class="tabs">3</span>
-        <span class="kebab"><i></i><i></i><i></i></span>
-      </div>
       <div class="page">
+      <div class="appbar"><svg class="ico"><use href="#i-back"/></svg><span>Braces and aligners</span><svg class="ico"><use href="#i-share"/></svg></div>
       <div class="site">
-        <div class="shead"><span class="logo"><i><svg><use href="#i-smile"/></svg></i>HappySmile</span><svg class="ico"><use href="#i-menu"/></svg></div>
-        <div class="crumbs">Treatments / Braces and aligners</div>
+        <div class="banner" aria-hidden="true"><svg viewBox="0 0 120 60" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M14 22c10 14 82 14 92 0"/><path d="M20 30c9 10 71 10 80 0"/><path d="M28 21v8M42 25v9M56 26v10M70 26v10M84 25v9M98 21v8"/></svg></div>
         <h1>Straighter teeth, minus the wait</h1>
-        <div class="rating"><svg class="ico"><use href="#i-star"/></svg><b>4.8</b>from 2,140 Google reviews</div>
+        <div class="rating"><svg class="ico"><use href="#i-star"/></svg><b>4.8</b>from 2,140 reviews</div>
         <div class="price">From <b>₹2,999/month</b> with EMI</div>
       </div>
+      <nav class="tabbar" aria-hidden="true"><span class="on"><svg class="ico"><use href="#i-home"/></svg>Home</span><span><svg class="ico"><use href="#i-cal"/></svg>Visits</span><span><svg class="ico"><use href="#i-msg"/></svg>Chat</span><span><svg class="ico"><use href="#i-user"/></svg>Profile</span></nav>
       <div class="scrim"></div>
 
       <div class="sheet" id="sheet">
@@ -388,8 +395,8 @@ td.dim{color:var(--color-text-tertiary)}
         <div id="ask">
           <h2>Get a call about braces</h2>
           <p class="eta"><svg class="ico"><use href="#i-clock"/></svg>We call back in about 2 minutes</p>
-          <div class="fld"><small>Name</small><span>Priya Sharma</span></div>
-          <div class="fld"><small>Mobile</small><span class="num">+91 98XXX X4210 <em><svg class="ico"><use href="#i-check"/></svg>Verified</em></span></div>
+          <div class="fld"><small>We'll call</small><span>Priya Sharma <button type="button" class="link sm" data-phone-toast>Change</button></span></div>
+          <div class="fld"><small>On</small><span class="num">+91 98XXX X4210 <em><svg class="ico"><use href="#i-check"/></svg>From your profile</em></span></div>
           <div class="lang" role="group" aria-label="Call language">
             <button type="button" aria-pressed="false">English</button>
             <button type="button" aria-pressed="true">हिन्दी</button>
@@ -587,6 +594,7 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-toast]');i
 $$('.lang button').forEach(b=>b.addEventListener('click',()=>$$('.lang button').forEach(x=>x.setAttribute('aria-pressed',x===b))));
 $('#cta').addEventListener('click',()=>{$('#ask').hidden=true;$('#sent').hidden=false;$('#undo').focus()});
 $('#undo').addEventListener('click',()=>{$('#sent').hidden=true;$('#ask').hidden=false;$('#cta').focus()});
+$('[data-phone-toast]').addEventListener('click',e=>{const b=e.currentTarget;b.textContent=b.textContent==='Change'?'Editing':'Change'});
 
 /* ---- navigation ---- */
 $$('.nav').forEach(n=>n.addEventListener('click',()=>{
