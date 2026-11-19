@@ -7,14 +7,13 @@
 <meta name="description" content="Mockup 1: a patient's phone at the moment they ask for a call. Mockup 2: the front-desk dashboard afterwards.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ---------- tokens ---------- */
 :root{
   --color-canvas:#e9ecf1;
   --color-surface:#ffffff;
   --color-surface-sunken:#f2f4f7;
-  --color-surface-raised:#ffffff;
   --color-text-primary:#161a22;
   --color-text-secondary:#465061;
   --color-text-tertiary:#5f6878;
@@ -31,7 +30,8 @@
   --color-urgent-soft:#fbe9e7;
   --color-attention:#7a5200;
   --color-attention-soft:#fbf1dc;
-  --color-device:#14171c;
+  --color-device:#161a22;
+  --color-chrome-bar:#f2f4f7;
   --focus-ring:0 0 0 3px #9db1f2;
   --radius-sm:8px; --radius-md:12px; --radius-lg:18px;
   --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:20px; --space-6:24px; --space-8:32px; --space-12:48px;
@@ -42,40 +42,59 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--color-canvas);color:var(--color-text-primary);font:var(--text-base)/1.5 "Inter Tight",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 button{font:inherit;color:inherit;cursor:pointer;transition:background-color var(--duration-fast) ease-out,color var(--duration-fast) ease-out,border-color var(--duration-fast) ease-out}
-button:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+button:focus-visible,[tabindex]:focus-visible{outline:none;box-shadow:var(--focus-ring)}
 button:disabled{opacity:.45;cursor:not-allowed}
 .num{font-variant-numeric:tabular-nums}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
 .ico{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+[hidden]{display:none!important}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
-/* ---------- canvas: mobile base ---------- */
-main{display:grid;gap:var(--space-12);padding:var(--space-8) var(--space-4) var(--space-12);justify-items:center}
-@media (min-width:1180px){main{grid-template-columns:auto minmax(0,1fr);align-items:center;padding:var(--space-12);gap:var(--space-12);max-width:1600px;margin:0 auto}}
+main{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--space-12);padding:var(--space-8) var(--space-4) var(--space-12);justify-items:center}
+@media (min-width:1180px){main{grid-template-columns:auto minmax(0,1fr);align-items:start;padding:var(--space-12);gap:var(--space-12);max-width:1600px;margin:0 auto}.phone{position:sticky;top:var(--space-12)}}
 
-/* ================= MOCKUP 1: phone ================= */
-.phone{position:relative;width:min(340px,100%);height:720px;background:var(--color-device);border-radius:52px;padding:10px;box-shadow:var(--shadow-device)}
-.screen{position:relative;height:100%;border-radius:43px;overflow:hidden;background:var(--color-surface)}
-.island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:96px;height:28px;border-radius:20px;background:#000;z-index:3}
-.status{display:flex;justify-content:space-between;align-items:center;padding:16px 28px 0;height:50px;font-size:var(--text-sm);font-weight:600}
-.status .ico{width:15px;height:15px}
-.status span:last-child{display:flex;gap:6px}
+/* ================= MOCKUP 1: Android phone ================= */
+.phone{position:relative;width:min(344px,100%);height:740px;background:var(--color-device);border-radius:44px;padding:9px;box-shadow:var(--shadow-device),inset 0 0 0 1.5px #3a3d43}
+@media (min-width:400px){.phone::before,.phone::after{content:""}}
+.phone::before,.phone::after{position:absolute;right:-3px;width:3px;border-radius:0 2px 2px 0;background:#2c2f34}
+.phone::before{top:150px;height:58px}
+.phone::after{top:232px;height:96px}
+.screen{position:relative;height:100%;border-radius:36px;overflow:hidden;background:var(--color-surface);font-family:Roboto,system-ui,sans-serif}
+.punch{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:13px;height:13px;border-radius:50%;background:#0c0d0f;z-index:3;box-shadow:inset 0 0 0 2px #1f2227}
+.abar{display:flex;justify-content:space-between;align-items:center;height:36px;padding:6px 22px 0;font-size:12.5px;font-weight:500;background:var(--color-chrome-bar)}
+.abar .r{display:flex;gap:5px;align-items:center}
+.abar .ico{width:14px;height:14px;stroke-width:2.2}
+.chrome{display:flex;align-items:center;gap:10px;padding:6px 12px 8px;background:var(--color-chrome-bar)}
+.chrome .home{width:18px;height:18px;color:#5f6368}
+.omni{flex:1;display:flex;align-items:center;gap:6px;background:#fff;border-radius:999px;padding:7px 12px;font-size:13px;color:#202124;min-width:0}
+.omni .ico{width:13px;height:13px;color:#5f6368}
+.omni span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tabs{width:18px;height:18px;border:2px solid #5f6368;border-radius:4px;font-size:9.5px;font-weight:700;display:grid;place-items:center;color:#5f6368}
+.kebab{display:grid;gap:2.5px}
+.kebab i{width:3.5px;height:3.5px;border-radius:50%;background:#5f6368}
 
-.web{padding:var(--space-2) var(--space-5) 0}
-.brand{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-5)}
+.page{position:absolute;top:84px;left:0;right:0;bottom:0;overflow:hidden}
+.site{padding:0 var(--space-5);font-family:"Inter Tight",system-ui,sans-serif}
+.shead{display:flex;align-items:center;justify-content:space-between;height:52px;border-bottom:1px solid var(--color-border-subtle);margin:0 calc(var(--space-5)*-1);padding:0 var(--space-5)}
 .logo{display:flex;align-items:center;gap:var(--space-2);font-weight:600}
 .logo i{width:24px;height:24px;border-radius:7px;background:var(--color-primary);display:grid;place-items:center}
 .logo i svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round}
-.crumb{font-size:var(--text-sm);color:var(--color-text-tertiary)}
-.web h1{font-size:28px;line-height:1.08;letter-spacing:-.02em;margin:0 0 var(--space-2);font-weight:600;max-width:12ch}
-.web p{margin:0;color:var(--color-text-secondary);font-size:var(--text-sm);max-width:30ch}
+.shead .ico{width:20px;height:20px}
+.crumbs{font-size:var(--text-xs);color:var(--color-text-tertiary);margin:var(--space-4) 0 var(--space-2)}
+.site h1{font-size:26px;line-height:1.1;letter-spacing:-.02em;margin:0 0 var(--space-2);font-weight:600;max-width:13ch}
+.rating{display:flex;align-items:center;gap:5px;font-size:var(--text-sm);color:var(--color-text-secondary)}
+.rating .ico{width:14px;height:14px;fill:#e2a100;stroke:#e2a100}
+.rating b{color:var(--color-text-primary)}
+.price{display:inline-flex;gap:6px;align-items:baseline;margin-top:var(--space-2);font-size:var(--text-sm);color:var(--color-text-secondary)}
+.price b{font-size:var(--text-base);color:var(--color-text-primary)}
 
-.sheet{position:absolute;left:0;right:0;bottom:0;background:var(--color-surface-raised);border-radius:28px 28px 0 0;padding:var(--space-3) var(--space-5) var(--space-6);border-top:1px solid var(--color-border-subtle);box-shadow:0 -16px 40px -20px rgba(22,26,34,.25)}
-.grab{width:38px;height:5px;border-radius:3px;background:var(--color-border-strong);margin:0 auto var(--space-4)}
+.scrim{position:absolute;inset:0;background:rgba(22,26,34,.28)}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:var(--color-surface);border-radius:26px 26px 0 0;padding:var(--space-3) var(--space-5) 30px;font-family:"Inter Tight",system-ui,sans-serif;box-shadow:0 -12px 32px -16px rgba(22,26,34,.35)}
+.grab{width:36px;height:4px;border-radius:2px;background:var(--color-border-strong);margin:0 auto var(--space-4)}
 .sheet h2{font-size:var(--text-lg);margin:0;font-weight:600}
 .eta{display:flex;align-items:center;gap:6px;font-size:var(--text-sm);color:var(--color-success);margin:2px 0 var(--space-4)}
 .eta .ico{width:14px;height:14px}
-.fld{display:block;border:1px solid var(--color-border-subtle);border-radius:var(--radius-md);padding:7px 12px;margin-bottom:var(--space-2)}
+.fld{border:1px solid var(--color-border-subtle);border-radius:var(--radius-md);padding:7px 12px;margin-bottom:var(--space-2)}
 .fld small{display:block;font-size:var(--text-xs);color:var(--color-text-tertiary)}
 .fld span{display:flex;justify-content:space-between;align-items:center;font-weight:500}
 .fld em{font-style:normal;font-size:var(--text-xs);color:var(--color-success);display:flex;align-items:center;gap:3px}
@@ -83,13 +102,25 @@ main{display:grid;gap:var(--space-12);padding:var(--space-8) var(--space-4) var(
 .lang{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:var(--color-surface-sunken);border-radius:var(--radius-md);padding:3px;margin:var(--space-1) 0 var(--space-3)}
 .lang button{border:0;background:none;border-radius:9px;padding:7px 0;font-size:var(--text-sm);color:var(--color-text-secondary)}
 .lang button:hover{color:var(--color-text-primary)}
-.lang button[aria-pressed="true"]{background:var(--color-surface-raised);color:var(--color-text-primary);font-weight:600;box-shadow:0 1px 2px rgba(22,26,34,.12)}
+.lang button[aria-pressed="true"]{background:var(--color-surface);color:var(--color-text-primary);font-weight:600;box-shadow:0 1px 2px rgba(22,26,34,.12)}
 .cta{width:100%;border:0;border-radius:var(--radius-md);padding:14px;background:var(--color-primary);color:var(--color-on-primary);font-weight:600;display:flex;justify-content:center;align-items:center;gap:var(--space-2)}
 .cta:hover{background:var(--color-primary-hover)}
 .cta:active{background:var(--color-primary-press)}
-.cta[aria-busy="true"]{background:var(--color-success)}
 .consent{display:flex;gap:var(--space-2);font-size:var(--text-xs);color:var(--color-text-tertiary);margin:var(--space-3) 0 0;line-height:1.45}
 .consent .ico{width:14px;height:14px;margin-top:1px}
+.done{text-align:left}
+.ring{width:52px;height:52px;border-radius:50%;background:var(--color-success-soft);color:var(--color-success);display:grid;place-items:center;margin-bottom:var(--space-3)}
+.ring .ico{width:24px;height:24px}
+.done p{margin:0 0 var(--space-3);font-size:var(--text-sm);color:var(--color-text-secondary)}
+.caller{display:flex;gap:var(--space-3);align-items:center;border:1px solid var(--color-border-subtle);border-radius:var(--radius-md);padding:10px 12px;margin-bottom:var(--space-3)}
+.caller>span:nth-child(2){min-width:0}
+.caller b{display:block;font-size:var(--text-sm);white-space:nowrap}
+.caller small{font-size:var(--text-xs);color:var(--color-text-tertiary);white-space:nowrap}
+.caller .ok{margin-left:auto;font-size:var(--text-xs);color:var(--color-success);display:flex;gap:3px;align-items:center;font-weight:600}
+.caller .ok .ico{width:13px;height:13px}
+.link{border:0;background:none;color:var(--color-primary);font-weight:600;font-size:var(--text-sm);padding:6px 0}
+.link:hover{color:var(--color-primary-hover);text-decoration:underline}
+.gesture{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:108px;height:4px;border-radius:2px;background:var(--color-device);opacity:.75;z-index:4}
 
 /* ================= MOCKUP 2: laptop ================= */
 .laptop{width:100%;max-width:1180px;min-width:0}
@@ -97,22 +128,28 @@ main{display:grid;gap:var(--space-12);padding:var(--space-8) var(--space-4) var(
 .cam{width:6px;height:6px;border-radius:50%;background:#2a2f37;margin:-6px auto 8px}
 .base{height:16px;background:linear-gradient(#c9ced6,#aab1bb);border-radius:0 0 14px 14px;position:relative}
 .base::after{content:"";position:absolute;left:50%;top:0;transform:translateX(-50%);width:16%;height:6px;background:#9aa1ac;border-radius:0 0 8px 8px}
-.app{background:var(--color-surface);border-radius:6px 6px 0 0;overflow:hidden;display:grid;min-height:560px}
+.app{background:var(--color-surface);border-radius:6px 6px 0 0;overflow:hidden;display:grid;min-height:640px;position:relative}
 @media (min-width:860px){.app{grid-template-columns:188px minmax(0,1fr)}}
 
-.side{display:none;flex-direction:column;gap:2px;padding:var(--space-4) var(--space-3);border-right:1px solid var(--color-border-subtle);background:var(--color-surface-sunken)}
-@media (min-width:860px){.side{display:flex}}
-.clinic{display:flex;gap:var(--space-2);align-items:center;padding:var(--space-1) var(--space-2) var(--space-4);margin-bottom:var(--space-2);border-bottom:1px solid var(--color-border-subtle)}
+.side{display:flex;gap:2px;padding:var(--space-2);border-bottom:1px solid var(--color-border-subtle);background:var(--color-surface-sunken);overflow-x:auto}
+.side .clinic,.side .fill,.side .pilot{display:none}
+@media (min-width:860px){
+  .side{flex-direction:column;padding:var(--space-4) var(--space-3);border-bottom:0;border-right:1px solid var(--color-border-subtle);overflow:visible}
+  .side .clinic,.side .pilot{display:flex}
+  .side .fill{display:block;flex:1}
+}
+.clinic{gap:var(--space-2);align-items:center;padding:var(--space-1) var(--space-2) var(--space-4);margin-bottom:var(--space-2);border-bottom:1px solid var(--color-border-subtle)}
 .clinic .logo i{width:28px;height:28px}
 .clinic b{display:block;font-size:var(--text-sm);line-height:1.2}
 .clinic small{font-size:var(--text-xs);color:var(--color-text-tertiary)}
-.nav{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:var(--radius-sm);font-size:var(--text-sm);color:var(--color-text-secondary);border:0;background:none;width:100%;text-align:left}
-.nav:hover{background:var(--color-surface-raised);color:var(--color-text-primary)}
-.nav[aria-current="page"]{background:var(--color-surface-raised);color:var(--color-text-primary);font-weight:600;box-shadow:inset 0 0 0 1px var(--color-border-subtle)}
+.nav{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:var(--radius-sm);font-size:var(--text-sm);color:var(--color-text-secondary);border:0;background:none;text-align:left;white-space:nowrap;flex:none}
+@media (min-width:860px){.nav{width:100%}}
+.nav:hover{background:var(--color-surface);color:var(--color-text-primary)}
+.nav:active{background:var(--color-border-subtle)}
+.nav[aria-current="page"]{background:var(--color-surface);color:var(--color-text-primary);font-weight:600;box-shadow:inset 0 0 0 1px var(--color-border-subtle)}
 .nav .count{margin-left:auto;font-size:var(--text-xs);font-weight:600;background:var(--color-urgent);color:#fff;border-radius:999px;padding:0 7px;line-height:18px}
-.side .fill{flex:1}
-.pilot{font-size:var(--text-xs);color:var(--color-text-secondary);line-height:1.45;padding:var(--space-3);border:1px solid var(--color-border-subtle);border-radius:var(--radius-md);background:var(--color-surface)}
-.pilot b{display:block;color:var(--color-text-primary);font-size:var(--text-sm)}
+.pilot{flex-direction:column;font-size:var(--text-xs);color:var(--color-text-secondary);line-height:1.45;padding:var(--space-3);border:1px solid var(--color-border-subtle);border-radius:var(--radius-md);background:var(--color-surface)}
+.pilot b{color:var(--color-text-primary);font-size:var(--text-sm)}
 .bar{height:4px;border-radius:2px;background:var(--color-border-subtle);margin-top:var(--space-2);overflow:hidden}
 .bar i{display:block;height:100%;width:50%;background:var(--color-primary)}
 
@@ -121,23 +158,25 @@ main{display:grid;gap:var(--space-12);padding:var(--space-8) var(--space-4) var(
 .top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:var(--space-3);margin-bottom:var(--space-6)}
 .top h2{margin:0;font-size:var(--text-xl);font-weight:600;letter-spacing:-.01em}
 .top p{margin:0;font-size:var(--text-sm);color:var(--color-text-tertiary)}
-.tools{display:flex;gap:var(--space-2)}
-.ghost{border:1px solid var(--color-border-subtle);background:var(--color-surface-raised);border-radius:var(--radius-sm);padding:7px 12px;font-size:var(--text-sm);display:inline-flex;gap:6px;align-items:center;color:var(--color-text-secondary)}
+.tools{display:flex;gap:var(--space-2);flex-wrap:wrap}
+.ghost{border:1px solid var(--color-border-subtle);background:var(--color-surface);border-radius:var(--radius-sm);padding:7px 12px;font-size:var(--text-sm);display:inline-flex;gap:6px;align-items:center;color:var(--color-text-secondary)}
 .ghost:hover{border-color:var(--color-border-strong);color:var(--color-text-primary)}
 .ghost:active{background:var(--color-surface-sunken)}
+.ghost[aria-pressed="true"]{background:var(--color-primary-soft);border-color:var(--color-primary);color:var(--color-primary);font-weight:600}
 
-/* lead metric band */
+/* leads: lead band */
 .lead{display:grid;gap:var(--space-4);padding-bottom:var(--space-6);margin-bottom:var(--space-6);border-bottom:1px solid var(--color-border-subtle)}
 @media (min-width:860px){.lead{grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--space-8);align-items:end}}
 .hero small{font-size:var(--text-sm);color:var(--color-text-secondary)}
-.hero .big{display:flex;align-items:baseline;gap:var(--space-3);flex-wrap:wrap}
-.hero .big b{font-size:var(--text-display);font-weight:600;letter-spacing:-.03em;line-height:1}
-.hero .big span{font-size:var(--text-sm);color:var(--color-text-secondary)}
-.hero .big .up{color:var(--color-success);font-weight:600;display:inline-flex;align-items:center;gap:2px}
+.big{display:flex;align-items:baseline;gap:var(--space-3);flex-wrap:wrap}
+.big b{font-size:var(--text-display);font-weight:600;letter-spacing:-.03em;line-height:1}
+.big span{font-size:var(--text-sm);color:var(--color-text-secondary)}
+.big .up{color:var(--color-success);font-weight:600;display:inline-flex;align-items:center;gap:2px}
 .compare{display:grid;gap:6px;margin-top:var(--space-4);max-width:440px}
 .crow{display:grid;grid-template-columns:120px 1fr 28px;gap:var(--space-3);align-items:center;font-size:var(--text-sm);color:var(--color-text-secondary)}
 .track{height:8px;border-radius:4px;background:var(--color-surface-sunken)}
 .track i{display:block;height:100%;border-radius:4px}
+.t-ai{background:var(--color-primary)} .t-ctl{background:var(--color-border-strong)}
 .secondary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--color-border-subtle);border-radius:var(--radius-md)}
 .secondary div{padding:var(--space-3)}
 .secondary div+div{border-left:1px solid var(--color-border-subtle)}
@@ -145,45 +184,47 @@ main{display:grid;gap:var(--space-12);padding:var(--space-8) var(--space-4) var(
 .secondary b{font-size:var(--text-lg);font-weight:600}
 .secondary span{display:block;font-size:var(--text-xs);color:var(--color-text-tertiary)}
 
-/* inbox */
-.h3row{display:flex;justify-content:space-between;align-items:baseline;gap:var(--space-3);margin-bottom:var(--space-3)}
+.h3row{display:flex;justify-content:space-between;align-items:baseline;gap:var(--space-3);margin-bottom:var(--space-3);flex-wrap:wrap}
 .h3row h3{margin:0;font-size:var(--text-base);font-weight:600}
 .h3row span{font-size:var(--text-sm);color:var(--color-text-tertiary)}
+
+/* inbox */
 .inbox{display:grid;border:1px solid var(--color-border-subtle);border-radius:var(--radius-md);overflow:hidden;margin-bottom:var(--space-8)}
 @media (min-width:1000px){.inbox{grid-template-columns:270px minmax(0,1fr)}}
 .list{background:var(--color-surface-sunken);border-bottom:1px solid var(--color-border-subtle)}
 @media (min-width:1000px){.list{border-bottom:0;border-right:1px solid var(--color-border-subtle)}}
 .item{display:grid;grid-template-columns:32px minmax(0,1fr) auto;gap:10px;width:100%;text-align:left;border:0;background:none;padding:12px 14px;border-bottom:1px solid var(--color-border-subtle)}
 .item:last-child{border-bottom:0}
+.item>span{min-width:0}
 .item:hover{background:var(--color-surface)}
-.item[aria-selected="true"]{background:var(--color-surface-raised);box-shadow:inset 0 0 0 1.5px var(--color-primary)}
+.item[aria-selected="true"]{background:var(--color-surface);box-shadow:inset 0 0 0 1.5px var(--color-primary)}
 .item b{display:block;font-size:var(--text-sm);font-weight:600}
 .item small{display:block;font-size:var(--text-xs);color:var(--color-text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .item time{font-size:var(--text-xs);color:var(--color-text-tertiary)}
-.av{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:var(--text-xs);font-weight:600;background:var(--color-primary-soft);color:var(--color-primary)}
+.item.cleared b{text-decoration:line-through;color:var(--color-text-tertiary)}
+.av{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:var(--text-xs);font-weight:600;background:var(--color-primary-soft);color:var(--color-primary);flex:none}
 .flag{display:inline-flex;align-items:center;gap:4px;font-size:var(--text-xs);font-weight:600;margin-top:3px}
 .flag .ico{width:13px;height:13px}
-.f-urgent{color:var(--color-urgent)} .f-attn{color:var(--color-attention)} .f-plain{color:var(--color-text-secondary)}
+.f-urgent{color:var(--color-urgent)} .f-attn{color:var(--color-attention)} .f-plain{color:var(--color-text-secondary)} .f-ok{color:var(--color-success)}
 
-.detail{padding:var(--space-5);min-width:0;background:var(--color-surface-raised)}
+.detail{padding:var(--space-5);min-width:0}
 .dhead{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--space-3);margin-bottom:var(--space-4)}
 .dhead .who{display:flex;gap:var(--space-3);align-items:center}
 .dhead .av{width:40px;height:40px;font-size:var(--text-sm)}
 .dhead h4{margin:0;font-size:var(--text-lg);font-weight:600}
 .dhead p{margin:0;font-size:var(--text-sm);color:var(--color-text-tertiary)}
 .acts{display:flex;gap:var(--space-2);flex-wrap:wrap}
-.btn{border:1px solid var(--color-border-subtle);background:var(--color-surface-raised);border-radius:var(--radius-sm);padding:8px 13px;font-size:var(--text-sm);font-weight:500;display:inline-flex;gap:7px;align-items:center}
+.btn{border:1px solid var(--color-border-subtle);background:var(--color-surface);border-radius:var(--radius-sm);padding:8px 13px;font-size:var(--text-sm);font-weight:500;display:inline-flex;gap:7px;align-items:center}
 .btn:hover{border-color:var(--color-border-strong)}
 .btn:active{background:var(--color-surface-sunken)}
 .btn.primary{background:var(--color-primary);color:var(--color-on-primary);border-color:var(--color-primary)}
 .btn.primary:hover{background:var(--color-primary-hover)}
 .btn.primary:active{background:var(--color-primary-press)}
+.btn.sm{padding:5px 10px;font-size:var(--text-xs)}
 .why{display:flex;gap:var(--space-2);align-items:flex-start;border:1px solid var(--color-border-subtle);border-radius:var(--radius-md);padding:10px 12px;font-size:var(--text-sm);margin-bottom:var(--space-4)}
 .why .ico{margin-top:2px}
-.why.u{background:var(--color-urgent-soft);border-color:#f2c9c4}
-.why.u .ico{color:var(--color-urgent)}
-.why.a{background:var(--color-attention-soft);border-color:#f0dcb0}
-.why.a .ico{color:var(--color-attention)}
+.why.u{background:var(--color-urgent-soft);border-color:#f2c9c4}.why.u .ico{color:var(--color-urgent)}
+.why.a{background:var(--color-attention-soft);border-color:#f0dcb0}.why.a .ico{color:var(--color-attention)}
 .why.p{background:var(--color-surface-sunken)}
 .facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-2);margin-bottom:var(--space-4)}
 .facts div{border:1px solid var(--color-border-subtle);border-radius:var(--radius-sm);padding:8px 10px}
@@ -202,34 +243,105 @@ main{display:grid;gap:var(--space-12);padding:var(--space-8) var(--space-4) var(
 .quote li{color:var(--color-text-secondary)}
 .quote b{color:var(--color-text-primary);font-weight:600}
 
-/* table */
-.tw:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+/* tables */
 .tw{border:1px solid var(--color-border-subtle);border-radius:var(--radius-md);overflow-x:auto;position:relative}
 table{width:100%;border-collapse:collapse;font-size:var(--text-sm);min-width:640px}
 th{text-align:left;font-weight:500;font-size:var(--text-xs);color:var(--color-text-tertiary);padding:9px 14px;background:var(--color-surface-sunken);border-bottom:1px solid var(--color-border-subtle);white-space:nowrap}
-td{padding:10px 14px;border-bottom:1px solid var(--color-border-subtle)}
+td{padding:10px 14px;border-bottom:1px solid var(--color-border-subtle);vertical-align:middle}
 tr:last-child td{border-bottom:0}
 .p{display:flex;align-items:center;gap:10px}
 .p .av{width:28px;height:28px}
 .p small{display:block;font-size:var(--text-xs);color:var(--color-text-tertiary);line-height:1.2}
 .st{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
 .st .ico{width:14px;height:14px}
-.s-book{color:var(--color-success)} .s-hand{color:var(--color-urgent)} .s-wait{color:var(--color-attention)} .s-ctl{color:var(--color-primary)} .s-off{color:var(--color-text-tertiary)}
 .st span{color:var(--color-text-primary)}
+.s-book{color:var(--color-success)} .s-hand{color:var(--color-urgent)} .s-wait{color:var(--color-attention)} .s-ctl{color:var(--color-primary)} .s-off{color:var(--color-text-tertiary)}
 td.dim{color:var(--color-text-tertiary)}
 .fast{color:var(--color-success);font-weight:500}
 .slow{color:var(--color-urgent);font-weight:500}
+.who-tag{display:inline-flex;align-items:center;gap:5px;font-size:var(--text-xs);color:var(--color-text-secondary);border:1px solid var(--color-border-subtle);border-radius:999px;padding:1px 8px;white-space:nowrap}
+.who-tag .ico{width:12px;height:12px}
+
+/* appointments */
+.sched{display:grid;gap:var(--space-6)}
+@media (min-width:1000px){.sched{grid-template-columns:minmax(0,8fr) minmax(0,4fr)}}
+.slots{border:1px solid var(--color-border-subtle);border-radius:var(--radius-md);overflow:hidden}
+.slot{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:var(--space-3);align-items:center;padding:12px 14px;border-bottom:1px solid var(--color-border-subtle)}
+.slot:last-child{border-bottom:0}
+.slot time{font-size:var(--text-sm);font-weight:600}
+.slot b{font-size:var(--text-sm);font-weight:600;display:block}
+.slot small{font-size:var(--text-xs);color:var(--color-text-tertiary);display:flex;gap:var(--space-2);flex-wrap:wrap;align-items:center}
+.slot.free{background:var(--color-surface-sunken)}
+.slot.free b{color:var(--color-text-tertiary);font-weight:500}
+.panel{border:1px solid var(--color-border-subtle);border-radius:var(--radius-md);padding:var(--space-4)}
+.panel h4{margin:0 0 var(--space-3);font-size:var(--text-sm);font-weight:600}
+.kv{display:flex;justify-content:space-between;font-size:var(--text-sm);padding:6px 0;border-bottom:1px solid var(--color-border-subtle)}
+.kv:last-child{border-bottom:0}
+.kv span{color:var(--color-text-secondary)}
+.seg2{display:inline-flex;border:1px solid var(--color-border-subtle);border-radius:var(--radius-sm);overflow:hidden}
+.seg2 button{border:0;background:var(--color-surface);padding:6px 12px;font-size:var(--text-sm);color:var(--color-text-secondary)}
+.seg2 button+button{border-left:1px solid var(--color-border-subtle)}
+.seg2 button:hover{color:var(--color-text-primary)}
+.seg2 button[aria-pressed="true"]{background:var(--color-text-primary);color:#fff}
+
+/* pilot */
+.funnel{display:grid;gap:var(--space-3);margin-bottom:var(--space-8)}
+.fstep{display:grid;grid-template-columns:110px minmax(0,1fr);gap:var(--space-3);align-items:center}
+.fstep>span{font-size:var(--text-sm);color:var(--color-text-secondary)}
+.fbars{display:grid;gap:4px}
+.fbar{display:grid;grid-template-columns:minmax(0,1fr) 42px;gap:var(--space-2);align-items:center;font-size:var(--text-xs)}
+.fbar b{font-weight:600;text-align:right}
+.legend{display:flex;gap:var(--space-4);font-size:var(--text-xs);color:var(--color-text-secondary);margin-bottom:var(--space-3)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.pgrid{display:grid;gap:var(--space-6)}
+@media (min-width:1000px){.pgrid{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}}
+.chart svg{width:100%;height:auto;display:block}
+.guard{display:grid;gap:var(--space-2)}
+.grow{display:flex;justify-content:space-between;align-items:center;gap:var(--space-3);font-size:var(--text-sm);padding:8px 0;border-bottom:1px solid var(--color-border-subtle)}
+.grow:last-child{border-bottom:0}
+.grow span{color:var(--color-text-secondary)}
+.grow b{display:inline-flex;align-items:center;gap:5px;font-weight:600;white-space:nowrap}
+.grow b .ico{width:14px;height:14px;color:var(--color-success)}
+.decide{margin-top:var(--space-4);font-size:var(--text-sm);color:var(--color-text-secondary);background:var(--color-surface-sunken);border-radius:var(--radius-md);padding:var(--space-3)}
+.decide b{color:var(--color-text-primary)}
+
+/* rules */
+.rules{border:1px solid var(--color-border-subtle);border-radius:var(--radius-md);overflow:hidden;margin-bottom:var(--space-6)}
+.rule{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--space-4);align-items:center;padding:14px 16px;border-bottom:1px solid var(--color-border-subtle)}
+.rule:last-child{border-bottom:0}
+.rule b{font-size:var(--text-sm);font-weight:600;display:block}
+.rule small{display:flex;flex-wrap:wrap;gap:var(--space-2);align-items:center;font-size:var(--text-xs);color:var(--color-text-tertiary);margin-top:2px}
+.rule.off b{color:var(--color-text-tertiary)}
+.switch{position:relative;width:40px;height:24px;border-radius:999px;border:0;background:var(--color-border-strong);flex:none}
+.switch::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.2);transition:transform var(--duration-fast) ease-out}
+.switch[aria-checked="true"]{background:var(--color-primary)}
+.switch[aria-checked="true"]::after{transform:translateX(16px)}
+.switch:hover{filter:brightness(.95)}
+.never{border:1px solid var(--color-border-subtle);border-radius:var(--radius-md);padding:var(--space-4);background:var(--color-surface-sunken)}
+.never h4{margin:0 0 var(--space-2);font-size:var(--text-sm);display:flex;gap:6px;align-items:center}
+.never ul{margin:0;padding-left:18px;font-size:var(--text-sm);color:var(--color-text-secondary)}
+
+/* toast */
+.toast{position:absolute;right:var(--space-5);bottom:var(--space-5);background:var(--color-text-primary);color:#fff;border-radius:var(--radius-md);padding:10px 14px;font-size:var(--text-sm);display:flex;gap:var(--space-2);align-items:center;box-shadow:0 10px 30px -10px rgba(0,0,0,.4);opacity:0;transform:translateY(8px);transition:opacity var(--duration-fast) ease-out,transform var(--duration-fast) ease-out;pointer-events:none;max-width:calc(100% - 40px)}
+.toast.show{opacity:1;transform:none}
+.toast .ico{color:#9fe3bf}
 </style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-smile" viewBox="0 0 24 24"><path d="M6 10c1.5 5 10.5 5 12 0"/></symbol>
+  <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M5 12.6a10 10 0 0 1 14 0M8.5 16.1a5 5 0 0 1 7 0M2 8.8a15 15 0 0 1 20 0M12 20h.01"/></symbol>
   <symbol id="i-signal" viewBox="0 0 24 24"><path d="M2 20h.01M7 20v-4M12 20v-8M17 20V8M22 4v16"/></symbol>
-  <symbol id="i-battery" viewBox="0 0 24 24"><rect x="2" y="7" width="16" height="10" rx="2"/><path d="M22 11v2"/></symbol>
+  <symbol id="i-battery" viewBox="0 0 24 24"><rect x="2" y="7" width="16" height="10" rx="2"/><path d="M22 11v2M6 11v2"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></symbol>
   <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
   <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
   <symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
   <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></symbol>
+  <symbol id="i-ringing" viewBox="0 0 24 24"><path d="M14.5 2a7.5 7.5 0 0 1 7.5 7.5M14.5 6A3.5 3.5 0 0 1 18 9.5"/><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></symbol>
   <symbol id="i-bot" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M12 8V4M8 14h.01M16 14h.01"/></symbol>
   <symbol id="i-inbox" viewBox="0 0 24 24"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5h13l3.5 7v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6z"/></symbol>
   <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
@@ -244,100 +356,219 @@ td.dim{color:var(--color-text-tertiary)}
   <symbol id="i-x" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6M9 9l6 6"/></symbol>
   <symbol id="i-split" viewBox="0 0 24 24"><path d="M16 3h5v5M8 3H3v5M21 3l-9 9M3 3l9 9v9"/></symbol>
   <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+  <symbol id="i-in" viewBox="0 0 24 24"><path d="M17 7 7 17M7 8v9h9"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
 </svg>
 
 <main>
-  <!-- ============ MOCKUP 1 ============ -->
-  <div class="phone" role="group" aria-label="Mockup 1: a patient's phone at the moment they ask HappySmile for a call">
+  <!-- ============ MOCKUP 1: Android + Chrome ============ -->
+  <div class="phone" role="group" aria-label="Mockup 1: a patient's Android phone at the moment they ask HappySmile for a call">
     <div class="screen">
-      <div class="island"></div>
-      <div class="status"><span>7:42</span><span><svg class="ico"><use href="#i-signal"/></svg><svg class="ico"><use href="#i-battery"/></svg></span></div>
-      <div class="web">
-        <div class="brand"><span class="logo"><i><svg><use href="#i-smile"/></svg></i>HappySmile</span><span class="crumb">Braces</span></div>
+      <div class="punch"></div>
+      <div class="abar"><span class="num">7:42</span><span class="r"><svg class="ico"><use href="#i-wifi"/></svg><svg class="ico"><use href="#i-signal"/></svg><svg class="ico"><use href="#i-battery"/></svg><span class="num">78%</span></span></div>
+      <div class="chrome">
+        <svg class="ico home"><use href="#i-home"/></svg>
+        <div class="omni"><svg class="ico"><use href="#i-lock"/></svg><span>happysmile.in/braces</span></div>
+        <span class="tabs">3</span>
+        <span class="kebab"><i></i><i></i><i></i></span>
+      </div>
+      <div class="page">
+      <div class="site">
+        <div class="shead"><span class="logo"><i><svg><use href="#i-smile"/></svg></i>HappySmile</span><svg class="ico"><use href="#i-menu"/></svg></div>
+        <div class="crumbs">Treatments / Braces and aligners</div>
         <h1>Straighter teeth, minus the wait</h1>
-        <p>Braces and clear aligners at 12 clinics. First consultation is free.</p>
+        <div class="rating"><svg class="ico"><use href="#i-star"/></svg><b>4.8</b>from 2,140 Google reviews</div>
+        <div class="price">From <b>₹2,999/month</b> with EMI</div>
       </div>
-      <div class="sheet">
+      <div class="scrim"></div>
+
+      <div class="sheet" id="sheet">
         <div class="grab"></div>
-        <h2>Get a call about braces</h2>
-        <p class="eta"><svg class="ico"><use href="#i-clock"/></svg>We call back in about 2 minutes</p>
-        <div class="fld"><small>Name</small><span>Priya Sharma</span></div>
-        <div class="fld"><small>Mobile</small><span class="num">+91 98XXX X4210 <em><svg class="ico"><use href="#i-check"/></svg>Verified</em></span></div>
-        <div class="lang" role="group" aria-label="Call language">
-          <button type="button" aria-pressed="false">English</button>
-          <button type="button" aria-pressed="true">हिन्दी</button>
-          <button type="button" aria-pressed="false">मराठी</button>
+        <div id="ask">
+          <h2>Get a call about braces</h2>
+          <p class="eta"><svg class="ico"><use href="#i-clock"/></svg>We call back in about 2 minutes</p>
+          <div class="fld"><small>Name</small><span>Priya Sharma</span></div>
+          <div class="fld"><small>Mobile</small><span class="num">+91 98XXX X4210 <em><svg class="ico"><use href="#i-check"/></svg>Verified</em></span></div>
+          <div class="lang" role="group" aria-label="Call language">
+            <button type="button" aria-pressed="false">English</button>
+            <button type="button" aria-pressed="true">हिन्दी</button>
+            <button type="button" aria-pressed="false">मराठी</button>
+          </div>
+          <button class="cta" type="button" id="cta"><svg class="ico"><use href="#i-phone"/></svg>Call me now</button>
+          <p class="consent"><svg class="ico"><use href="#i-bot"/></svg><span>HappySmile's virtual assistant will call you. Ask for a person at any time. Calls 9 am to 9 pm.</span></p>
         </div>
-        <button class="cta" type="button" id="cta"><svg class="ico"><use href="#i-phone"/></svg><span>Call me now</span></button>
-        <p class="consent"><svg class="ico"><use href="#i-bot"/></svg><span>HappySmile's virtual assistant will call you. Ask for a person at any time. Calls 9 am to 9 pm.</span></p>
+        <div id="sent" class="done" hidden>
+          <div class="ring"><svg class="ico"><use href="#i-ringing"/></svg></div>
+          <h2>Calling you now</h2>
+          <p>Keep your phone close. The call is in Hindi and starts with our assistant saying who it is.</p>
+          <div class="caller"><span class="av"><svg class="ico"><use href="#i-smile"/></svg></span><span><b>HappySmile Dental</b><small class="num">+91 22 4XXX 1100</small></span><span class="ok"><svg class="ico"><use href="#i-check"/></svg>Verified</span></div>
+          <p>Missed it? We will send a WhatsApp message with times you can book.</p>
+          <button class="link" type="button" id="undo">Call me later instead</button>
+        </div>
       </div>
+      </div>
+      <div class="gesture"></div>
     </div>
   </div>
 
-  <!-- ============ MOCKUP 2 ============ -->
+  <!-- ============ MOCKUP 2: laptop ============ -->
   <div class="laptop">
     <div class="lid">
       <div class="cam"></div>
       <div class="app">
         <nav class="side" aria-label="Workspace">
           <div class="clinic"><span class="logo"><i><svg><use href="#i-smile"/></svg></i></span><span><b>Andheri West</b><small>HappySmile, 1 of 12</small></span></div>
-          <button class="nav" aria-current="page"><svg class="ico"><use href="#i-inbox"/></svg>Leads<span class="count">3</span></button>
-          <button class="nav"><svg class="ico"><use href="#i-cal"/></svg>Appointments</button>
-          <button class="nav"><svg class="ico"><use href="#i-phone"/></svg>Call log</button>
-          <button class="nav"><svg class="ico"><use href="#i-chart"/></svg>Pilot results</button>
-          <button class="nav"><svg class="ico"><use href="#i-rules"/></svg>Handover rules</button>
+          <button class="nav" data-view="leads" aria-current="page"><svg class="ico"><use href="#i-inbox"/></svg>Leads<span class="count" id="navcount">3</span></button>
+          <button class="nav" data-view="appts"><svg class="ico"><use href="#i-cal"/></svg>Appointments</button>
+          <button class="nav" data-view="calls"><svg class="ico"><use href="#i-phone"/></svg>Call log</button>
+          <button class="nav" data-view="pilot"><svg class="ico"><use href="#i-chart"/></svg>Pilot results</button>
+          <button class="nav" data-view="rules"><svg class="ico"><use href="#i-rules"/></svg>Handover rules</button>
           <div class="fill"></div>
           <div class="pilot"><b>Pilot, week 2 of 4</b>Half of new leads get the assistant. Half get the usual callback.<div class="bar"><i></i></div></div>
         </nav>
 
         <div class="main">
-          <div class="top">
-            <div><h2>Leads today</h2><p>Tue 19 Nov, 41 enquiries, updated 7:44 pm</p></div>
-            <div class="tools"><button class="ghost"><svg class="ico"><use href="#i-cal"/></svg>Today</button><button class="ghost"><svg class="ico"><use href="#i-download"/></svg>Export</button></div>
-          </div>
-
-          <section class="lead" aria-label="Pilot results">
-            <div class="hero">
-              <small>Visits that happened, per 100 enquiries</small>
-              <div class="big"><b class="num">31</b><span class="up"><svg class="ico"><use href="#i-arrow-up"/></svg>+9</span><span>vs 22 with the usual callback</span></div>
-              <div class="compare" role="img" aria-label="Assistant group 31 attended visits per 100 enquiries, usual callback group 22">
-                <div class="crow"><span>Assistant</span><span class="track"><i style="width:62%;background:var(--color-primary)"></i></span><b class="num">31</b></div>
-                <div class="crow"><span>Usual callback</span><span class="track"><i style="width:44%;background:var(--color-border-strong)"></i></span><b class="num">22</b></div>
-              </div>
+          <!-- ===== LEADS ===== -->
+          <section data-panel="leads" aria-label="Leads">
+            <div class="top">
+              <div><h2>Leads today</h2><p>Tue 19 Nov, 41 enquiries, updated 7:44 pm</p></div>
+              <div class="tools"><button class="ghost" data-toast="Showing today"><svg class="ico"><use href="#i-cal"/></svg>Today</button><button class="ghost" data-toast="leads-19-nov.csv downloaded"><svg class="ico"><use href="#i-download"/></svg>Export</button></div>
             </div>
-            <div class="secondary">
-              <div><small>First call</small><b class="num">1m 48s</b><span>was 4h 52m</span></div>
-              <div><small>Reached</small><b class="num">68%</b><span>was 61%</span></div>
-              <div><small>Booked</small><b class="num">44%</b><span>was 29%</span></div>
+            <section class="lead" aria-label="Pilot headline">
+              <div class="hero">
+                <small>Visits that happened, per 100 enquiries</small>
+                <div class="big"><b class="num">31</b><span class="up"><svg class="ico"><use href="#i-arrow-up"/></svg>+9</span><span>vs 22 with the usual callback</span></div>
+                <div class="compare" role="img" aria-label="Assistant group 31 attended visits per 100 enquiries, usual callback group 22">
+                  <div class="crow"><span>Assistant</span><span class="track"><i class="t-ai" style="width:62%"></i></span><b class="num">31</b></div>
+                  <div class="crow"><span>Usual callback</span><span class="track"><i class="t-ctl" style="width:44%"></i></span><b class="num">22</b></div>
+                </div>
+              </div>
+              <div class="secondary">
+                <div><small>First call</small><b class="num">1m 48s</b><span>was 4h 52m</span></div>
+                <div><small>Reached</small><b class="num">68%</b><span>was 61%</span></div>
+                <div><small>Booked</small><b class="num">44%</b><span>was 29%</span></div>
+              </div>
+            </section>
+            <div class="h3row"><h3>Needs you (<span id="needcount">3</span>)</h3><span>Handed over by the assistant</span></div>
+            <div class="inbox">
+              <div class="list" role="tablist" aria-label="Handed over leads">
+                <button class="item" role="tab" aria-selected="true" data-i="0"><span class="av">RM</span><span><b>Rahul Mehta</b><small>Swelling and pain for 2 days</small><span class="flag f-urgent"><svg class="ico"><use href="#i-alert"/></svg>Pain, call within 15 min</span></span><time>7:20</time></button>
+                <button class="item" role="tab" aria-selected="false" data-i="1"><span class="av">AD</span><span><b>Anita Desai</b><small>Wants EMI options for aligners</small><span class="flag f-attn"><svg class="ico"><use href="#i-rupee"/></svg>Price question</span></span><time>6:31</time></button>
+                <button class="item" role="tab" aria-selected="false" data-i="2"><span class="av">SI</span><span><b>Suresh Iyer</b><small>“I'd rather speak to someone”</small><span class="flag f-plain"><svg class="ico"><use href="#i-user"/></svg>Asked for a person</span></span><time>5:58</time></button>
+              </div>
+              <div class="detail" id="detail" role="tabpanel"></div>
+            </div>
+            <div class="h3row"><h3>All leads</h3><span>7 of 41</span></div>
+            <div class="tw" tabindex="0" role="region" aria-label="All leads table">
+              <table>
+                <caption class="sr-only">Today's leads with first-call time and status</caption>
+                <thead><tr><th scope="col">Person</th><th scope="col">Interested in</th><th scope="col">Enquired</th><th scope="col">First call after</th><th scope="col">Status</th><th scope="col">Next</th></tr></thead>
+                <tbody>
+                  <tr><td><div class="p"><span class="av">PS</span><span>Priya Sharma<small>Hindi</small></span></div></td><td>Braces</td><td class="dim num">7:42 pm</td><td class="num fast">1m 12s</td><td><span class="st s-wait"><svg class="ico"><use href="#i-msg"/></svg><span>Missed, sent WhatsApp</span></span></td><td class="dim">Retry 8:15 pm</td></tr>
+                  <tr><td><div class="p"><span class="av">RM</span><span>Rahul Mehta<small>English</small></span></div></td><td>Implants</td><td class="dim num">7:20 pm</td><td class="num fast">1m 52s</td><td><span class="st s-hand"><svg class="ico"><use href="#i-alert"/></svg><span>Handed to staff</span></span></td><td class="dim">Urgent call</td></tr>
+                  <tr><td><div class="p"><span class="av">FK</span><span>Fatima Khan<small>Hindi</small></span></div></td><td>Whitening</td><td class="dim num">6:58 pm</td><td class="num fast">1m 05s</td><td><span class="st s-book"><svg class="ico"><use href="#i-check-circle"/></svg><span>Booked</span></span></td><td class="dim">Thu, 6:30 pm</td></tr>
+                  <tr><td><div class="p"><span class="av">AD</span><span>Anita Desai<small>English</small></span></div></td><td>Aligners</td><td class="dim num">6:31 pm</td><td class="num fast">1m 41s</td><td><span class="st s-hand"><svg class="ico"><use href="#i-alert"/></svg><span>Handed to staff</span></span></td><td class="dim">Price call</td></tr>
+                  <tr><td><div class="p"><span class="av">VR</span><span>Vikram Rao<small>English</small></span></div></td><td>Cleaning</td><td class="dim num">5:47 pm</td><td class="num fast">2m 10s</td><td><span class="st s-book"><svg class="ico"><use href="#i-check-circle"/></svg><span>Booked</span></span></td><td class="dim">Wed, 10:00 am</td></tr>
+                  <tr><td><div class="p"><span class="av">NJ</span><span>Neha Joshi<small>Marathi</small></span></div></td><td>Braces</td><td class="dim num">5:12 pm</td><td class="num slow">4h 38m</td><td><span class="st s-ctl"><svg class="ico"><use href="#i-split"/></svg><span>Usual callback group</span></span></td><td class="dim">Front desk queue</td></tr>
+                  <tr><td><div class="p"><span class="av">AN</span><span>Arjun Nair<small>English</small></span></div></td><td>Whitening</td><td class="dim num">4:40 pm</td><td class="num fast">1m 22s</td><td><span class="st s-off"><svg class="ico"><use href="#i-x"/></svg><span>Not interested</span></span></td><td class="dim">Closed, price</td></tr>
+                </tbody>
+              </table>
             </div>
           </section>
 
-          <div class="h3row"><h3>Needs you (3)</h3><span>Handed over by the assistant</span></div>
-          <div class="inbox">
-            <div class="list" role="tablist" aria-label="Handed over leads">
-              <button class="item" role="tab" aria-selected="true" data-i="0"><span class="av">RM</span><span><b>Rahul Mehta</b><small>Swelling and pain for 2 days</small><span class="flag f-urgent"><svg class="ico"><use href="#i-alert"/></svg>Pain, call within 15 min</span></span><time>7:20</time></button>
-              <button class="item" role="tab" aria-selected="false" data-i="1"><span class="av">AD</span><span><b>Anita Desai</b><small>Wants EMI options for aligners</small><span class="flag f-attn"><svg class="ico"><use href="#i-rupee"/></svg>Price question</span></span><time>6:31</time></button>
-              <button class="item" role="tab" aria-selected="false" data-i="2"><span class="av">SI</span><span><b>Suresh Iyer</b><small>“I'd rather speak to someone”</small><span class="flag f-plain"><svg class="ico"><use href="#i-user"/></svg>Asked for a person</span></span><time>5:58</time></button>
+          <!-- ===== APPOINTMENTS ===== -->
+          <section data-panel="appts" aria-label="Appointments" hidden>
+            <div class="top">
+              <div><h2>Appointments</h2><p>Wed 20 Nov, Andheri West, 2 chairs</p></div>
+              <div class="seg2" role="group" aria-label="Filter by who booked">
+                <button aria-pressed="true" data-src="all">All</button>
+                <button aria-pressed="false" data-src="ai">Booked by assistant</button>
+                <button aria-pressed="false" data-src="desk">Front desk</button>
+              </div>
             </div>
-            <div class="detail" id="detail" role="tabpanel"></div>
-          </div>
+            <div class="sched">
+              <div class="slots" id="slots"></div>
+              <div>
+                <div class="panel" style="margin-bottom:var(--space-4)">
+                  <h4>Tomorrow at a glance</h4>
+                  <div class="kv"><span>Booked</span><b class="num">9 of 12 slots</b></div>
+                  <div class="kv"><span>By the assistant</span><b class="num">5</b></div>
+                  <div class="kv"><span>Reminder sent</span><b class="num">9 of 9</b></div>
+                  <div class="kv"><span>Free slots</span><b class="num">3</b></div>
+                </div>
+                <div class="panel">
+                  <h4>No-show guard</h4>
+                  <p class="sum" style="margin:0">Every booking gets a WhatsApp reminder the evening before and two hours before. If someone does not confirm by 9 am, the front desk gets a call task.</p>
+                </div>
+              </div>
+            </div>
+          </section>
 
-          <div class="h3row"><h3>All leads</h3><span>7 of 41</span></div>
-          <div class="tw" tabindex="0" role="region" aria-label="All leads table">
-            <table>
-              <caption class="sr-only">Today's leads with first-call time and status</caption>
-              <thead><tr><th scope="col">Person</th><th scope="col">Interested in</th><th scope="col">Enquired</th><th scope="col">First call after</th><th scope="col">Status</th><th scope="col">Next</th></tr></thead>
-              <tbody>
-                <tr><td><div class="p"><span class="av">PS</span><span>Priya Sharma<small>Hindi</small></span></div></td><td>Braces</td><td class="dim num">7:42 pm</td><td class="num fast">1m 12s</td><td><span class="st s-wait"><svg class="ico"><use href="#i-msg"/></svg><span>Missed, sent WhatsApp</span></span></td><td class="dim">Retry 8:15 pm</td></tr>
-                <tr><td><div class="p"><span class="av">RM</span><span>Rahul Mehta<small>English</small></span></div></td><td>Implants</td><td class="dim num">7:20 pm</td><td class="num fast">1m 52s</td><td><span class="st s-hand"><svg class="ico"><use href="#i-alert"/></svg><span>Handed to staff</span></span></td><td class="dim">Urgent call</td></tr>
-                <tr><td><div class="p"><span class="av">FK</span><span>Fatima Khan<small>Hindi</small></span></div></td><td>Whitening</td><td class="dim num">6:58 pm</td><td class="num fast">1m 05s</td><td><span class="st s-book"><svg class="ico"><use href="#i-check-circle"/></svg><span>Booked</span></span></td><td class="dim">Thu, 6:30 pm</td></tr>
-                <tr><td><div class="p"><span class="av">AD</span><span>Anita Desai<small>English</small></span></div></td><td>Aligners</td><td class="dim num">6:31 pm</td><td class="num fast">1m 41s</td><td><span class="st s-hand"><svg class="ico"><use href="#i-alert"/></svg><span>Handed to staff</span></span></td><td class="dim">Price call</td></tr>
-                <tr><td><div class="p"><span class="av">VR</span><span>Vikram Rao<small>English</small></span></div></td><td>Cleaning</td><td class="dim num">5:47 pm</td><td class="num fast">2m 10s</td><td><span class="st s-book"><svg class="ico"><use href="#i-check-circle"/></svg><span>Booked</span></span></td><td class="dim">Wed, 10:00 am</td></tr>
-                <tr><td><div class="p"><span class="av">NJ</span><span>Neha Joshi<small>Marathi</small></span></div></td><td>Braces</td><td class="dim num">5:12 pm</td><td class="num slow">4h 38m</td><td><span class="st s-ctl"><svg class="ico"><use href="#i-split"/></svg><span>Usual callback group</span></span></td><td class="dim">Front desk queue</td></tr>
-                <tr><td><div class="p"><span class="av">AN</span><span>Arjun Nair<small>English</small></span></div></td><td>Whitening</td><td class="dim num">4:40 pm</td><td class="num fast">1m 22s</td><td><span class="st s-off"><svg class="ico"><use href="#i-x"/></svg><span>Not interested</span></span></td><td class="dim">Closed, price</td></tr>
-              </tbody>
-            </table>
-          </div>
+          <!-- ===== CALL LOG ===== -->
+          <section data-panel="calls" aria-label="Call log" hidden>
+            <div class="top">
+              <div><h2>Call log</h2><p>Every call today, by the assistant and by staff</p></div>
+              <div class="seg2" role="group" aria-label="Filter calls">
+                <button aria-pressed="true" data-by="all">All</button>
+                <button aria-pressed="false" data-by="ai">Assistant</button>
+                <button aria-pressed="false" data-by="staff">Staff</button>
+              </div>
+            </div>
+            <div class="tw" tabindex="0" role="region" aria-label="Call log table">
+              <table>
+                <caption class="sr-only">Calls made today</caption>
+                <thead><tr><th scope="col">Time</th><th scope="col">Person</th><th scope="col">Direction</th><th scope="col">Handled by</th><th scope="col">Length</th><th scope="col">Outcome</th><th scope="col"><span class="sr-only">Recording</span></th></tr></thead>
+                <tbody id="calls"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- ===== PILOT ===== -->
+          <section data-panel="pilot" aria-label="Pilot results" hidden>
+            <div class="top">
+              <div><h2>Pilot results</h2><p>3 clinics, leads split 50/50 at random, 1,140 enquiries so far</p></div>
+              <span class="who-tag"><svg class="ico"><use href="#i-clock"/></svg>Decision on 13 Dec</span>
+            </div>
+            <div class="legend"><span><i style="background:var(--color-primary)"></i>Assistant group</span><span><i style="background:var(--color-border-strong)"></i>Usual callback group</span></div>
+            <div class="funnel" id="funnel"></div>
+            <div class="pgrid">
+              <div class="panel chart">
+                <h4>Visits that happened, per 100 enquiries, by day</h4>
+                <div id="trend"></div>
+              </div>
+              <div class="panel">
+                <h4>Safety checks</h4>
+                <div class="guard">
+                  <div class="grow"><span>Complaints about the assistant</span><b class="num"><svg class="ico"><use href="#i-check"/></svg>0.4%</b></div>
+                  <div class="grow"><span>Asked for a person</span><b class="num"><svg class="ico"><use href="#i-check"/></svg>11%</b></div>
+                  <div class="grow"><span>Pain cases called within 15 min</span><b class="num"><svg class="ico"><use href="#i-check"/></svg>23 of 23</b></div>
+                  <div class="grow"><span>Opted out of calls</span><b class="num"><svg class="ico"><use href="#i-check"/></svg>1.1%</b></div>
+                </div>
+                <p class="decide"><b>Scale to 12 clinics if</b> the assistant group stays at least 5 visits ahead per 100 enquiries and complaints stay under 1%.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- ===== RULES ===== -->
+          <section data-panel="rules" aria-label="Handover rules" hidden>
+            <div class="top">
+              <div><h2>Handover rules</h2><p>When the assistant stops and passes the person to staff. Written with the front desk.</p></div>
+              <span class="who-tag"><svg class="ico"><use href="#i-user"/></svg>Owner: Meera K.</span>
+            </div>
+            <div class="rules" id="rules"></div>
+            <div class="never">
+              <h4><svg class="ico"><use href="#i-shield"/></svg>The assistant never does these. They cannot be switched off.</h4>
+              <ul>
+                <li>Hide that it is an assistant</li>
+                <li>Give medical advice or say whether something is serious</li>
+                <li>Quote prices that are not on the published list</li>
+                <li>Call before 9 am or after 9 pm</li>
+              </ul>
+            </div>
+          </section>
+
+          <div class="toast" id="toast" role="status" aria-live="polite"><svg class="ico"><use href="#i-check"/></svg><span></span></div>
         </div>
       </div>
     </div>
@@ -346,19 +577,25 @@ td.dim{color:var(--color-text-tertiary)}
 </main>
 
 <script>
-/* phone: language toggle + CTA feedback */
-document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>{
-  document.querySelectorAll('.lang button').forEach(x=>x.setAttribute('aria-pressed',x===b));
-}));
-const cta=document.getElementById('cta');
-cta.addEventListener('click',()=>{
-  const busy=cta.getAttribute('aria-busy')==='true';
-  cta.setAttribute('aria-busy',!busy);
-  cta.querySelector('span').textContent=busy?'Call me now':'Calling you in about 2 min';
-});
-
-/* dashboard: inbox */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const use=id=>`<svg class="ico"><use href="#${id}"/></svg>`;
+let tt;
+function toast(msg){const t=$('#toast');t.querySelector('span').textContent=msg;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),2200)}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-toast]');if(b)toast(b.dataset.toast)});
+
+/* ---- phone ---- */
+$$('.lang button').forEach(b=>b.addEventListener('click',()=>$$('.lang button').forEach(x=>x.setAttribute('aria-pressed',x===b))));
+$('#cta').addEventListener('click',()=>{$('#ask').hidden=true;$('#sent').hidden=false;$('#undo').focus()});
+$('#undo').addEventListener('click',()=>{$('#sent').hidden=true;$('#ask').hidden=false;$('#cta').focus()});
+
+/* ---- navigation ---- */
+$$('.nav').forEach(n=>n.addEventListener('click',()=>{
+  $$('.nav').forEach(x=>x.toggleAttribute('aria-current',x===n));
+  n.setAttribute('aria-current','page');
+  $$('[data-panel]').forEach(p=>p.hidden=p.dataset.panel!==n.dataset.view);
+}));
+
+/* ---- leads inbox ---- */
 const D=[
  {ini:'RM',name:'Rahul Mehta',meta:'Implants, English, enquired 7:20 pm',k:'u',icon:'i-alert',
   why:'Mentions swelling and pain for two days. The assistant gave no advice and said the clinic would call within 15 minutes.',
@@ -379,21 +616,101 @@ const D=[
   q:[['Suresh','“I would rather speak to someone at the clinic.”'],['Assistant','“Of course. Someone from the clinic will call you after 6 pm today.”']],
   len:'0:34',b:['Call Suresh','Assign Tamil speaker']}
 ];
+const done=new Set();
 function wave(){let s='';for(let i=0;i<60;i++){const h=20+Math.round(70*Math.abs(Math.sin(i*1.7)*Math.cos(i*.43)));s+=`<i class="${i<18?'on':''}" style="height:${h}%"></i>`}return s}
 function render(i){
-  const d=D[i];
-  document.getElementById('detail').innerHTML=`
+  const d=D[i], cleared=done.has(i);
+  $('#detail').innerHTML=`
    <div class="dhead"><div class="who"><span class="av">${d.ini}</span><div><h4>${d.name}</h4><p>${d.meta}</p></div></div>
-     <div class="acts"><button class="btn primary">${use('i-phone')}${d.b[0]}</button><button class="btn">${use('i-cal')}${d.b[1]}</button></div></div>
+     <div class="acts">${cleared?`<span class="flag f-ok">${use('i-check-circle')}Handled</span>`:`<button class="btn primary" data-act="call">${use('i-phone')}${d.b[0]}</button><button class="btn" data-act="second">${use('i-cal')}${d.b[1]}</button>`}</div></div>
    <div class="why ${d.k}">${use(d.icon)}<span>${d.why}</span></div>
    <div class="facts">${d.facts.map(f=>`<div><small>${f[0]}</small><b>${f[1]}</b></div>`).join('')}</div>
    <p class="sum">${d.sum}</p>
-   <div class="player"><button class="play" aria-label="Play call recording">${use('i-play')}</button><div class="wave" aria-hidden="true">${wave()}</div><time class="num">${d.len}</time></div>
+   <div class="player"><button class="play" aria-label="Play call recording" data-toast="Playing ${d.name}'s call">${use('i-play')}</button><div class="wave" aria-hidden="true">${wave()}</div><time class="num">${d.len}</time></div>
    <ul class="quote">${d.q.map(x=>`<li><b>${x[0]}:</b> ${x[1]}</li>`).join('')}</ul>`;
-  document.querySelectorAll('.item').forEach((b,j)=>b.setAttribute('aria-selected',i===j));
+  $$('.item').forEach((b,j)=>b.setAttribute('aria-selected',i===j));
+  $$('#detail [data-act]').forEach(b=>b.addEventListener('click',()=>{
+    if(b.dataset.act==='call'){done.add(i);$$('.item')[i].classList.add('cleared');const left=3-done.size;$('#needcount').textContent=left;$('#navcount').textContent=left;$('#navcount').hidden=left===0;toast(`Calling ${d.name}. Marked as handled.`);render(i)}
+    else toast(`${d.b[1]}: done`);
+  }));
 }
-document.querySelectorAll('.item').forEach(b=>b.addEventListener('click',()=>render(+b.dataset.i)));
+$$('.item').forEach(b=>b.addEventListener('click',()=>render(+b.dataset.i)));
 render(0);
+
+/* ---- appointments ---- */
+const S=[
+ ['9:00','Rahul Mehta','Emergency check, implants','Dr. Kulkarni','ai','Confirmed'],
+ ['9:30','Kavya Menon','Aligner review','Dr. Shah','desk','Confirmed'],
+ ['10:00','Vikram Rao','Cleaning','Dr. Shah','ai','Reminder sent'],
+ ['10:30',null],
+ ['11:00','Priya Sharma','Braces consultation','Dr. Kulkarni','ai','Waiting to confirm'],
+ ['11:30','Mohan Pillai','Root canal, visit 2','Dr. Kulkarni','desk','Confirmed'],
+ ['12:00',null],
+ ['4:00','Sana Qureshi','Whitening consultation','Dr. Shah','ai','Confirmed'],
+ ['4:30','Ravi Gupta','Filling','Dr. Kulkarni','desk','Reminder sent'],
+ ['5:00',null],
+ ['5:30','Fatima Khan','Whitening consultation','Dr. Shah','ai','Confirmed'],
+ ['6:00','Deepak Jain','Crown fitting','Dr. Kulkarni','desk','Confirmed']
+];
+function slots(f){
+  $('#slots').innerHTML=S.filter(s=>!s[1]?f==='all':(f==='all'||s[4]===f)).map(s=>!s[1]
+   ?`<div class="slot free"><time class="num">${s[0]}</time><b>Free slot</b><button class="btn sm" data-toast="Slot at ${s[0]} offered to the WhatsApp waitlist">Offer to waitlist</button></div>`
+   :`<div class="slot"><time class="num">${s[0]}</time><span><b>${s[1]}</b><small>${s[2]}, ${s[3]} <span class="who-tag">${use(s[4]==='ai'?'i-bot':'i-user')}${s[4]==='ai'?'Assistant':'Front desk'}</span></small></span><span class="flag ${s[5]==='Waiting to confirm'?'f-attn':'f-ok'}">${use(s[5]==='Waiting to confirm'?'i-clock':'i-check')}${s[5]}</span></div>`).join('');
+}
+$$('[data-src]').forEach(b=>b.addEventListener('click',()=>{$$('[data-src]').forEach(x=>x.setAttribute('aria-pressed',x===b));slots(b.dataset.src)}));
+slots('all');
+
+/* ---- call log ---- */
+const C=[
+ ['7:43 pm','Priya Sharma','out','ai','0:00','No answer, WhatsApp sent','s-wait','i-msg'],
+ ['7:31 pm','Rahul Mehta','out','staff','3:05','Emergency slot booked','s-book','i-check-circle'],
+ ['7:22 pm','Rahul Mehta','out','ai','1:12','Pain, handed to staff','s-hand','i-alert'],
+ ['6:59 pm','Fatima Khan','out','ai','2:18','Booked Thu 6:30 pm','s-book','i-check-circle'],
+ ['6:33 pm','Anita Desai','out','ai','2:40','Price question, handed to staff','s-hand','i-alert'],
+ ['6:02 pm','Suresh Iyer','out','ai','0:34','Asked for a person','s-hand','i-user'],
+ ['5:49 pm','Vikram Rao','out','ai','1:56','Booked Wed 10:00 am','s-book','i-check-circle'],
+ ['5:20 pm','Kavya Menon','in','staff','4:10','Rescheduled aligner review','s-book','i-check-circle'],
+ ['4:42 pm','Arjun Nair','out','ai','1:30','Not interested, price','s-off','i-x']
+];
+function calls(f){
+  $('#calls').innerHTML=C.filter(c=>f==='all'||c[3]===f).map(c=>`<tr><td class="dim num">${c[0]}</td><td>${c[1]}</td><td><span class="st s-off">${use(c[2]==='in'?'i-in':'i-out')}<span>${c[2]==='in'?'Incoming':'Outgoing'}</span></span></td><td><span class="who-tag">${use(c[3]==='ai'?'i-bot':'i-user')}${c[3]==='ai'?'Assistant':'Staff'}</span></td><td class="num">${c[4]}</td><td><span class="st ${c[6]}">${use(c[7])}<span>${c[5]}</span></span></td><td>${c[4]==='0:00'?'':`<button class="btn sm" data-toast="Playing call with ${c[1]}">${use('i-play')}Play</button>`}</td></tr>`).join('');
+}
+$$('[data-by]').forEach(b=>b.addEventListener('click',()=>{$$('[data-by]').forEach(x=>x.setAttribute('aria-pressed',x===b));calls(b.dataset.by)}));
+calls('all');
+
+/* ---- pilot ---- */
+const F=[['Enquiries',100,100],['Reached',68,61],['Booked',44,29],['Visit happened',31,22]];
+$('#funnel').innerHTML=F.map(f=>`<div class="fstep"><span>${f[0]}</span><div class="fbars" role="img" aria-label="${f[0]}: assistant ${f[1]}, usual callback ${f[2]} per 100 enquiries">
+ <div class="fbar"><span class="track"><i class="t-ai" style="width:${f[1]}%"></i></span><b class="num">${f[1]}</b></div>
+ <div class="fbar"><span class="track"><i class="t-ctl" style="width:${f[2]}%"></i></span><b class="num">${f[2]}</b></div></div></div>`).join('');
+(function(){
+  const ai=[26,29,28,31,30,33,32,29,31,34,32,31], ct=[21,23,22,22,20,24,23,21,22,23,22,22];
+  const W=520,H=200,P=28,max=40,step=(W-P*2)/(ai.length-1);
+  const pt=(v,i)=>`${(P+i*step).toFixed(1)},${(H-P-(v/max)*(H-P*2)).toFixed(1)}`;
+  const grid=[0,10,20,30,40].map(v=>{const y=(H-P-(v/max)*(H-P*2)).toFixed(1);return `<line x1="${P}" x2="${W-P}" y1="${y}" y2="${y}" stroke="var(--color-border-subtle)"/><text x="${P-8}" y="${+y+4}" text-anchor="end" font-size="10" fill="var(--color-text-tertiary)">${v}</text>`}).join('');
+  const days=['Mon','','Wed','','Fri','','Mon','','Wed','','Fri',''].map((d,i)=>d?`<text x="${P+i*step}" y="${H-8}" text-anchor="middle" font-size="10" fill="var(--color-text-tertiary)">${d}</text>`:'').join('');
+  $('#trend').innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Over 12 working days the assistant group ranged 26 to 34 visits per 100 enquiries, the usual callback group 20 to 24">${grid}${days}
+   <polyline fill="none" stroke="var(--color-border-strong)" stroke-width="2" stroke-linejoin="round" points="${ct.map(pt).join(' ')}"/>
+   <polyline fill="none" stroke="var(--color-primary)" stroke-width="2.5" stroke-linejoin="round" points="${ai.map(pt).join(' ')}"/>
+   <circle cx="${pt(ai[11],11).split(',')[0]}" cy="${pt(ai[11],11).split(',')[1]}" r="4" fill="var(--color-primary)"/></svg>`;
+})();
+
+/* ---- rules ---- */
+const R=[
+ ['Pain, swelling, bleeding or injury','Urgent. Staff call within 15 minutes.',true],
+ ['Any question about symptoms or treatment safety','Staff call the same day.',true],
+ ['Price talk beyond the published list, EMI or discounts','Staff call the same day.',true],
+ ['Implants or full-mouth treatment','Staff call the same day. Higher value, more questions.',true],
+ ['Person asks for a human, at any point','Assistant stops at once and hands over.',true],
+ ['Person sounds upset or confused','Assistant offers a person and hands over.',true],
+ ['Language the assistant does not speak well','Assigned to a staff member who speaks it.',true],
+ ['Repeat patient with a visit in the last 6 months','Staff call. They know the patient.',false]
+];
+function rules(){
+  $('#rules').innerHTML=R.map((r,i)=>`<div class="rule ${r[2]?'':'off'}"><span><b id="rl${i}">${r[0]}</b><small>${r[1]}</small></span><button class="switch" role="switch" aria-checked="${r[2]}" aria-labelledby="rl${i}" data-r="${i}"></button></div>`).join('');
+  $$('.switch').forEach(s=>s.addEventListener('click',()=>{const i=+s.dataset.r;R[i][2]=!R[i][2];rules();$$('.switch')[i].focus();toast(R[i][2]?'Rule switched on':'Rule switched off')}));
+}
+rules();
 </script>
 </body>
 </html>
