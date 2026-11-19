@@ -3,498 +3,394 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HappySmile Call Assistant</title>
-<meta name="description" content="Two-screen concept: the moment a person asks to be contacted, and what HappySmile's front desk sees afterwards.">
+<title>HappySmile Mockups</title>
+<meta name="description" content="Mockup 1: a patient's phone at the moment they ask for a call. Mockup 2: the front-desk dashboard afterwards.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+/* ---------- tokens ---------- */
 :root{
-  --canvas:#efe9df;
-  --paper:#ffffff;
-  --paper-2:#f7f4ef;
-  --ink:#1a1a1d;
-  --ink-2:#4a4a52;
-  --ink-3:#8b8a90;
-  --line:#ebe6de;
-  --line-2:#ddd6cb;
-  --accent:#d9573b;
-  --accent-soft:#fbe9e3;
-  --green:#2f7d5b;
-  --green-soft:#e3f1ea;
-  --amber:#b7791f;
-  --amber-soft:#fbf1df;
-  --blue:#3b5bdb;
-  --r-lg:22px; --r-md:14px; --r-sm:10px;
-  --shadow:0 1px 2px rgba(26,26,29,.04),0 8px 24px rgba(26,26,29,.06);
-  --shadow-lg:0 2px 6px rgba(26,26,29,.06),0 30px 60px -20px rgba(26,26,29,.25);
+  --color-canvas:#e9ecf1;
+  --color-surface:#ffffff;
+  --color-surface-sunken:#f2f4f7;
+  --color-surface-raised:#ffffff;
+  --color-text-primary:#161a22;
+  --color-text-secondary:#465061;
+  --color-text-tertiary:#5f6878;
+  --color-border-subtle:#e3e7ed;
+  --color-border-strong:#cfd5de;
+  --color-primary:#2348c8;
+  --color-primary-hover:#1c3aa6;
+  --color-primary-press:#162e85;
+  --color-primary-soft:#e8edfb;
+  --color-on-primary:#ffffff;
+  --color-success:#1d6b45;
+  --color-success-soft:#e3f2ea;
+  --color-urgent:#b3261e;
+  --color-urgent-soft:#fbe9e7;
+  --color-attention:#7a5200;
+  --color-attention-soft:#fbf1dc;
+  --color-device:#14171c;
+  --focus-ring:0 0 0 3px #9db1f2;
+  --radius-sm:8px; --radius-md:12px; --radius-lg:18px;
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:20px; --space-6:24px; --space-8:32px; --space-12:48px;
+  --text-xs:11.5px; --text-sm:13px; --text-base:14px; --text-lg:17px; --text-xl:22px; --text-display:44px;
+  --shadow-device:0 2px 4px rgba(22,26,34,.08),0 40px 80px -30px rgba(22,26,34,.35);
+  --duration-fast:140ms;
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--canvas);color:var(--ink);font:14px/1.5 "Instrument Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-button{font:inherit;color:inherit;cursor:pointer}
-button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.serif{font-family:"Instrument Serif",Georgia,serif;font-weight:400}
+body{margin:0;background:var(--color-canvas);color:var(--color-text-primary);font:var(--text-base)/1.5 "Inter Tight",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer;transition:background-color var(--duration-fast) ease-out,color var(--duration-fast) ease-out,border-color var(--duration-fast) ease-out}
+button:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+button:disabled{opacity:.45;cursor:not-allowed}
 .num{font-variant-numeric:tabular-nums}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+.ico{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
-/* ---------- page intro ---------- */
-.intro{max-width:1320px;margin:0 auto;padding:56px 24px 28px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
-.intro .eyebrow{font-size:13px;color:var(--ink-3);margin:0 0 10px;display:flex;align-items:center;gap:8px}
-.intro .eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--accent)}
-.intro h1{font-size:clamp(34px,5vw,56px);line-height:1.02;margin:0;letter-spacing:-.01em}
-.intro h1 em{color:var(--accent)}
-.intro p.lede{max-width:360px;color:var(--ink-2);margin:0;font-size:15px}
+/* ---------- canvas: mobile base ---------- */
+main{display:grid;gap:var(--space-12);padding:var(--space-8) var(--space-4) var(--space-12);justify-items:center}
+@media (min-width:1180px){main{grid-template-columns:auto minmax(0,1fr);align-items:center;padding:var(--space-12);gap:var(--space-12);max-width:1600px;margin:0 auto}}
 
-.intro,.foot{max-width:1440px!important}
-.stage{max-width:1440px;margin:0 auto;padding:0 24px 40px;display:grid;grid-template-columns:380px 1fr;gap:28px;align-items:start}
-@media (max-width:1100px){.stage{grid-template-columns:1fr}}
-.shot{background:var(--paper-2);border-radius:28px;padding:28px;position:relative;min-width:0}
-.shot-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:22px;gap:12px}
-.shot-head h2{font-size:15px;font-weight:600;margin:0}
-.shot-head span{font-size:13px;color:var(--ink-3)}
-.shot-head .n{font-family:"Instrument Serif",serif;font-size:22px;color:var(--accent);margin-right:6px}
+/* ================= MOCKUP 1: phone ================= */
+.phone{position:relative;width:min(340px,100%);height:720px;background:var(--color-device);border-radius:52px;padding:10px;box-shadow:var(--shadow-device)}
+.screen{position:relative;height:100%;border-radius:43px;overflow:hidden;background:var(--color-surface)}
+.island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:96px;height:28px;border-radius:20px;background:#000;z-index:3}
+.status{display:flex;justify-content:space-between;align-items:center;padding:16px 28px 0;height:50px;font-size:var(--text-sm);font-weight:600}
+.status .ico{width:15px;height:15px}
+.status span:last-child{display:flex;gap:6px}
 
-/* ================= SCREEN 1: phone ================= */
-.phone{width:312px;height:640px;margin:0 auto;border-radius:48px;background:#111;padding:9px;box-shadow:var(--shadow-lg);position:relative}
-.phone .glass{width:100%;height:100%;border-radius:40px;overflow:hidden;position:relative;background:var(--paper)}
-.island{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:92px;height:26px;border-radius:20px;background:#000;z-index:5}
-.sbar{position:absolute;top:0;left:0;right:0;height:44px;display:flex;justify-content:space-between;align-items:center;padding:4px 26px 0;font-size:13px;font-weight:600;z-index:4}
-.sbar .ic{display:flex;gap:5px;align-items:center}
-.sbar svg{height:11px}
-.view{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .35s ease,transform .35s ease;transform:scale(.985)}
-.view.on{opacity:1;visibility:visible;transform:none}
-@media (prefers-reduced-motion:reduce){.view{transition:none}}
+.web{padding:var(--space-2) var(--space-5) 0}
+.brand{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-5)}
+.logo{display:flex;align-items:center;gap:var(--space-2);font-weight:600}
+.logo i{width:24px;height:24px;border-radius:7px;background:var(--color-primary);display:grid;place-items:center}
+.logo i svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round}
+.crumb{font-size:var(--text-sm);color:var(--color-text-tertiary)}
+.web h1{font-size:28px;line-height:1.08;letter-spacing:-.02em;margin:0 0 var(--space-2);font-weight:600;max-width:12ch}
+.web p{margin:0;color:var(--color-text-secondary);font-size:var(--text-sm);max-width:30ch}
 
-/* view A: website + sheet */
-.web{padding:52px 18px 0;height:100%;background:linear-gradient(180deg,#f6efe6 0%,#f6efe6 46%,var(--paper) 46%)}
-.web .nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
-.wordmark{display:flex;align-items:center;gap:7px;font-weight:600;font-size:14px}
-.wordmark b{width:22px;height:22px;border-radius:7px;background:var(--ink);display:grid;place-items:center}
-.wordmark b svg{width:13px}
-.web .menu{width:18px;height:10px;border-top:1.6px solid var(--ink);border-bottom:1.6px solid var(--ink)}
-.web h3{font-size:30px;line-height:1.05;margin:0 0 8px}
-.web h3 em{color:var(--accent)}
-.web .hero-sub{font-size:12.5px;color:var(--ink-2);margin:0 0 14px;max-width:170px}
-.tooth{position:absolute;right:16px;top:150px;width:64px;opacity:.95}
-.sheet{position:absolute;left:8px;right:8px;bottom:8px;background:var(--paper);border-radius:28px;padding:18px 16px 16px;box-shadow:0 -10px 40px rgba(26,26,29,.10)}
-.sheet .grab{width:36px;height:4px;border-radius:4px;background:var(--line-2);margin:-6px auto 12px}
-.sheet h4{margin:0 0 2px;font-size:16px}
-.sheet .promise{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--green);margin-bottom:12px}
-.sheet .promise i{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px var(--green-soft)}
-.f{border:1px solid var(--line);border-radius:12px;padding:7px 11px;margin-bottom:8px}
-.f small{display:block;font-size:10.5px;color:var(--ink-3)}
-.f div{font-size:13.5px;font-weight:500;display:flex;justify-content:space-between;align-items:center}
-.f .ok{font-size:11px;color:var(--green);font-weight:600}
-.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--paper-2);border-radius:12px;padding:3px;margin-bottom:8px}
-.seg span{text-align:center;font-size:12px;padding:6px 0;border-radius:9px;color:var(--ink-2)}
-.seg span.on{background:var(--paper);color:var(--ink);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.08)}
-.cta{width:100%;border:0;border-radius:14px;background:var(--ink);color:#fff;padding:13px;font-weight:600;font-size:14px;display:flex;justify-content:center;gap:8px;align-items:center}
-.fine{font-size:10.5px;color:var(--ink-3);text-align:center;margin:8px 4px 0;line-height:1.4}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:var(--color-surface-raised);border-radius:28px 28px 0 0;padding:var(--space-3) var(--space-5) var(--space-6);border-top:1px solid var(--color-border-subtle);box-shadow:0 -16px 40px -20px rgba(22,26,34,.25)}
+.grab{width:38px;height:5px;border-radius:3px;background:var(--color-border-strong);margin:0 auto var(--space-4)}
+.sheet h2{font-size:var(--text-lg);margin:0;font-weight:600}
+.eta{display:flex;align-items:center;gap:6px;font-size:var(--text-sm);color:var(--color-success);margin:2px 0 var(--space-4)}
+.eta .ico{width:14px;height:14px}
+.fld{display:block;border:1px solid var(--color-border-subtle);border-radius:var(--radius-md);padding:7px 12px;margin-bottom:var(--space-2)}
+.fld small{display:block;font-size:var(--text-xs);color:var(--color-text-tertiary)}
+.fld span{display:flex;justify-content:space-between;align-items:center;font-weight:500}
+.fld em{font-style:normal;font-size:var(--text-xs);color:var(--color-success);display:flex;align-items:center;gap:3px}
+.fld em .ico{width:13px;height:13px}
+.lang{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:var(--color-surface-sunken);border-radius:var(--radius-md);padding:3px;margin:var(--space-1) 0 var(--space-3)}
+.lang button{border:0;background:none;border-radius:9px;padding:7px 0;font-size:var(--text-sm);color:var(--color-text-secondary)}
+.lang button:hover{color:var(--color-text-primary)}
+.lang button[aria-pressed="true"]{background:var(--color-surface-raised);color:var(--color-text-primary);font-weight:600;box-shadow:0 1px 2px rgba(22,26,34,.12)}
+.cta{width:100%;border:0;border-radius:var(--radius-md);padding:14px;background:var(--color-primary);color:var(--color-on-primary);font-weight:600;display:flex;justify-content:center;align-items:center;gap:var(--space-2)}
+.cta:hover{background:var(--color-primary-hover)}
+.cta:active{background:var(--color-primary-press)}
+.cta[aria-busy="true"]{background:var(--color-success)}
+.consent{display:flex;gap:var(--space-2);font-size:var(--text-xs);color:var(--color-text-tertiary);margin:var(--space-3) 0 0;line-height:1.45}
+.consent .ico{width:14px;height:14px;margin-top:1px}
 
-/* view B: incoming call */
-.call{background:radial-gradient(120% 70% at 50% 0%,#5b4636 0%,#2a211c 55%,#141110 100%);color:#fff;height:100%;display:flex;flex-direction:column;align-items:center;padding:70px 24px 40px;text-align:center}
-.call .sbar{color:#fff}
-.call .kind{font-size:13px;opacity:.65;margin-bottom:6px}
-.call .who{font-size:30px;font-weight:400;line-height:1.1;margin:0}
-.call .vb{display:inline-flex;gap:5px;align-items:center;font-size:12.5px;opacity:.85;margin-top:8px}
-.call .vb svg{width:14px}
-.call .ctx{margin-top:22px;background:rgba(255,255,255,.08);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.10);border-radius:18px;padding:12px 14px;text-align:left;font-size:12.5px;line-height:1.45;width:100%}
-.call .ctx b{display:block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;opacity:.55;font-weight:600;margin-bottom:4px}
-.call .timer{margin-top:14px;font-size:12px;opacity:.6}
-.call .spacer{flex:1}
-.call .row{display:flex;justify-content:space-between;width:100%;padding:0 10px}
-.call .act{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:12px;opacity:.9}
-.call .act span{width:64px;height:64px;border-radius:50%;display:grid;place-items:center}
-.call .act svg{width:26px;fill:#fff}
-.decline span{background:#eb4d3d}
-.decline svg{transform:rotate(135deg)}
-.accept span{background:#34c759;animation:nudge 1.6s ease-in-out infinite}
-@keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-@media (prefers-reduced-motion:reduce){.accept span{animation:none}}
-.call .minor{display:flex;justify-content:space-between;width:100%;padding:0 22px;margin-bottom:28px;font-size:12px;opacity:.7}
+/* ================= MOCKUP 2: laptop ================= */
+.laptop{width:100%;max-width:1180px;min-width:0}
+.lid{margin:0 3%;background:var(--color-device);border-radius:20px 20px 0 0;padding:14px 14px 0;box-shadow:var(--shadow-device)}
+.cam{width:6px;height:6px;border-radius:50%;background:#2a2f37;margin:-6px auto 8px}
+.base{height:16px;background:linear-gradient(#c9ced6,#aab1bb);border-radius:0 0 14px 14px;position:relative}
+.base::after{content:"";position:absolute;left:50%;top:0;transform:translateX(-50%);width:16%;height:6px;background:#9aa1ac;border-radius:0 0 8px 8px}
+.app{background:var(--color-surface);border-radius:6px 6px 0 0;overflow:hidden;display:grid;min-height:560px}
+@media (min-width:860px){.app{grid-template-columns:188px minmax(0,1fr)}}
 
-/* view C: whatsapp */
-.wa{height:100%;background:#efe7dc;display:flex;flex-direction:column}
-.wa-top{background:var(--paper);padding:50px 14px 10px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line)}
-.wa-top .back{font-size:20px;color:#1f8f5f;line-height:1}
-.wa-top .av{width:34px;height:34px;border-radius:50%;background:var(--ink);display:grid;place-items:center}
-.wa-top .av svg{width:16px}
-.wa-top b{font-size:14px;display:flex;gap:4px;align-items:center}
-.wa-top b svg{width:13px}
-.wa-top small{display:block;font-size:11px;color:var(--ink-3)}
-.wa-body{flex:1;padding:12px 10px;display:flex;flex-direction:column;gap:6px;overflow:hidden}
-.day{align-self:center;background:rgba(255,255,255,.75);font-size:10.5px;padding:3px 9px;border-radius:7px;color:var(--ink-2);margin-bottom:4px}
-.msg{background:var(--paper);border-radius:4px 14px 14px 14px;padding:8px 10px 6px;font-size:13px;max-width:88%;box-shadow:0 1px .5px rgba(0,0,0,.12);line-height:1.4}
-.msg time{display:block;text-align:right;font-size:10px;color:var(--ink-3);margin-top:2px}
-.slots{background:var(--paper);border-radius:14px;max-width:88%;overflow:hidden;box-shadow:0 1px .5px rgba(0,0,0,.12)}
-.slots .hd{padding:8px 10px;font-size:13px;line-height:1.4}
-.slots .hd small{color:var(--ink-3);font-size:11.5px;display:block}
-.slots button{display:flex;justify-content:space-between;align-items:center;width:100%;border:0;border-top:1px solid var(--line);background:none;padding:9px 10px;font-size:13px;color:#1f7a8c;font-weight:500;text-align:left}
-.slots button span{font-size:11.5px;color:var(--ink-3);font-weight:400}
-.slots button.human{color:var(--ink-2)}
-.wa-in{background:var(--paper);padding:8px 10px 26px;display:flex;gap:8px;align-items:center}
-.wa-in div{flex:1;background:var(--paper-2);border-radius:18px;padding:8px 12px;font-size:12.5px;color:var(--ink-3)}
-.wa-in i{width:32px;height:32px;border-radius:50%;background:#1f8f5f;flex:none}
+.side{display:none;flex-direction:column;gap:2px;padding:var(--space-4) var(--space-3);border-right:1px solid var(--color-border-subtle);background:var(--color-surface-sunken)}
+@media (min-width:860px){.side{display:flex}}
+.clinic{display:flex;gap:var(--space-2);align-items:center;padding:var(--space-1) var(--space-2) var(--space-4);margin-bottom:var(--space-2);border-bottom:1px solid var(--color-border-subtle)}
+.clinic .logo i{width:28px;height:28px}
+.clinic b{display:block;font-size:var(--text-sm);line-height:1.2}
+.clinic small{font-size:var(--text-xs);color:var(--color-text-tertiary)}
+.nav{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:var(--radius-sm);font-size:var(--text-sm);color:var(--color-text-secondary);border:0;background:none;width:100%;text-align:left}
+.nav:hover{background:var(--color-surface-raised);color:var(--color-text-primary)}
+.nav[aria-current="page"]{background:var(--color-surface-raised);color:var(--color-text-primary);font-weight:600;box-shadow:inset 0 0 0 1px var(--color-border-subtle)}
+.nav .count{margin-left:auto;font-size:var(--text-xs);font-weight:600;background:var(--color-urgent);color:#fff;border-radius:999px;padding:0 7px;line-height:18px}
+.side .fill{flex:1}
+.pilot{font-size:var(--text-xs);color:var(--color-text-secondary);line-height:1.45;padding:var(--space-3);border:1px solid var(--color-border-subtle);border-radius:var(--radius-md);background:var(--color-surface)}
+.pilot b{display:block;color:var(--color-text-primary);font-size:var(--text-sm)}
+.bar{height:4px;border-radius:2px;background:var(--color-border-subtle);margin-top:var(--space-2);overflow:hidden}
+.bar i{display:block;height:100%;width:50%;background:var(--color-primary)}
 
-/* stepper under phone */
-.steps{margin:26px auto 0;max-width:330px}
-.step{display:grid;grid-template-columns:28px 1fr;gap:10px;width:100%;text-align:left;background:none;border:0;padding:10px 12px;border-radius:14px;color:var(--ink-3);transition:background .2s,color .2s}
-.step .k{width:24px;height:24px;border-radius:50%;border:1px solid var(--line-2);display:grid;place-items:center;font-size:11.5px;font-weight:600}
-.step b{display:block;font-size:13.5px;font-weight:600}
-.step small{font-size:12.5px;line-height:1.4;display:block}
-.step.on{background:var(--paper);color:var(--ink-2);box-shadow:var(--shadow)}
-.step.on b{color:var(--ink)}
-.step.on .k{background:var(--ink);border-color:var(--ink);color:#fff}
+.main{padding:var(--space-5);min-width:0}
+@media (min-width:860px){.main{padding:var(--space-6) var(--space-8)}}
+.top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:var(--space-3);margin-bottom:var(--space-6)}
+.top h2{margin:0;font-size:var(--text-xl);font-weight:600;letter-spacing:-.01em}
+.top p{margin:0;font-size:var(--text-sm);color:var(--color-text-tertiary)}
+.tools{display:flex;gap:var(--space-2)}
+.ghost{border:1px solid var(--color-border-subtle);background:var(--color-surface-raised);border-radius:var(--radius-sm);padding:7px 12px;font-size:var(--text-sm);display:inline-flex;gap:6px;align-items:center;color:var(--color-text-secondary)}
+.ghost:hover{border-color:var(--color-border-strong);color:var(--color-text-primary)}
+.ghost:active{background:var(--color-surface-sunken)}
 
-/* ================= SCREEN 2: dashboard ================= */
-.win{background:var(--paper);border-radius:18px;box-shadow:var(--shadow-lg);overflow:hidden;min-width:0}
-.chrome{height:38px;background:var(--paper-2);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:7px;padding:0 14px}
-.chrome i{width:10px;height:10px;border-radius:50%;background:var(--line-2)}
-.chrome .url{margin:0 auto;font-size:11.5px;color:var(--ink-3);background:var(--paper);border-radius:7px;padding:3px 40px}
-.app{display:grid;grid-template-columns:176px 1fr;min-height:760px}
-@media (max-width:760px){.app{grid-template-columns:1fr}.side{display:none!important}}
+/* lead metric band */
+.lead{display:grid;gap:var(--space-4);padding-bottom:var(--space-6);margin-bottom:var(--space-6);border-bottom:1px solid var(--color-border-subtle)}
+@media (min-width:860px){.lead{grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--space-8);align-items:end}}
+.hero small{font-size:var(--text-sm);color:var(--color-text-secondary)}
+.hero .big{display:flex;align-items:baseline;gap:var(--space-3);flex-wrap:wrap}
+.hero .big b{font-size:var(--text-display);font-weight:600;letter-spacing:-.03em;line-height:1}
+.hero .big span{font-size:var(--text-sm);color:var(--color-text-secondary)}
+.hero .big .up{color:var(--color-success);font-weight:600;display:inline-flex;align-items:center;gap:2px}
+.compare{display:grid;gap:6px;margin-top:var(--space-4);max-width:440px}
+.crow{display:grid;grid-template-columns:120px 1fr 28px;gap:var(--space-3);align-items:center;font-size:var(--text-sm);color:var(--color-text-secondary)}
+.track{height:8px;border-radius:4px;background:var(--color-surface-sunken)}
+.track i{display:block;height:100%;border-radius:4px}
+.secondary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--color-border-subtle);border-radius:var(--radius-md)}
+.secondary div{padding:var(--space-3)}
+.secondary div+div{border-left:1px solid var(--color-border-subtle)}
+.secondary small{display:block;font-size:var(--text-xs);color:var(--color-text-tertiary)}
+.secondary b{font-size:var(--text-lg);font-weight:600}
+.secondary span{display:block;font-size:var(--text-xs);color:var(--color-text-tertiary)}
 
-.side{border-right:1px solid var(--line);padding:16px 12px;display:flex;flex-direction:column;gap:2px;background:#fcfbf9}
-.clinic{display:flex;align-items:center;gap:9px;padding:6px 8px 14px;border-bottom:1px solid var(--line);margin-bottom:10px}
-.clinic .lg{width:30px;height:30px;border-radius:9px;background:var(--ink);display:grid;place-items:center;flex:none}
-.clinic .lg svg{width:16px}
-.clinic b{font-size:13px;display:block;line-height:1.2}
-.clinic small{font-size:11.5px;color:var(--ink-3)}
-.nv{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;font-size:13px;color:var(--ink-2)}
-.nv svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
-.nv.on{background:var(--paper);color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.05),0 0 0 1px var(--line)}
-.nv .badge{margin-left:auto;background:var(--accent);color:#fff;font-size:10.5px;font-weight:600;border-radius:999px;padding:0 7px;line-height:18px}
-.side .grow{flex:1}
-.pilotcard{background:var(--paper-2);border-radius:12px;padding:12px;font-size:12px;color:var(--ink-2);line-height:1.45;margin-bottom:10px}
-.pilotcard b{display:block;color:var(--ink);font-size:12.5px;margin-bottom:2px}
-.prog{height:4px;background:var(--line-2);border-radius:4px;margin-top:8px;overflow:hidden}
-.prog i{display:block;height:100%;width:50%;background:var(--ink)}
-.me{display:flex;align-items:center;gap:9px;padding:8px;border-top:1px solid var(--line);padding-top:12px}
-.av{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:11.5px;font-weight:600;flex:none}
-.me b{font-size:12.5px;display:block;line-height:1.2}
-.me small{font-size:11.5px;color:var(--ink-3)}
-
-.main{padding:22px 26px 26px;min-width:0}
-@media (max-width:520px){.main{padding:18px 14px}}
-.mhead{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:20px}
-.mhead h3{margin:0;font-size:28px;line-height:1.1}
-.mhead p{margin:2px 0 0;color:var(--ink-3);font-size:13px}
-.tools{display:flex;gap:8px}
-.tbtn{border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:7px 12px;font-size:12.5px;display:flex;gap:6px;align-items:center;color:var(--ink-2)}
-.tbtn.dark{background:var(--ink);color:#fff;border-color:var(--ink)}
-
-.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:var(--r-md);margin-bottom:22px}
-@media (max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid var(--line)}}
-.stat{padding:14px 16px;border-right:1px solid var(--line);min-width:0}
-.stat:last-child{border-right:0}
-.stat .l{font-size:12px;color:var(--ink-3);display:flex;justify-content:space-between;gap:6px}
-.stat .v{font-size:28px;font-weight:500;letter-spacing:-.02em;margin:4px 0 2px;line-height:1.1}
-.stat .v small{font-size:14px;color:var(--ink-3);font-weight:400;margin-left:2px}
-.stat .d{font-size:12px;color:var(--ink-3)}
-.stat .d b{color:var(--green);font-weight:600}
-.stat.key{background:var(--ink);color:#fff;border-radius:0 13px 13px 0}
-@media (max-width:900px){.stat.key{border-radius:0 0 13px 0}}
-.stat.key .l,.stat.key .d,.stat.key .v small{color:rgba(255,255,255,.6)}
-.stat.key .d b{color:#8fe0b5}
-.tag{font-size:10.5px;border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:0 7px;line-height:17px;white-space:nowrap}
-.mini{display:flex;gap:4px;align-items:flex-end;height:22px;margin-top:6px}
-.mini i{flex:1;border-radius:3px 3px 0 0;background:rgba(255,255,255,.18)}
-.mini i.a{background:#8fe0b5}
-
-.sect-title{display:flex;align-items:center;justify-content:space-between;margin:0 0 10px}
-.sect-title h4{margin:0;font-size:14px;display:flex;align-items:center;gap:8px}
-.sect-title h4 .c{background:var(--accent-soft);color:var(--accent);font-size:11.5px;border-radius:999px;padding:0 8px;line-height:20px}
-.sect-title span{font-size:12.5px;color:var(--ink-3)}
-
-.inbox{display:grid;grid-template-columns:250px 1fr;border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;margin-bottom:24px}
-@media (max-width:900px){.inbox{grid-template-columns:1fr}}
-.list{border-right:1px solid var(--line);background:#fcfbf9}
-@media (max-width:900px){.list{border-right:0;border-bottom:1px solid var(--line)}}
-.item{display:grid;grid-template-columns:32px 1fr auto;gap:10px;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);padding:12px 14px;position:relative}
+/* inbox */
+.h3row{display:flex;justify-content:space-between;align-items:baseline;gap:var(--space-3);margin-bottom:var(--space-3)}
+.h3row h3{margin:0;font-size:var(--text-base);font-weight:600}
+.h3row span{font-size:var(--text-sm);color:var(--color-text-tertiary)}
+.inbox{display:grid;border:1px solid var(--color-border-subtle);border-radius:var(--radius-md);overflow:hidden;margin-bottom:var(--space-8)}
+@media (min-width:1000px){.inbox{grid-template-columns:270px minmax(0,1fr)}}
+.list{background:var(--color-surface-sunken);border-bottom:1px solid var(--color-border-subtle)}
+@media (min-width:1000px){.list{border-bottom:0;border-right:1px solid var(--color-border-subtle)}}
+.item{display:grid;grid-template-columns:32px minmax(0,1fr) auto;gap:10px;width:100%;text-align:left;border:0;background:none;padding:12px 14px;border-bottom:1px solid var(--color-border-subtle)}
 .item:last-child{border-bottom:0}
-.item b{font-size:13.5px;font-weight:600;display:block}
-.item small{display:block;font-size:12px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.item time{font-size:11.5px;color:var(--ink-3)}
-.item.on{background:var(--paper)}
-.item.on::before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:3px;border-radius:0 3px 3px 0;background:var(--accent)}
-.reason{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;margin-top:3px}
-.reason i{width:6px;height:6px;border-radius:50%}
-.r-red{color:var(--accent)} .r-red i{background:var(--accent)}
-.r-amb{color:var(--amber)} .r-amb i{background:var(--amber)}
-.r-ink{color:var(--ink-2)} .r-ink i{background:var(--ink-3)}
+.item:hover{background:var(--color-surface)}
+.item[aria-selected="true"]{background:var(--color-surface-raised);box-shadow:inset 0 0 0 1.5px var(--color-primary)}
+.item b{display:block;font-size:var(--text-sm);font-weight:600}
+.item small{display:block;font-size:var(--text-xs);color:var(--color-text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item time{font-size:var(--text-xs);color:var(--color-text-tertiary)}
+.av{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:var(--text-xs);font-weight:600;background:var(--color-primary-soft);color:var(--color-primary)}
+.flag{display:inline-flex;align-items:center;gap:4px;font-size:var(--text-xs);font-weight:600;margin-top:3px}
+.flag .ico{width:13px;height:13px}
+.f-urgent{color:var(--color-urgent)} .f-attn{color:var(--color-attention)} .f-plain{color:var(--color-text-secondary)}
 
-.detail{padding:18px 20px;min-width:0}
-.dtop{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:14px}
-.dtop .who{display:flex;gap:12px;align-items:center}
-.dtop .who .av{width:40px;height:40px;font-size:14px}
-.dtop h5{margin:0;font-size:17px}
-.dtop p{margin:0;font-size:12.5px;color:var(--ink-3)}
-.acts{display:flex;gap:8px;flex-wrap:wrap}
-.btn{border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:8px 13px;font-size:13px;font-weight:500;display:inline-flex;gap:7px;align-items:center}
-.btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
-.alert{display:flex;gap:10px;align-items:flex-start;background:var(--accent-soft);border-radius:12px;padding:10px 12px;font-size:13px;margin-bottom:14px;color:#7a2a18}
-.alert.amb{background:var(--amber-soft);color:#6b4510}
-.alert.ink{background:var(--paper-2);color:var(--ink-2)}
-.alert svg{width:16px;height:16px;flex:none;margin-top:2px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
-@media (max-width:520px){.facts{grid-template-columns:1fr 1fr}}
-.fact{background:var(--paper-2);border-radius:12px;padding:9px 11px}
-.fact small{display:block;font-size:11px;color:var(--ink-3)}
-.fact b{font-size:13px;font-weight:600}
-.summary{font-size:13.5px;color:var(--ink-2);margin:0 0 14px;line-height:1.55}
-.player{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:12px}
-.play{width:30px;height:30px;border-radius:50%;background:var(--ink);border:0;display:grid;place-items:center;flex:none}
-.play svg{width:11px;fill:#fff;margin-left:2px}
-.wave{flex:1;display:flex;align-items:center;gap:2px;height:28px;min-width:0;overflow:hidden}
-.wave i{flex:1;min-width:2px;border-radius:2px;background:var(--line-2)}
-.wave i.p{background:var(--ink)}
-.player time{font-size:12px;color:var(--ink-3)}
-.quote{border-left:2px solid var(--line-2);padding:2px 0 2px 12px;font-size:13px;color:var(--ink-2);margin:0}
-.quote p{margin:0 0 6px}
-.quote b{color:var(--ink);font-weight:600}
+.detail{padding:var(--space-5);min-width:0;background:var(--color-surface-raised)}
+.dhead{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--space-3);margin-bottom:var(--space-4)}
+.dhead .who{display:flex;gap:var(--space-3);align-items:center}
+.dhead .av{width:40px;height:40px;font-size:var(--text-sm)}
+.dhead h4{margin:0;font-size:var(--text-lg);font-weight:600}
+.dhead p{margin:0;font-size:var(--text-sm);color:var(--color-text-tertiary)}
+.acts{display:flex;gap:var(--space-2);flex-wrap:wrap}
+.btn{border:1px solid var(--color-border-subtle);background:var(--color-surface-raised);border-radius:var(--radius-sm);padding:8px 13px;font-size:var(--text-sm);font-weight:500;display:inline-flex;gap:7px;align-items:center}
+.btn:hover{border-color:var(--color-border-strong)}
+.btn:active{background:var(--color-surface-sunken)}
+.btn.primary{background:var(--color-primary);color:var(--color-on-primary);border-color:var(--color-primary)}
+.btn.primary:hover{background:var(--color-primary-hover)}
+.btn.primary:active{background:var(--color-primary-press)}
+.why{display:flex;gap:var(--space-2);align-items:flex-start;border:1px solid var(--color-border-subtle);border-radius:var(--radius-md);padding:10px 12px;font-size:var(--text-sm);margin-bottom:var(--space-4)}
+.why .ico{margin-top:2px}
+.why.u{background:var(--color-urgent-soft);border-color:#f2c9c4}
+.why.u .ico{color:var(--color-urgent)}
+.why.a{background:var(--color-attention-soft);border-color:#f0dcb0}
+.why.a .ico{color:var(--color-attention)}
+.why.p{background:var(--color-surface-sunken)}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-2);margin-bottom:var(--space-4)}
+.facts div{border:1px solid var(--color-border-subtle);border-radius:var(--radius-sm);padding:8px 10px}
+.facts small{display:block;font-size:var(--text-xs);color:var(--color-text-tertiary)}
+.facts b{font-size:var(--text-sm);font-weight:600}
+.sum{font-size:var(--text-sm);color:var(--color-text-secondary);margin:0 0 var(--space-4);max-width:65ch}
+.player{display:flex;align-items:center;gap:var(--space-3);border:1px solid var(--color-border-subtle);border-radius:var(--radius-md);padding:8px 12px;margin-bottom:var(--space-3)}
+.play{width:30px;height:30px;border-radius:50%;border:0;background:var(--color-text-primary);color:#fff;display:grid;place-items:center;flex:none}
+.play:hover{background:var(--color-primary)}
+.play .ico{width:13px;height:13px;fill:currentColor;stroke:none}
+.wave{flex:1;display:flex;align-items:center;gap:2px;height:26px;min-width:0;overflow:hidden}
+.wave i{flex:1;min-width:2px;border-radius:2px;background:var(--color-border-strong)}
+.wave i.on{background:var(--color-text-primary)}
+.player time{font-size:var(--text-xs);color:var(--color-text-tertiary)}
+.quote{margin:0;padding:0;list-style:none;display:grid;gap:6px;font-size:var(--text-sm)}
+.quote li{color:var(--color-text-secondary)}
+.quote b{color:var(--color-text-primary);font-weight:600}
 
-table{width:100%;border-collapse:collapse;font-size:13px}
-.tw{border:1px solid var(--line);border-radius:var(--r-md);overflow-x:auto}
-.tw table{min-width:640px}
-th{white-space:nowrap;text-align:left;font-weight:500;color:var(--ink-3);font-size:12px;padding:10px 14px;border-bottom:1px solid var(--line);background:#fcfbf9}
-td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
+/* table */
+.tw:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+.tw{border:1px solid var(--color-border-subtle);border-radius:var(--radius-md);overflow-x:auto;position:relative}
+table{width:100%;border-collapse:collapse;font-size:var(--text-sm);min-width:640px}
+th{text-align:left;font-weight:500;font-size:var(--text-xs);color:var(--color-text-tertiary);padding:9px 14px;background:var(--color-surface-sunken);border-bottom:1px solid var(--color-border-subtle);white-space:nowrap}
+td{padding:10px 14px;border-bottom:1px solid var(--color-border-subtle)}
 tr:last-child td{border-bottom:0}
-.person{display:flex;align-items:center;gap:10px}
-.person .av{width:28px;height:28px;font-size:11px}
-.person small{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.2}
-.st{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;white-space:nowrap}
-.st i{width:7px;height:7px;border-radius:50%}
-.s-book i{background:var(--green)} .s-hand i{background:var(--accent)} .s-wait i{background:var(--amber)} .s-off i{background:var(--line-2)} .s-old i{background:var(--blue)}
-.fast{color:var(--green);font-weight:500}
-.slow{color:var(--accent);font-weight:500}
-td.dim{color:var(--ink-3)}
-
-.foot{max-width:1320px;margin:0 auto;padding:0 24px 48px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--ink-3);font-size:12.5px}
-
-.item>span{min-width:0}
-@media (max-width:600px){
-  .intro{padding:36px 16px 20px}
-  .stage{padding:0 12px 32px;gap:16px}
-  .shot{padding:18px 12px;border-radius:22px}
-  .stat .v{font-size:22px}
-  .sect-title{flex-wrap:wrap;gap:2px 10px}
-  .foot{padding:0 16px 36px}
-}
-/* avatar colours */
-.a1{background:#f3dccf;color:#8a3b1f}.a2{background:#dbe7f5;color:#264d7d}.a3{background:#e2efe5;color:#2f6b47}.a4{background:#efe1f2;color:#6c3478}.a5{background:#f6ead0;color:#7a5a12}.a6{background:#e3e2ee;color:#3f3c70}.a7{background:#f0e0e0;color:#7d3030}
+.p{display:flex;align-items:center;gap:10px}
+.p .av{width:28px;height:28px}
+.p small{display:block;font-size:var(--text-xs);color:var(--color-text-tertiary);line-height:1.2}
+.st{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.st .ico{width:14px;height:14px}
+.s-book{color:var(--color-success)} .s-hand{color:var(--color-urgent)} .s-wait{color:var(--color-attention)} .s-ctl{color:var(--color-primary)} .s-off{color:var(--color-text-tertiary)}
+.st span{color:var(--color-text-primary)}
+td.dim{color:var(--color-text-tertiary)}
+.fast{color:var(--color-success);font-weight:500}
+.slow{color:var(--color-urgent);font-weight:500}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-smile" viewBox="0 0 24 24"><path d="M6 10c1.5 5 10.5 5 12 0"/></symbol>
+  <symbol id="i-signal" viewBox="0 0 24 24"><path d="M2 20h.01M7 20v-4M12 20v-8M17 20V8M22 4v16"/></symbol>
+  <symbol id="i-battery" viewBox="0 0 24 24"><rect x="2" y="7" width="16" height="10" rx="2"/><path d="M22 11v2"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></symbol>
+  <symbol id="i-bot" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M12 8V4M8 14h.01M16 14h.01"/></symbol>
+  <symbol id="i-inbox" viewBox="0 0 24 24"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5h13l3.5 7v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6z"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></symbol>
+  <symbol id="i-rules" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></symbol>
+  <symbol id="i-rupee" viewBox="0 0 24 24"><path d="M6 3h12M6 8h12M6 13l8.5 8M6 13h3c6.7 0 6.7-10 0-10"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4v16l13-8z"/></symbol>
+  <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></symbol>
+  <symbol id="i-msg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6M9 9l6 6"/></symbol>
+  <symbol id="i-split" viewBox="0 0 24 24"><path d="M16 3h5v5M8 3H3v5M21 3l-9 9M3 3l9 9v9"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
+</svg>
 
-<header class="intro">
-  <div>
-    <p class="eyebrow"><i></i>HappySmile · Call assistant concept</p>
-    <h1 class="serif">Every enquiry, called<br>back in <em>two minutes</em>.</h1>
-  </div>
-  <p class="lede">Two moments: what a person sees right after asking for a call, and what the front desk sees afterwards.</p>
-</header>
-
-<main class="stage">
-
-  <!-- =============== SCREEN 1 =============== -->
-  <section class="shot" aria-labelledby="h1">
-    <div class="shot-head"><h2 id="h1"><span class="n">01</span>Asking for a call</h2><span>Patient's phone</span></div>
-
-    <div class="phone" aria-live="polite">
-      <div class="glass">
-        <div class="island"></div>
-
-        <!-- A: website -->
-        <div class="view on" id="v0">
-          <div class="sbar"><span>7:42</span><span class="ic"><svg viewBox="0 0 18 11"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="6" rx="1"/><rect x="10" y="2.5" width="3" height="8.5" rx="1"/><rect x="15" y="0" width="3" height="11" rx="1"/></svg><svg viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="15" height="8" rx="2"/></svg></span></div>
-          <div class="web">
-            <div class="nav"><span class="wordmark"><b><svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M3.5 6.5c1.2 3.6 7.8 3.6 9 0"/></svg></b>HappySmile</span><span class="menu"></span></div>
-            <h3 class="serif">Straighter teeth,<br><em>without the wait.</em></h3>
-            <p class="hero-sub">Braces and clear aligners at 12 clinics across India.</p>
-            <svg class="tooth" viewBox="0 0 100 110" fill="none"><path d="M50 14c-9-8-30-10-36 6-6 17 4 30 7 47 3 18 6 33 14 33 7 0 7-26 15-26s8 26 15 26c8 0 11-15 14-33 3-17 13-30 7-47-6-16-27-14-36-6z" fill="#fff" stroke="#e6d9c8" stroke-width="2"/><path d="M36 34c4 3 10 3 14 0" stroke="#d9573b" stroke-width="2.5" stroke-linecap="round"/></svg>
-          </div>
-          <div class="sheet">
-            <div class="grab"></div>
-            <h4>Get a free consultation</h4>
-            <div class="promise"><i></i>We usually call back in under 2 minutes</div>
-            <div class="f"><small>Name</small><div>Priya Sharma</div></div>
-            <div class="f"><small>Mobile</small><div>+91 98XXX X4210 <span class="ok">✓ Verified</span></div></div>
-            <div class="seg"><span>English</span><span class="on">हिन्दी</span><span>मराठी</span></div>
-            <button class="cta" onclick="show(1)">Call me now
-              <svg width="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-            <p class="fine">HappySmile's <b>virtual assistant</b> will call you. Ask for a person any time. Calls 9 am – 9 pm only.</p>
-          </div>
+<main>
+  <!-- ============ MOCKUP 1 ============ -->
+  <div class="phone" role="group" aria-label="Mockup 1: a patient's phone at the moment they ask HappySmile for a call">
+    <div class="screen">
+      <div class="island"></div>
+      <div class="status"><span>7:42</span><span><svg class="ico"><use href="#i-signal"/></svg><svg class="ico"><use href="#i-battery"/></svg></span></div>
+      <div class="web">
+        <div class="brand"><span class="logo"><i><svg><use href="#i-smile"/></svg></i>HappySmile</span><span class="crumb">Braces</span></div>
+        <h1>Straighter teeth, minus the wait</h1>
+        <p>Braces and clear aligners at 12 clinics. First consultation is free.</p>
+      </div>
+      <div class="sheet">
+        <div class="grab"></div>
+        <h2>Get a call about braces</h2>
+        <p class="eta"><svg class="ico"><use href="#i-clock"/></svg>We call back in about 2 minutes</p>
+        <div class="fld"><small>Name</small><span>Priya Sharma</span></div>
+        <div class="fld"><small>Mobile</small><span class="num">+91 98XXX X4210 <em><svg class="ico"><use href="#i-check"/></svg>Verified</em></span></div>
+        <div class="lang" role="group" aria-label="Call language">
+          <button type="button" aria-pressed="false">English</button>
+          <button type="button" aria-pressed="true">हिन्दी</button>
+          <button type="button" aria-pressed="false">मराठी</button>
         </div>
-
-        <!-- B: incoming call -->
-        <div class="view" id="v1">
-          <div class="call">
-            <div class="sbar"><span>7:43</span><span class="ic"><svg viewBox="0 0 18 11" fill="#fff"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="6" rx="1"/><rect x="10" y="2.5" width="3" height="8.5" rx="1"/><rect x="15" y="0" width="3" height="11" rx="1"/></svg></span></div>
-            <div class="kind">Incoming call · 1m 12s after request</div>
-            <p class="who serif">HappySmile Dental</p>
-            <span class="vb"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#34c759"/><path d="M5 8.2l2 2 4-4.2" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>Verified business · Virtual assistant</span>
-            <div class="ctx"><b>You'll hear first</b>“Namaste Priya, main HappySmile ki virtual assistant hoon, aapki braces enquiry ke baare mein call kar rahi hoon. Kya abhi baat kar sakte hain?”</div>
-            <div class="spacer"></div>
-            <div class="minor"><span>Remind me</span><span>Message</span></div>
-            <div class="row">
-              <button class="act decline" onclick="show(2)" style="background:none;border:0;color:#fff"><span><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg></span>Decline</button>
-              <button class="act accept" onclick="show(2)" style="background:none;border:0;color:#fff"><span><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg></span>Accept</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- C: whatsapp fallback -->
-        <div class="view" id="v2">
-          <div class="wa">
-            <div class="sbar"><span>7:44</span><span></span></div>
-            <div class="wa-top">
-              <span class="back">‹</span>
-              <span class="av"><svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M3.5 6.5c1.2 3.6 7.8 3.6 9 0"/></svg></span>
-              <div><b>HappySmile Dental <svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#25a366"/><path d="M5 8.2l2 2 4-4.2" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></b><small>Business account</small></div>
-            </div>
-            <div class="wa-body">
-              <span class="day">Today</span>
-              <div class="msg">Hi Priya, we just tried calling about braces and missed you. No problem!<time>7:44 pm</time></div>
-              <div class="slots">
-                <div class="hd">Pick a free consultation slot<small>Andheri West clinic · 1.8 km away</small></div>
-                <button>Thu 21 Nov · 11:00 am <span>Dr. Kulkarni</span></button>
-                <button>Thu 21 Nov · 6:30 pm <span>Dr. Kulkarni</span></button>
-                <button>Sat 23 Nov · 10:00 am <span>Dr. Shah</span></button>
-                <button class="human">Talk to a person instead</button>
-              </div>
-              <div class="msg">We'll try one more call at 8:15 pm. Reply STOP to opt out.<time>7:44 pm</time></div>
-            </div>
-            <div class="wa-in"><div>Message</div><i></i></div>
-          </div>
-        </div>
+        <button class="cta" type="button" id="cta"><svg class="ico"><use href="#i-phone"/></svg><span>Call me now</span></button>
+        <p class="consent"><svg class="ico"><use href="#i-bot"/></svg><span>HappySmile's virtual assistant will call you. Ask for a person at any time. Calls 9 am to 9 pm.</span></p>
       </div>
     </div>
+  </div>
 
-    <div class="steps" role="tablist" aria-label="Moments">
-      <button class="step on" role="tab" onclick="show(0)"><span class="k">1</span><span><b>Asks for a call</b><small>Verified number, language, and a clear note that an assistant will call.</small></span></button>
-      <button class="step" role="tab" onclick="show(1)"><span class="k">2</span><span><b>Call arrives in ~1 minute</b><small>From a verified business number. The first sentence says it's an assistant.</small></span></button>
-      <button class="step" role="tab" onclick="show(2)"><span class="k">3</span><span><b>Missed? WhatsApp takes over</b><small>Bookable slots plus a way to reach a person.</small></span></button>
-    </div>
-  </section>
-
-  <!-- =============== SCREEN 2 =============== -->
-  <section class="shot" aria-labelledby="h2" style="min-width:0">
-    <div class="shot-head"><h2 id="h2"><span class="n">02</span>What HappySmile sees</h2><span>Front-desk workspace</span></div>
-
-    <div class="win">
-      <div class="chrome"><i></i><i></i><i></i><span class="url">desk.happysmile.in/leads</span></div>
+  <!-- ============ MOCKUP 2 ============ -->
+  <div class="laptop">
+    <div class="lid">
+      <div class="cam"></div>
       <div class="app">
-
-        <aside class="side">
-          <div class="clinic"><span class="lg"><svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M3.5 6.5c1.2 3.6 7.8 3.6 9 0"/></svg></span><span><b>Andheri West</b><small>HappySmile · 1 of 12</small></span></div>
-          <div class="nv on"><svg viewBox="0 0 24 24"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5h13l3.5 7v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6z"/></svg>Leads<span class="badge">3</span></div>
-          <div class="nv"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Appointments</div>
-          <div class="nv"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call log</div>
-          <div class="nv"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>Pilot results</div>
-          <div class="nv"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z"/></svg>Escalation rules</div>
-          <div class="grow"></div>
-          <div class="pilotcard"><b>Pilot · week 2 of 4</b>Half of new leads go to the assistant, half to the usual callback.<div class="prog"><i></i></div></div>
-          <div class="me"><span class="av a5">MK</span><span><b>Meera K.</b><small>Front desk lead</small></span></div>
-        </aside>
+        <nav class="side" aria-label="Workspace">
+          <div class="clinic"><span class="logo"><i><svg><use href="#i-smile"/></svg></i></span><span><b>Andheri West</b><small>HappySmile, 1 of 12</small></span></div>
+          <button class="nav" aria-current="page"><svg class="ico"><use href="#i-inbox"/></svg>Leads<span class="count">3</span></button>
+          <button class="nav"><svg class="ico"><use href="#i-cal"/></svg>Appointments</button>
+          <button class="nav"><svg class="ico"><use href="#i-phone"/></svg>Call log</button>
+          <button class="nav"><svg class="ico"><use href="#i-chart"/></svg>Pilot results</button>
+          <button class="nav"><svg class="ico"><use href="#i-rules"/></svg>Handover rules</button>
+          <div class="fill"></div>
+          <div class="pilot"><b>Pilot, week 2 of 4</b>Half of new leads get the assistant. Half get the usual callback.<div class="bar"><i></i></div></div>
+        </nav>
 
         <div class="main">
-          <div class="mhead">
-            <div><h3 class="serif">Good evening, Meera</h3><p>Tuesday, 19 November · 41 enquiries so far today</p></div>
-            <div class="tools"><button class="tbtn">Today ▾</button><button class="tbtn dark">Export</button></div>
+          <div class="top">
+            <div><h2>Leads today</h2><p>Tue 19 Nov, 41 enquiries, updated 7:44 pm</p></div>
+            <div class="tools"><button class="ghost"><svg class="ico"><use href="#i-cal"/></svg>Today</button><button class="ghost"><svg class="ico"><use href="#i-download"/></svg>Export</button></div>
           </div>
 
-          <div class="stats">
-            <div class="stat"><div class="l">Time to first call</div><div class="v num">1m 48s</div><div class="d">Usual callback: 4h 52m</div></div>
-            <div class="stat"><div class="l">Reached</div><div class="v num">68<small>%</small></div><div class="d"><b>+7 pts</b> vs usual</div></div>
-            <div class="stat"><div class="l">Booked</div><div class="v num">44<small>%</small></div><div class="d"><b>+15 pts</b> vs usual</div></div>
-            <div class="stat key"><div class="l">Attended / 100 enquiries</div><div class="v num">31<small>vs 22</small></div>
-              <div class="mini" aria-hidden="true"><i style="height:40%"></i><i class="a" style="height:55%"></i><i style="height:45%"></i><i class="a" style="height:70%"></i><i style="height:42%"></i><i class="a" style="height:66%"></i><i style="height:48%"></i><i class="a" style="height:84%"></i></div><div class="d" style="margin-top:6px"><span class="tag">North star</span> &nbsp;assistant vs usual</div></div>
-          </div>
-
-          <div class="sect-title"><h4>Needs you <span class="c">3</span></h4><span>Handed over by the assistant</span></div>
-          <div class="inbox">
-            <div class="list" role="tablist" aria-label="Escalations">
-              <button class="item on" data-i="0" role="tab"><span class="av a1">RM</span><span><b>Rahul Mehta</b><small>Swelling and pain for 2 days</small><span class="reason r-red"><i></i>Pain · call in 15 min</span></span><time>7:20</time></button>
-              <button class="item" data-i="1" role="tab"><span class="av a2">AD</span><span><b>Anita Desai</b><small>Wants EMI options for aligners</small><span class="reason r-amb"><i></i>Price question</span></span><time>6:31</time></button>
-              <button class="item" data-i="2" role="tab"><span class="av a3">SI</span><span><b>Suresh Iyer</b><small>“I'd rather speak to someone”</small><span class="reason r-ink"><i></i>Asked for a person</span></span><time>5:58</time></button>
+          <section class="lead" aria-label="Pilot results">
+            <div class="hero">
+              <small>Visits that happened, per 100 enquiries</small>
+              <div class="big"><b class="num">31</b><span class="up"><svg class="ico"><use href="#i-arrow-up"/></svg>+9</span><span>vs 22 with the usual callback</span></div>
+              <div class="compare" role="img" aria-label="Assistant group 31 attended visits per 100 enquiries, usual callback group 22">
+                <div class="crow"><span>Assistant</span><span class="track"><i style="width:62%;background:var(--color-primary)"></i></span><b class="num">31</b></div>
+                <div class="crow"><span>Usual callback</span><span class="track"><i style="width:44%;background:var(--color-border-strong)"></i></span><b class="num">22</b></div>
+              </div>
             </div>
-            <div class="detail" id="detail"></div>
+            <div class="secondary">
+              <div><small>First call</small><b class="num">1m 48s</b><span>was 4h 52m</span></div>
+              <div><small>Reached</small><b class="num">68%</b><span>was 61%</span></div>
+              <div><small>Booked</small><b class="num">44%</b><span>was 29%</span></div>
+            </div>
+          </section>
+
+          <div class="h3row"><h3>Needs you (3)</h3><span>Handed over by the assistant</span></div>
+          <div class="inbox">
+            <div class="list" role="tablist" aria-label="Handed over leads">
+              <button class="item" role="tab" aria-selected="true" data-i="0"><span class="av">RM</span><span><b>Rahul Mehta</b><small>Swelling and pain for 2 days</small><span class="flag f-urgent"><svg class="ico"><use href="#i-alert"/></svg>Pain, call within 15 min</span></span><time>7:20</time></button>
+              <button class="item" role="tab" aria-selected="false" data-i="1"><span class="av">AD</span><span><b>Anita Desai</b><small>Wants EMI options for aligners</small><span class="flag f-attn"><svg class="ico"><use href="#i-rupee"/></svg>Price question</span></span><time>6:31</time></button>
+              <button class="item" role="tab" aria-selected="false" data-i="2"><span class="av">SI</span><span><b>Suresh Iyer</b><small>“I'd rather speak to someone”</small><span class="flag f-plain"><svg class="ico"><use href="#i-user"/></svg>Asked for a person</span></span><time>5:58</time></button>
+            </div>
+            <div class="detail" id="detail" role="tabpanel"></div>
           </div>
 
-          <div class="sect-title"><h4>All leads today</h4><span>Showing 7 of 41</span></div>
-          <div class="tw">
+          <div class="h3row"><h3>All leads</h3><span>7 of 41</span></div>
+          <div class="tw" tabindex="0" role="region" aria-label="All leads table">
             <table>
-              <thead><tr><th>Person</th><th>Interested in</th><th>Enquired</th><th>First call after</th><th>Status</th><th>Next</th></tr></thead>
+              <caption class="sr-only">Today's leads with first-call time and status</caption>
+              <thead><tr><th scope="col">Person</th><th scope="col">Interested in</th><th scope="col">Enquired</th><th scope="col">First call after</th><th scope="col">Status</th><th scope="col">Next</th></tr></thead>
               <tbody>
-                <tr><td><div class="person"><span class="av a4">PS</span><span>Priya Sharma<small>Hindi</small></span></div></td><td>Braces</td><td class="dim num">7:42 pm</td><td class="num fast">1m 12s</td><td><span class="st s-wait"><i></i>Missed · on WhatsApp</span></td><td class="dim">Retry 8:15 pm</td></tr>
-                <tr><td><div class="person"><span class="av a1">RM</span><span>Rahul Mehta<small>English</small></span></div></td><td>Implants</td><td class="dim num">7:20 pm</td><td class="num fast">1m 52s</td><td><span class="st s-hand"><i></i>Handed to you</span></td><td class="dim">Urgent call</td></tr>
-                <tr><td><div class="person"><span class="av a3">FK</span><span>Fatima Khan<small>Hindi</small></span></div></td><td>Whitening</td><td class="dim num">6:58 pm</td><td class="num fast">1m 05s</td><td><span class="st s-book"><i></i>Booked</span></td><td class="dim">Thu, 6:30 pm</td></tr>
-                <tr><td><div class="person"><span class="av a2">AD</span><span>Anita Desai<small>English</small></span></div></td><td>Aligners</td><td class="dim num">6:31 pm</td><td class="num fast">1m 41s</td><td><span class="st s-hand"><i></i>Handed to you</span></td><td class="dim">Price call</td></tr>
-                <tr><td><div class="person"><span class="av a6">VR</span><span>Vikram Rao<small>English</small></span></div></td><td>Cleaning</td><td class="dim num">5:47 pm</td><td class="num fast">2m 10s</td><td><span class="st s-book"><i></i>Booked</span></td><td class="dim">Wed, 10:00 am</td></tr>
-                <tr><td><div class="person"><span class="av a5">NJ</span><span>Neha Joshi<small>Marathi</small></span></div></td><td>Braces</td><td class="dim num">5:12 pm</td><td class="num slow">4h 38m</td><td><span class="st s-old"><i></i>Usual callback group</span></td><td class="dim">Front desk queue</td></tr>
-                <tr><td><div class="person"><span class="av a7">AN</span><span>Arjun Nair<small>English</small></span></div></td><td>Whitening</td><td class="dim num">4:40 pm</td><td class="num fast">1m 22s</td><td><span class="st s-off"><i></i>Not interested</span></td><td class="dim">Closed · price</td></tr>
+                <tr><td><div class="p"><span class="av">PS</span><span>Priya Sharma<small>Hindi</small></span></div></td><td>Braces</td><td class="dim num">7:42 pm</td><td class="num fast">1m 12s</td><td><span class="st s-wait"><svg class="ico"><use href="#i-msg"/></svg><span>Missed, sent WhatsApp</span></span></td><td class="dim">Retry 8:15 pm</td></tr>
+                <tr><td><div class="p"><span class="av">RM</span><span>Rahul Mehta<small>English</small></span></div></td><td>Implants</td><td class="dim num">7:20 pm</td><td class="num fast">1m 52s</td><td><span class="st s-hand"><svg class="ico"><use href="#i-alert"/></svg><span>Handed to staff</span></span></td><td class="dim">Urgent call</td></tr>
+                <tr><td><div class="p"><span class="av">FK</span><span>Fatima Khan<small>Hindi</small></span></div></td><td>Whitening</td><td class="dim num">6:58 pm</td><td class="num fast">1m 05s</td><td><span class="st s-book"><svg class="ico"><use href="#i-check-circle"/></svg><span>Booked</span></span></td><td class="dim">Thu, 6:30 pm</td></tr>
+                <tr><td><div class="p"><span class="av">AD</span><span>Anita Desai<small>English</small></span></div></td><td>Aligners</td><td class="dim num">6:31 pm</td><td class="num fast">1m 41s</td><td><span class="st s-hand"><svg class="ico"><use href="#i-alert"/></svg><span>Handed to staff</span></span></td><td class="dim">Price call</td></tr>
+                <tr><td><div class="p"><span class="av">VR</span><span>Vikram Rao<small>English</small></span></div></td><td>Cleaning</td><td class="dim num">5:47 pm</td><td class="num fast">2m 10s</td><td><span class="st s-book"><svg class="ico"><use href="#i-check-circle"/></svg><span>Booked</span></span></td><td class="dim">Wed, 10:00 am</td></tr>
+                <tr><td><div class="p"><span class="av">NJ</span><span>Neha Joshi<small>Marathi</small></span></div></td><td>Braces</td><td class="dim num">5:12 pm</td><td class="num slow">4h 38m</td><td><span class="st s-ctl"><svg class="ico"><use href="#i-split"/></svg><span>Usual callback group</span></span></td><td class="dim">Front desk queue</td></tr>
+                <tr><td><div class="p"><span class="av">AN</span><span>Arjun Nair<small>English</small></span></div></td><td>Whitening</td><td class="dim num">4:40 pm</td><td class="num fast">1m 22s</td><td><span class="st s-off"><svg class="ico"><use href="#i-x"/></svg><span>Not interested</span></span></td><td class="dim">Closed, price</td></tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
     </div>
-  </section>
+    <div class="base"></div>
+  </div>
 </main>
 
-<footer class="foot"><span>Concept mockup for a case study. HappySmile and all names, numbers and phone numbers are fictional.</span><span>Pilot: 3 clinics · 4 weeks · leads split 50/50</span></footer>
-
 <script>
-/* ---- screen 1 ---- */
-const views=[...document.querySelectorAll('.view')];
-const steps=[...document.querySelectorAll('.step')];
-let t;
-function show(i){
-  clearTimeout(t);
-  views.forEach((v,j)=>v.classList.toggle('on',i===j));
-  steps.forEach((s,j)=>{s.classList.toggle('on',i===j);s.setAttribute('aria-selected',i===j)});
-  if(i===1) t=setTimeout(()=>show(2),5000);
-}
+/* phone: language toggle + CTA feedback */
+document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.lang button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+}));
+const cta=document.getElementById('cta');
+cta.addEventListener('click',()=>{
+  const busy=cta.getAttribute('aria-busy')==='true';
+  cta.setAttribute('aria-busy',!busy);
+  cta.querySelector('span').textContent=busy?'Call me now':'Calling you in about 2 min';
+});
 
-/* ---- screen 2 ---- */
-const ic={
-  phone:'<svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>',
-  cal:'<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>',
-  alert:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>'
-};
-const data=[
-  {av:'a1',ini:'RM',name:'Rahul Mehta',meta:'Implants · English · enquired 7:20 pm',cls:'',
-   alert:'Mentions swelling and pain for two days. The assistant gave no advice and promised a call from the clinic within 15 minutes.',
-   facts:[['Pain','7 / 10, lower left'],['Wants','Seen tomorrow'],['Free','Before 11 am']],
-   sum:'Had an implant consult elsewhere last year and didn\'t go ahead. Now has pain near the same tooth. Open to an emergency visit tomorrow morning.',
-   q:[['Rahul','“It\'s been swelling since Sunday, I can\'t really chew on that side.”'],['Assistant','“I\'m not able to give medical advice, but I\'ll get someone from the clinic to call you within 15 minutes.”']],
-   len:'1:12',btns:['Call Rahul now','Hold 9:30 am slot']},
-  {av:'a2',ini:'AD',name:'Anita Desai',meta:'Clear aligners · English · enquired 6:31 pm',cls:'amb',
-   alert:'Asked about EMI and compared us with another clinic\'s quote. Pricing beyond the published list is for staff only.',
-   facts:[['Budget','~₹1.2L'],['Wants','EMI, 12 months'],['Free','Sat mornings']],
-   sum:'Has a quote of ₹1.1L elsewhere. Likes that we\'re closer to home. Would book this Saturday if the EMI works.',
-   q:[['Anita','“The other clinic offered no-cost EMI. Can you match that?”'],['Assistant','“A colleague can talk you through payment options. Can they call you back this evening?”']],
-   len:'2:40',btns:['Call back','Send EMI details']},
-  {av:'a3',ini:'SI',name:'Suresh Iyer',meta:'Whitening · Tamil · enquired 5:58 pm',cls:'ink',
-   alert:'Asked for a person in the first 20 seconds. The assistant stopped and handed over straight away.',
-   facts:[['Language','Tamil'],['Wants','A person'],['Free','After 6 pm']],
-   sum:'No details collected. He prefers a human conversation and an evening call.',
-   q:[['Suresh','“I\'d rather speak to someone at the clinic, please.”'],['Assistant','“Of course. Someone from the clinic will call you after 6 pm today.”']],
-   len:'0:34',btns:['Call back','Assign to Tamil speaker']}
+/* dashboard: inbox */
+const use=id=>`<svg class="ico"><use href="#${id}"/></svg>`;
+const D=[
+ {ini:'RM',name:'Rahul Mehta',meta:'Implants, English, enquired 7:20 pm',k:'u',icon:'i-alert',
+  why:'Mentions swelling and pain for two days. The assistant gave no advice and said the clinic would call within 15 minutes.',
+  facts:[['Pain','7 of 10, lower left'],['Wants','Seen tomorrow'],['Free','Before 11 am']],
+  sum:'Had an implant consult elsewhere last year and did not go ahead. Now has pain near the same tooth. Open to an emergency visit tomorrow morning.',
+  q:[['Rahul','“It has been swelling since Sunday. I cannot chew on that side.”'],['Assistant','“I cannot give medical advice, but someone from the clinic will call you within 15 minutes.”']],
+  len:'1:12',b:['Call Rahul','Hold 9:30 am slot']},
+ {ini:'AD',name:'Anita Desai',meta:'Clear aligners, English, enquired 6:31 pm',k:'a',icon:'i-rupee',
+  why:'Asked about EMI and compared us with another clinic’s quote. Prices beyond the published list are for staff.',
+  facts:[['Budget','About ₹1.2L'],['Wants','12-month EMI'],['Free','Sat mornings']],
+  sum:'Has a quote of ₹1.1L elsewhere. Likes that we are closer to home. Would book this Saturday if the EMI works.',
+  q:[['Anita','“The other clinic offered no-cost EMI. Can you match that?”'],['Assistant','“A colleague can explain payment options. Can they call you this evening?”']],
+  len:'2:40',b:['Call Anita','Send EMI details']},
+ {ini:'SI',name:'Suresh Iyer',meta:'Whitening, Tamil, enquired 5:58 pm',k:'p',icon:'i-user',
+  why:'Asked for a person in the first 20 seconds. The assistant stopped and handed over.',
+  facts:[['Language','Tamil'],['Wants','A person'],['Free','After 6 pm']],
+  sum:'No details collected. Prefers a human conversation and an evening call.',
+  q:[['Suresh','“I would rather speak to someone at the clinic.”'],['Assistant','“Of course. Someone from the clinic will call you after 6 pm today.”']],
+  len:'0:34',b:['Call Suresh','Assign Tamil speaker']}
 ];
-function wave(){let s='';for(let i=0;i<64;i++){const h=18+Math.round(70*Math.abs(Math.sin(i*1.7)*Math.cos(i*.43)));s+=`<i class="${i<20?'p':''}" style="height:${h}%"></i>`}return s}
+function wave(){let s='';for(let i=0;i<60;i++){const h=20+Math.round(70*Math.abs(Math.sin(i*1.7)*Math.cos(i*.43)));s+=`<i class="${i<18?'on':''}" style="height:${h}%"></i>`}return s}
 function render(i){
-  const d=data[i];
+  const d=D[i];
   document.getElementById('detail').innerHTML=`
-    <div class="dtop"><div class="who"><span class="av ${d.av}">${d.ini}</span><div><h5>${d.name}</h5><p>${d.meta}</p></div></div>
-      <div class="acts"><button class="btn primary">${ic.phone}${d.btns[0]}</button><button class="btn">${ic.cal}${d.btns[1]}</button></div></div>
-    <div class="alert ${d.cls}">${ic.alert}<span>${d.alert}</span></div>
-    <div class="facts">${d.facts.map(f=>`<div class="fact"><small>${f[0]}</small><b>${f[1]}</b></div>`).join('')}</div>
-    <p class="summary">${d.sum}</p>
-    <div class="player"><button class="play" aria-label="Play recording"><svg viewBox="0 0 10 12"><path d="M0 0l10 6-10 6z"/></svg></button><div class="wave">${wave()}</div><time class="num">${d.len}</time></div>
-    <blockquote class="quote">${d.q.map(x=>`<p><b>${x[0]}:</b> ${x[1]}</p>`).join('')}</blockquote>`;
-  document.querySelectorAll('.item').forEach((b,j)=>{b.classList.toggle('on',i===j);b.setAttribute('aria-selected',i===j)});
+   <div class="dhead"><div class="who"><span class="av">${d.ini}</span><div><h4>${d.name}</h4><p>${d.meta}</p></div></div>
+     <div class="acts"><button class="btn primary">${use('i-phone')}${d.b[0]}</button><button class="btn">${use('i-cal')}${d.b[1]}</button></div></div>
+   <div class="why ${d.k}">${use(d.icon)}<span>${d.why}</span></div>
+   <div class="facts">${d.facts.map(f=>`<div><small>${f[0]}</small><b>${f[1]}</b></div>`).join('')}</div>
+   <p class="sum">${d.sum}</p>
+   <div class="player"><button class="play" aria-label="Play call recording">${use('i-play')}</button><div class="wave" aria-hidden="true">${wave()}</div><time class="num">${d.len}</time></div>
+   <ul class="quote">${d.q.map(x=>`<li><b>${x[0]}:</b> ${x[1]}</li>`).join('')}</ul>`;
+  document.querySelectorAll('.item').forEach((b,j)=>b.setAttribute('aria-selected',i===j));
 }
 document.querySelectorAll('.item').forEach(b=>b.addEventListener('click',()=>render(+b.dataset.i)));
 render(0);
