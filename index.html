@@ -53,86 +53,86 @@ button:disabled{opacity:.45;cursor:not-allowed}
 main{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--space-12);padding:var(--space-8) var(--space-4) var(--space-12);justify-items:center}
 @media (min-width:1180px){main{grid-template-columns:344px minmax(0,1fr);align-items:start;padding:var(--space-12);gap:var(--space-12);max-width:1600px;margin:0 auto}.phone{position:sticky;top:var(--space-12)}}
 
-/* ================= MOCKUP 1: Android phone ================= */
+/* ================= MOCKUP 1: native Android app (Material 3) ================= */
 .phone{position:relative;width:min(344px,100%);height:740px;background:var(--color-device);border-radius:44px;padding:9px;box-shadow:var(--shadow-device),inset 0 0 0 1.5px #3a3d43}
 @media (min-width:400px){.phone::before,.phone::after{content:""}}
 .phone::before,.phone::after{position:absolute;right:-3px;width:3px;border-radius:0 2px 2px 0;background:#2c2f34}
 .phone::before{top:150px;height:58px}
 .phone::after{top:232px;height:96px}
-.screen{position:relative;height:100%;border-radius:36px;overflow:hidden;background:var(--color-surface);font-family:Roboto,system-ui,sans-serif}
-.punch{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:13px;height:13px;border-radius:50%;background:#0c0d0f;z-index:3;box-shadow:inset 0 0 0 2px #1f2227}
-.abar{display:flex;justify-content:space-between;align-items:center;height:36px;padding:6px 22px 0;font-size:12.5px;font-weight:500;background:var(--color-surface)}
+.screen{position:relative;height:100%;border-radius:36px;overflow:hidden;background:var(--color-surface);font-family:Roboto,system-ui,sans-serif;letter-spacing:.1px}
+.punch{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:13px;height:13px;border-radius:50%;background:#0c0d0f;z-index:6;box-shadow:inset 0 0 0 2px #1f2227}
+.abar{position:relative;z-index:5;display:flex;justify-content:space-between;align-items:center;height:36px;padding:6px 22px 0;font-size:12.5px;font-weight:500}
 .abar .r{display:flex;gap:5px;align-items:center}
 .abar .ico{width:14px;height:14px;stroke-width:2.2}
-.chrome{display:flex;align-items:center;gap:10px;padding:6px 12px 8px;background:var(--color-chrome-bar)}
-.chrome .home{width:18px;height:18px;color:#5f6368}
-.omni{flex:1;display:flex;align-items:center;gap:6px;background:#fff;border-radius:999px;padding:7px 12px;font-size:13px;color:#202124;min-width:0}
-.omni .ico{width:13px;height:13px;color:#5f6368}
-.omni span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tabs{width:18px;height:18px;border:2px solid #5f6368;border-radius:4px;font-size:9.5px;font-weight:700;display:grid;place-items:center;color:#5f6368}
-.kebab{display:grid;gap:2.5px}
-.kebab i{width:3.5px;height:3.5px;border-radius:50%;background:#5f6368}
 
-.page{position:absolute;top:36px;left:0;right:0;bottom:0;overflow:hidden;font-family:"Inter Tight",system-ui,sans-serif}
-.appbar{display:flex;align-items:center;gap:var(--space-4);height:56px;padding:0 var(--space-4);font-size:var(--text-lg);font-weight:600}
-.appbar span{flex:1}
-.appbar .ico{width:22px;height:22px}
-.banner{height:120px;border-radius:var(--radius-lg);background:var(--color-primary-soft);color:var(--color-primary);display:grid;place-items:center;margin:var(--space-1) 0 var(--space-4)}
-.banner svg{width:150px}
-.tabbar{position:absolute;left:0;right:0;bottom:0;height:72px;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--color-border-subtle);background:var(--color-surface);padding-bottom:14px}
-.tabbar span{display:grid;justify-items:center;align-content:center;gap:2px;font-size:var(--text-xs);color:var(--color-text-tertiary)}
-.tabbar span.on{color:var(--color-primary);font-weight:600}
-.tabbar .ico{width:20px;height:20px}
-.link.sm{font-size:var(--text-xs);padding:0}
-.site{padding:0 var(--space-5);font-family:"Inter Tight",system-ui,sans-serif}
-.shead{display:flex;align-items:center;justify-content:space-between;height:52px;border-bottom:1px solid var(--color-border-subtle);margin:0 calc(var(--space-5)*-1);padding:0 var(--space-5)}
-.logo{display:flex;align-items:center;gap:var(--space-2);font-weight:600}
-.logo i{width:24px;height:24px;border-radius:7px;background:var(--color-primary);display:grid;place-items:center}
-.logo i svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round}
-.shead .ico{width:20px;height:20px}
-.crumbs{font-size:var(--text-xs);color:var(--color-text-tertiary);margin:var(--space-4) 0 var(--space-2)}
-.site h1{font-size:26px;line-height:1.1;letter-spacing:-.02em;margin:0 0 var(--space-2);font-weight:600;max-width:13ch}
-.rating{display:flex;align-items:center;gap:5px;font-size:var(--text-sm);color:var(--color-text-secondary)}
-.rating .ico{width:14px;height:14px;fill:#e2a100;stroke:#e2a100}
-.rating b{color:var(--color-text-primary)}
-.price{display:inline-flex;gap:6px;align-items:baseline;margin-top:var(--space-2);font-size:var(--text-sm);color:var(--color-text-secondary)}
-.price b{font-size:var(--text-base);color:var(--color-text-primary)}
+.page{position:absolute;top:36px;left:0;right:0;bottom:0;overflow:hidden}
+.topbar{display:flex;align-items:center;gap:var(--space-2);height:56px;padding:0 var(--space-1)}
+.topbar .ib{width:44px;height:44px;display:grid;place-items:center;border-radius:50%}
+.topbar .ib .ico{width:22px;height:22px}
+.topbar h1{flex:1;margin:0;font-size:20px;font-weight:400;font-family:Roboto,system-ui,sans-serif}
+.hero-img{margin:0 var(--space-4);height:150px;border-radius:24px;background:var(--color-primary-soft);color:var(--color-primary);position:relative;display:grid;place-items:center;overflow:hidden}
+.hero-img svg{width:170px}
+.hero-img .pager{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:5px}
+.hero-img .pager i{width:6px;height:6px;border-radius:50%;background:var(--color-primary);opacity:.3}
+.hero-img .pager i:first-child{opacity:1;width:16px;border-radius:3px}
+.body{padding:var(--space-4)}
+.body h2{margin:0 0 4px;font-size:22px;font-weight:500;line-height:1.2;font-family:Roboto,system-ui,sans-serif}
+.meta{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--color-text-secondary)}
+.meta .ico{width:14px;height:14px;fill:#e2a100;stroke:#e2a100}
+.assist{display:flex;gap:var(--space-2);margin:var(--space-3) 0}
+.assist span{display:inline-flex;align-items:center;gap:5px;height:32px;padding:0 12px;border-radius:8px;background:var(--color-surface-sunken);font-size:12.5px;font-weight:500}
+.assist .ico{width:15px;height:15px}
+.listrow{display:flex;align-items:center;gap:var(--space-3);padding:10px 0;border-top:1px solid var(--color-border-subtle);font-size:14px}
+.listrow .lead-ico{width:40px;height:40px;border-radius:50%;background:var(--color-surface-sunken);display:grid;place-items:center;flex:none}
+.listrow small{display:block;color:var(--color-text-tertiary);font-size:12.5px}
 
-.scrim{position:absolute;inset:0;background:rgba(22,26,34,.28)}
-.sheet{position:absolute;left:0;right:0;bottom:0;background:var(--color-surface);border-radius:26px 26px 0 0;padding:var(--space-3) var(--space-5) 30px;font-family:"Inter Tight",system-ui,sans-serif;box-shadow:0 -12px 32px -16px rgba(22,26,34,.35)}
-.grab{width:36px;height:4px;border-radius:2px;background:var(--color-border-strong);margin:0 auto var(--space-4)}
-.sheet h2{font-size:var(--text-lg);margin:0;font-weight:600}
-.eta{display:flex;align-items:center;gap:6px;font-size:var(--text-sm);color:var(--color-success);margin:2px 0 var(--space-4)}
-.eta .ico{width:14px;height:14px}
-.fld{border:1px solid var(--color-border-subtle);border-radius:var(--radius-md);padding:7px 12px;margin-bottom:var(--space-2)}
-.fld small{display:block;font-size:var(--text-xs);color:var(--color-text-tertiary)}
-.fld span{display:flex;justify-content:space-between;align-items:center;font-weight:500}
-.fld em{font-style:normal;font-size:var(--text-xs);color:var(--color-success);display:flex;align-items:center;gap:3px}
-.fld em .ico{width:13px;height:13px}
-.lang{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:var(--color-surface-sunken);border-radius:var(--radius-md);padding:3px;margin:var(--space-1) 0 var(--space-3)}
-.lang button{border:0;background:none;border-radius:9px;padding:7px 0;font-size:var(--text-sm);color:var(--color-text-secondary)}
-.lang button:hover{color:var(--color-text-primary)}
-.lang button[aria-pressed="true"]{background:var(--color-surface);color:var(--color-text-primary);font-weight:600;box-shadow:0 1px 2px rgba(22,26,34,.12)}
-.cta{width:100%;border:0;border-radius:var(--radius-md);padding:14px;background:var(--color-primary);color:var(--color-on-primary);font-weight:600;display:flex;justify-content:center;align-items:center;gap:var(--space-2)}
+.scrim{position:absolute;inset:0;background:rgba(22,26,34,.32);z-index:2}
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:3;background:var(--color-surface);border-radius:28px 28px 0 0;padding:var(--space-2) var(--space-5) 30px}
+.grab{width:32px;height:4px;border-radius:2px;background:var(--color-border-strong);margin:6px auto var(--space-4)}
+.sheet h3{margin:0;font-size:20px;font-weight:400;font-family:Roboto,system-ui,sans-serif}
+.eta{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--color-success);margin:4px 0 var(--space-4)}
+.eta .ico{width:15px;height:15px}
+.me-row{display:flex;align-items:center;gap:var(--space-3);padding:var(--space-2) 0 var(--space-3)}
+.me-row .av{width:40px;height:40px;font-size:14px}
+.me-row div{flex:1;min-width:0}
+.me-row b{display:block;font-weight:500;font-size:15px}
+.me-row small{display:block;color:var(--color-text-tertiary);font-size:13px;white-space:nowrap}
+.tbtn-m{border:0;background:none;color:var(--color-primary);font-weight:500;font-size:14px;padding:10px 12px;border-radius:20px}
+.tbtn-m:hover{background:var(--color-primary-soft)}
+.tbtn-m:active{background:#d6dff8}
+.lbl{font-size:12.5px;color:var(--color-text-secondary);margin:0 0 var(--space-2)}
+.lang{display:flex;gap:var(--space-2);margin-bottom:var(--space-5)}
+.lang button{height:32px;padding:0 14px;border-radius:8px;border:1px solid var(--color-border-strong);background:var(--color-surface);font-size:13.5px;font-weight:500;color:var(--color-text-secondary);display:inline-flex;align-items:center;gap:6px}
+.lang button:hover{background:var(--color-surface-sunken)}
+.lang button[aria-pressed="true"]{background:var(--color-primary-soft);border-color:transparent;color:var(--color-primary)}
+.lang button .ico{width:15px;height:15px;display:none}
+.lang button[aria-pressed="true"] .ico{display:block}
+.cta{width:100%;height:52px;border:0;border-radius:26px;background:var(--color-primary);color:var(--color-on-primary);font-weight:500;font-size:15px;display:flex;justify-content:center;align-items:center;gap:var(--space-2)}
 .cta:hover{background:var(--color-primary-hover)}
 .cta:active{background:var(--color-primary-press)}
-.consent{display:flex;gap:var(--space-2);font-size:var(--text-xs);color:var(--color-text-tertiary);margin:var(--space-3) 0 0;line-height:1.45}
-.consent .ico{width:14px;height:14px;margin-top:1px}
-.done{text-align:left}
-.ring{width:52px;height:52px;border-radius:50%;background:var(--color-success-soft);color:var(--color-success);display:grid;place-items:center;margin-bottom:var(--space-3)}
-.ring .ico{width:24px;height:24px}
-.done p{margin:0 0 var(--space-3);font-size:var(--text-sm);color:var(--color-text-secondary)}
-.caller{display:flex;gap:var(--space-3);align-items:center;border:1px solid var(--color-border-subtle);border-radius:var(--radius-md);padding:10px 12px;margin-bottom:var(--space-3)}
-.caller>span:nth-child(2){min-width:0}
-.caller b{display:block;font-size:var(--text-sm);white-space:nowrap}
-.caller small{font-size:var(--text-xs);color:var(--color-text-tertiary);white-space:nowrap}
-.caller .ok{margin-left:auto;font-size:var(--text-xs);color:var(--color-success);display:flex;gap:3px;align-items:center;font-weight:600}
-.caller .ok .ico{width:13px;height:13px}
-.link{border:0;background:none;color:var(--color-primary);font-weight:600;font-size:var(--text-sm);padding:6px 0}
-.link:hover{color:var(--color-primary-hover);text-decoration:underline}
+.consent{display:flex;gap:var(--space-2);font-size:12px;color:var(--color-text-tertiary);margin:var(--space-3) 0 0;line-height:1.45}
+.consent .ico{width:15px;height:15px;margin-top:1px}
+
+.done .ring{width:48px;height:48px;border-radius:50%;background:var(--color-success-soft);color:var(--color-success);display:grid;place-items:center;margin-bottom:var(--space-3)}
+.done .ring .ico{width:22px;height:22px}
+.done p{margin:6px 0 var(--space-4);font-size:14px;color:var(--color-text-secondary)}
+.cta.tonal{background:var(--color-primary-soft);color:var(--color-primary)}
+.cta.tonal:hover{background:#dbe3f8}
+.cta.tonal:active{background:#cdd8f6}
+
+.heads{position:absolute;top:44px;left:10px;right:10px;z-index:7;background:#f6f7fb;border-radius:22px;padding:12px 14px;box-shadow:0 10px 30px -8px rgba(22,26,34,.35);display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;transform:translateY(-140%);transition:transform 260ms ease-out}
+.heads.show{transform:none}
+.heads .happ{width:28px;height:28px;border-radius:8px;background:var(--color-primary);display:grid;place-items:center}
+.heads .happ svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round}
+.heads b{display:block;font-size:13.5px;font-weight:500}
+.heads small{display:block;font-size:12.5px;color:var(--color-text-secondary)}
+.heads time{font-size:11.5px;color:var(--color-text-tertiary);align-self:start}
 .gesture{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:108px;height:4px;border-radius:2px;background:var(--color-device);opacity:.75;z-index:4}
 
 /* ================= MOCKUP 2: laptop ================= */
+.logo{display:flex;align-items:center;gap:var(--space-2);font-weight:600}
+.logo i{width:24px;height:24px;border-radius:7px;background:var(--color-primary);display:grid;place-items:center}
+.logo i svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round}
 .laptop{width:100%;max-width:1180px;min-width:0}
 .lid{margin:0 3%;background:var(--color-device);border-radius:20px 20px 0 0;padding:14px 14px 0;box-shadow:var(--shadow-device)}
 .cam{width:6px;height:6px;border-radius:50%;background:#2a2f37;margin:-6px auto 8px}
@@ -374,46 +374,46 @@ td.dim{color:var(--color-text-tertiary)}
 </svg>
 
 <main>
-  <!-- ============ MOCKUP 1: Android + Chrome ============ -->
-  <div class="phone" role="group" aria-label="Mockup 1: the HappySmile app on a patient's Android phone at the moment they ask for a call">
+  <!-- ============ MOCKUP 1: HappySmile Android app ============ -->
+  <div class="phone" role="group" aria-label="Mockup 1: the HappySmile Android app at the moment a patient asks for a call">
     <div class="screen">
       <div class="punch"></div>
       <div class="abar"><span class="num">7:42</span><span class="r"><svg class="ico"><use href="#i-wifi"/></svg><svg class="ico"><use href="#i-signal"/></svg><svg class="ico"><use href="#i-battery"/></svg><span class="num">78%</span></span></div>
-      <div class="page">
-      <div class="appbar"><svg class="ico"><use href="#i-back"/></svg><span>Braces and aligners</span><svg class="ico"><use href="#i-share"/></svg></div>
-      <div class="site">
-        <div class="banner" aria-hidden="true"><svg viewBox="0 0 120 60" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M14 22c10 14 82 14 92 0"/><path d="M20 30c9 10 71 10 80 0"/><path d="M28 21v8M42 25v9M56 26v10M70 26v10M84 25v9M98 21v8"/></svg></div>
-        <h1>Straighter teeth, minus the wait</h1>
-        <div class="rating"><svg class="ico"><use href="#i-star"/></svg><b>4.8</b>from 2,140 reviews</div>
-        <div class="price">From <b>₹2,999/month</b> with EMI</div>
-      </div>
-      <nav class="tabbar" aria-hidden="true"><span class="on"><svg class="ico"><use href="#i-home"/></svg>Home</span><span><svg class="ico"><use href="#i-cal"/></svg>Visits</span><span><svg class="ico"><use href="#i-msg"/></svg>Chat</span><span><svg class="ico"><use href="#i-user"/></svg>Profile</span></nav>
-      <div class="scrim"></div>
+      <div class="heads" id="heads" aria-hidden="true"><span class="happ"><svg><use href="#i-smile"/></svg></span><span><b>HappySmile</b><small>Calling you now from +91 22 4XXX 1100</small></span><time>now</time></div>
 
-      <div class="sheet" id="sheet">
-        <div class="grab"></div>
-        <div id="ask">
-          <h2>Get a call about braces</h2>
-          <p class="eta"><svg class="ico"><use href="#i-clock"/></svg>We call back in about 2 minutes</p>
-          <div class="fld"><small>We'll call</small><span>Priya Sharma <button type="button" class="link sm" data-phone-toast>Change</button></span></div>
-          <div class="fld"><small>On</small><span class="num">+91 98XXX X4210 <em><svg class="ico"><use href="#i-check"/></svg>From your profile</em></span></div>
-          <div class="lang" role="group" aria-label="Call language">
-            <button type="button" aria-pressed="false">English</button>
-            <button type="button" aria-pressed="true">हिन्दी</button>
-            <button type="button" aria-pressed="false">मराठी</button>
+      <div class="page">
+        <div class="topbar"><span class="ib"><svg class="ico"><use href="#i-back"/></svg></span><h1>Braces and aligners</h1><span class="ib"><svg class="ico"><use href="#i-share"/></svg></span></div>
+        <div class="hero-img" aria-hidden="true"><svg viewBox="0 0 120 60" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M14 22c10 14 82 14 92 0"/><path d="M20 30c9 10 71 10 80 0"/><path d="M28 21v8M42 25v9M56 26v10M70 26v10M84 25v9M98 21v8"/></svg><span class="pager"><i></i><i></i><i></i></span></div>
+        <div class="body">
+          <h2>Straighter teeth, minus the wait</h2>
+          <div class="meta"><svg class="ico"><use href="#i-star"/></svg>4.8 · 2,140 reviews · From ₹2,999/month</div>
+          <div class="assist"><span><svg class="ico"><use href="#i-check"/></svg>Free consult</span><span><svg class="ico"><use href="#i-rupee"/></svg>EMI</span></div>
+          <div class="listrow"><span class="lead-ico"><svg class="ico"><use href="#i-home"/></svg></span><span>Andheri West clinic<small>1.8 km · Open till 9 pm</small></span></div>
+        </div>
+        <div class="scrim"></div>
+
+        <div class="sheet" role="dialog" aria-label="Request a call">
+          <div class="grab"></div>
+          <div id="ask">
+            <h3>Get a call about braces</h3>
+            <p class="eta"><svg class="ico"><use href="#i-clock"/></svg>We usually call within 2 minutes</p>
+            <div class="me-row"><span class="av">PS</span><div><b>Priya Sharma</b><small class="num">+91 98XXX X4210</small></div><button type="button" class="tbtn-m" data-phone-toast>Change</button></div>
+            <p class="lbl">Call me in</p>
+            <div class="lang" role="group" aria-label="Call language">
+              <button type="button" aria-pressed="false"><svg class="ico"><use href="#i-check"/></svg>English</button>
+              <button type="button" aria-pressed="true"><svg class="ico"><use href="#i-check"/></svg>हिन्दी</button>
+              <button type="button" aria-pressed="false"><svg class="ico"><use href="#i-check"/></svg>मराठी</button>
+            </div>
+            <button class="cta" type="button" id="cta"><svg class="ico"><use href="#i-phone"/></svg>Call me now</button>
+            <p class="consent"><svg class="ico"><use href="#i-bot"/></svg><span>HappySmile's virtual assistant will call. Ask for a person any time. Calls 9 am to 9 pm.</span></p>
           </div>
-          <button class="cta" type="button" id="cta"><svg class="ico"><use href="#i-phone"/></svg>Call me now</button>
-          <p class="consent"><svg class="ico"><use href="#i-bot"/></svg><span>HappySmile's virtual assistant will call you. Ask for a person at any time. Calls 9 am to 9 pm.</span></p>
+          <div id="sent" class="done" hidden>
+            <div class="ring"><svg class="ico"><use href="#i-ringing"/></svg></div>
+            <h3>Calling you now</h3>
+            <p>Watch for <b>HappySmile, +91 22 4XXX 1100</b>. The assistant speaks Hindi and says who it is first. If you miss it, we will send times to book on WhatsApp.</p>
+            <button class="cta tonal" type="button" id="undo">Call me later instead</button>
+          </div>
         </div>
-        <div id="sent" class="done" hidden>
-          <div class="ring"><svg class="ico"><use href="#i-ringing"/></svg></div>
-          <h2>Calling you now</h2>
-          <p>Keep your phone close. The call is in Hindi and starts with our assistant saying who it is.</p>
-          <div class="caller"><span class="av"><svg class="ico"><use href="#i-smile"/></svg></span><span><b>HappySmile Dental</b><small class="num">+91 22 4XXX 1100</small></span><span class="ok"><svg class="ico"><use href="#i-check"/></svg>Verified</span></div>
-          <p>Missed it? We will send a WhatsApp message with times you can book.</p>
-          <button class="link" type="button" id="undo">Call me later instead</button>
-        </div>
-      </div>
       </div>
       <div class="gesture"></div>
     </div>
@@ -592,8 +592,9 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-toast]');i
 
 /* ---- phone ---- */
 $$('.lang button').forEach(b=>b.addEventListener('click',()=>$$('.lang button').forEach(x=>x.setAttribute('aria-pressed',x===b))));
-$('#cta').addEventListener('click',()=>{$('#ask').hidden=true;$('#sent').hidden=false;$('#undo').focus()});
-$('#undo').addEventListener('click',()=>{$('#sent').hidden=true;$('#ask').hidden=false;$('#cta').focus()});
+let ht;
+$('#cta').addEventListener('click',()=>{$('#ask').hidden=true;$('#sent').hidden=false;$('#undo').focus();clearTimeout(ht);ht=setTimeout(()=>$('#heads').classList.add('show'),400)});
+$('#undo').addEventListener('click',()=>{clearTimeout(ht);$('#heads').classList.remove('show');$('#sent').hidden=true;$('#ask').hidden=false;$('#cta').focus()});
 $('[data-phone-toast]').addEventListener('click',e=>{const b=e.currentTarget;b.textContent=b.textContent==='Change'?'Editing':'Change'});
 
 /* ---- navigation ---- */
