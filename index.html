@@ -3,320 +3,501 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HappySmile Voice Assistant Mockup</title>
-<meta name="description" content="Two-screen mockup: the moment a person asks to be contacted, and what HappySmile staff see afterwards.">
+<title>HappySmile Call Assistant</title>
+<meta name="description" content="Two-screen concept: the moment a person asks to be contacted, and what HappySmile's front desk sees afterwards.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f4f6f8; --surface:#ffffff; --surface-2:#f0f3f6; --text:#14202b; --muted:#5d6b78;
-  --line:#dde3e9; --brand:#0e8a7a; --brand-soft:#e3f4f1; --warn:#b4560b; --warn-soft:#fdf0e3;
-  --danger:#b42335; --danger-soft:#fbe9ec; --ok:#1f7a3d; --ok-soft:#e5f4ea; --info:#2557a7; --info-soft:#e7eefa;
-  --phone:#0f1720; --wa:#1f8f4e;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#0e141a; --surface:#16202a; --surface-2:#1d2934; --text:#e7edf2; --muted:#9aa8b5;
-    --line:#2a3846; --brand:#3cc2ae; --brand-soft:#123a35; --warn:#f0a35c; --warn-soft:#3a2a17;
-    --danger:#f07a8a; --danger-soft:#3b1d23; --ok:#6fd08f; --ok-soft:#173523; --info:#86aef0; --info-soft:#1a2a45;
-    --phone:#000;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#0e141a; --surface:#16202a; --surface-2:#1d2934; --text:#e7edf2; --muted:#9aa8b5;
-  --line:#2a3846; --brand:#3cc2ae; --brand-soft:#123a35; --warn:#f0a35c; --warn-soft:#3a2a17;
-  --danger:#f07a8a; --danger-soft:#3b1d23; --ok:#6fd08f; --ok-soft:#173523; --info:#86aef0; --info-soft:#1a2a45;
-  --phone:#000;
+  --canvas:#efe9df;
+  --paper:#ffffff;
+  --paper-2:#f7f4ef;
+  --ink:#1a1a1d;
+  --ink-2:#4a4a52;
+  --ink-3:#8b8a90;
+  --line:#ebe6de;
+  --line-2:#ddd6cb;
+  --accent:#d9573b;
+  --accent-soft:#fbe9e3;
+  --green:#2f7d5b;
+  --green-soft:#e3f1ea;
+  --amber:#b7791f;
+  --amber-soft:#fbf1df;
+  --blue:#3b5bdb;
+  --r-lg:22px; --r-md:14px; --r-sm:10px;
+  --shadow:0 1px 2px rgba(26,26,29,.04),0 8px 24px rgba(26,26,29,.06);
+  --shadow-lg:0 2px 6px rgba(26,26,29,.06),0 30px 60px -20px rgba(26,26,29,.25);
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 Inter,system-ui,sans-serif}
-header.top{max-width:1240px;margin:0 auto;padding:28px 16px 8px}
-header.top h1{margin:0 0 4px;font-size:22px}
-header.top p{margin:0;color:var(--muted)}
-.wrap{max-width:1240px;margin:0 auto;padding:16px;display:grid;grid-template-columns:380px 1fr;gap:28px;align-items:start}
-@media (max-width:980px){.wrap{grid-template-columns:1fr}}
-.label{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--brand);margin:0 0 10px}
-.label span{color:var(--muted);text-transform:none;letter-spacing:0;font-weight:500}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--canvas);color:var(--ink);font:14px/1.5 "Instrument Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.serif{font-family:"Instrument Serif",Georgia,serif;font-weight:400}
+.num{font-variant-numeric:tabular-nums}
 
-/* ---------- Screen 1: phone ---------- */
-.phone{width:100%;max-width:360px;margin:0 auto;background:var(--phone);border-radius:38px;padding:12px;box-shadow:0 20px 50px rgba(0,0,0,.18)}
-.screen{background:var(--surface);border-radius:28px;min-height:690px;overflow:hidden;position:relative;display:flex;flex-direction:column}
-.status{display:flex;justify-content:space-between;padding:10px 20px 4px;font-size:12px;font-weight:600;color:var(--muted)}
-.site{padding:6px 18px 18px;flex:1;display:flex;flex-direction:column}
-.logo{display:flex;align-items:center;gap:8px;font-weight:700;color:var(--brand);margin:6px 0 14px}
-.logo i{width:26px;height:26px;border-radius:8px;background:var(--brand);display:inline-block;position:relative}
-.logo i::after{content:"";position:absolute;left:6px;right:6px;top:11px;height:6px;border:2px solid #fff;border-top:0;border-radius:0 0 10px 10px}
-.site h2{font-size:19px;margin:0 0 4px}
-.site .sub{color:var(--muted);font-size:13px;margin:0 0 14px}
-.field{margin-bottom:10px}
-.field label{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:4px}
-.input{border:1px solid var(--line);border-radius:10px;padding:9px 11px;background:var(--surface-2);font-size:14px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{border:1px solid var(--line);border-radius:999px;padding:5px 10px;font-size:12.5px;background:var(--surface)}
-.chip.on{background:var(--brand-soft);border-color:var(--brand);color:var(--brand);font-weight:600}
-.consent{display:flex;gap:8px;font-size:12px;color:var(--muted);background:var(--surface-2);border-radius:10px;padding:9px 10px;margin:4px 0 12px}
-.consent b{color:var(--text)}
-.box{width:16px;height:16px;border-radius:4px;background:var(--brand);flex:none;margin-top:1px;position:relative}
-.box::after{content:"";position:absolute;left:5px;top:2px;width:4px;height:8px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
-.btn{display:block;width:100%;border:0;border-radius:12px;padding:13px;font:600 15px Inter,sans-serif;background:var(--brand);color:#fff;cursor:pointer}
-.btn:focus-visible{outline:3px solid var(--info);outline-offset:2px}
-.small{font-size:11.5px;color:var(--muted);text-align:center;margin-top:8px}
+/* ---------- page intro ---------- */
+.intro{max-width:1320px;margin:0 auto;padding:56px 24px 28px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.intro .eyebrow{font-size:13px;color:var(--ink-3);margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.intro .eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.intro h1{font-size:clamp(34px,5vw,56px);line-height:1.02;margin:0;letter-spacing:-.01em}
+.intro h1 em{color:var(--accent)}
+.intro p.lede{max-width:360px;color:var(--ink-2);margin:0;font-size:15px}
 
-/* states */
-.state{display:none}
-.state.show{display:flex;flex-direction:column;flex:1}
-.calling{align-items:center;text-align:center;padding-top:30px}
-.ring{width:92px;height:92px;border-radius:50%;background:var(--brand-soft);display:grid;place-items:center;margin:10px auto 16px;position:relative}
-.ring::before,.ring::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--brand);animation:pulse 1.8s infinite}
-.ring::after{animation-delay:.9s}
-@keyframes pulse{from{transform:scale(1);opacity:.7}to{transform:scale(1.6);opacity:0}}
-@media (prefers-reduced-motion:reduce){.ring::before,.ring::after{animation:none;opacity:.3}}
-.ring svg{width:38px;height:38px;fill:var(--brand)}
-.calling h3{margin:0 0 6px;font-size:18px}
-.calling p{margin:0 0 4px;color:var(--muted);font-size:13.5px}
-.verified{display:inline-flex;gap:6px;align-items:center;margin-top:10px;font-size:12.5px;background:var(--ok-soft);color:var(--ok);border-radius:999px;padding:5px 11px;font-weight:600}
-.script{margin-top:18px;text-align:left;background:var(--surface-2);border-radius:14px;padding:12px 13px;font-size:13px;width:100%}
-.script b{display:block;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
-.timeline{margin-top:14px;width:100%;text-align:left;font-size:12.5px;color:var(--muted)}
-.timeline div{display:flex;gap:8px;align-items:center;padding:3px 0}
-.dot{width:8px;height:8px;border-radius:50%;background:var(--line);flex:none}
-.dot.done{background:var(--brand)}
+.intro,.foot{max-width:1440px!important}
+.stage{max-width:1440px;margin:0 auto;padding:0 24px 40px;display:grid;grid-template-columns:380px 1fr;gap:28px;align-items:start}
+@media (max-width:1100px){.stage{grid-template-columns:1fr}}
+.shot{background:var(--paper-2);border-radius:28px;padding:28px;position:relative;min-width:0}
+.shot-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:22px;gap:12px}
+.shot-head h2{font-size:15px;font-weight:600;margin:0}
+.shot-head span{font-size:13px;color:var(--ink-3)}
+.shot-head .n{font-family:"Instrument Serif",serif;font-size:22px;color:var(--accent);margin-right:6px}
 
-.wa{background:#e9e2d8;flex:1;padding:12px 12px 16px}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .wa{background:#0b141a}}
-:root[data-theme="dark"] .wa{background:#0b141a}
-.wahead{display:flex;align-items:center;gap:10px;background:var(--wa);color:#fff;margin:-12px -12px 12px;padding:12px 14px}
-.wahead .av{width:32px;height:32px;border-radius:50%;background:#fff;color:var(--wa);display:grid;place-items:center;font-weight:700}
-.wahead small{display:block;opacity:.85;font-size:11px}
-.bubble{background:var(--surface);border-radius:4px 14px 14px 14px;padding:10px 12px;font-size:13.5px;max-width:92%;box-shadow:0 1px 1px rgba(0,0,0,.08);margin-bottom:8px}
-.bubble .t{display:block;text-align:right;font-size:10.5px;color:var(--muted);margin-top:4px}
-.qr{display:grid;gap:6px;max-width:92%}
-.qr button{background:var(--surface);border:0;border-radius:10px;padding:10px;font:600 13.5px Inter,sans-serif;color:var(--info);cursor:pointer}
-.qr button.primary{color:var(--brand)}
-.replay{margin:10px auto 0;background:none;border:1px solid var(--line);border-radius:999px;padding:6px 14px;color:var(--muted);font:500 12.5px Inter,sans-serif;cursor:pointer}
+/* ================= SCREEN 1: phone ================= */
+.phone{width:312px;height:640px;margin:0 auto;border-radius:48px;background:#111;padding:9px;box-shadow:var(--shadow-lg);position:relative}
+.phone .glass{width:100%;height:100%;border-radius:40px;overflow:hidden;position:relative;background:var(--paper)}
+.island{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:92px;height:26px;border-radius:20px;background:#000;z-index:5}
+.sbar{position:absolute;top:0;left:0;right:0;height:44px;display:flex;justify-content:space-between;align-items:center;padding:4px 26px 0;font-size:13px;font-weight:600;z-index:4}
+.sbar .ic{display:flex;gap:5px;align-items:center}
+.sbar svg{height:11px}
+.view{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .35s ease,transform .35s ease;transform:scale(.985)}
+.view.on{opacity:1;visibility:visible;transform:none}
+@media (prefers-reduced-motion:reduce){.view{transition:none}}
 
-.stepper{display:flex;gap:6px;justify-content:center;margin:14px 0 0;flex-wrap:wrap}
-.stepper button{border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:6px 12px;font:500 12.5px Inter,sans-serif;cursor:pointer}
-.stepper button.on{background:var(--brand);border-color:var(--brand);color:#fff}
+/* view A: website + sheet */
+.web{padding:52px 18px 0;height:100%;background:linear-gradient(180deg,#f6efe6 0%,#f6efe6 46%,var(--paper) 46%)}
+.web .nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.wordmark{display:flex;align-items:center;gap:7px;font-weight:600;font-size:14px}
+.wordmark b{width:22px;height:22px;border-radius:7px;background:var(--ink);display:grid;place-items:center}
+.wordmark b svg{width:13px}
+.web .menu{width:18px;height:10px;border-top:1.6px solid var(--ink);border-bottom:1.6px solid var(--ink)}
+.web h3{font-size:30px;line-height:1.05;margin:0 0 8px}
+.web h3 em{color:var(--accent)}
+.web .hero-sub{font-size:12.5px;color:var(--ink-2);margin:0 0 14px;max-width:170px}
+.tooth{position:absolute;right:16px;top:150px;width:64px;opacity:.95}
+.sheet{position:absolute;left:8px;right:8px;bottom:8px;background:var(--paper);border-radius:28px;padding:18px 16px 16px;box-shadow:0 -10px 40px rgba(26,26,29,.10)}
+.sheet .grab{width:36px;height:4px;border-radius:4px;background:var(--line-2);margin:-6px auto 12px}
+.sheet h4{margin:0 0 2px;font-size:16px}
+.sheet .promise{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--green);margin-bottom:12px}
+.sheet .promise i{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px var(--green-soft)}
+.f{border:1px solid var(--line);border-radius:12px;padding:7px 11px;margin-bottom:8px}
+.f small{display:block;font-size:10.5px;color:var(--ink-3)}
+.f div{font-size:13.5px;font-weight:500;display:flex;justify-content:space-between;align-items:center}
+.f .ok{font-size:11px;color:var(--green);font-weight:600}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--paper-2);border-radius:12px;padding:3px;margin-bottom:8px}
+.seg span{text-align:center;font-size:12px;padding:6px 0;border-radius:9px;color:var(--ink-2)}
+.seg span.on{background:var(--paper);color:var(--ink);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.cta{width:100%;border:0;border-radius:14px;background:var(--ink);color:#fff;padding:13px;font-weight:600;font-size:14px;display:flex;justify-content:center;gap:8px;align-items:center}
+.fine{font-size:10.5px;color:var(--ink-3);text-align:center;margin:8px 4px 0;line-height:1.4}
 
-/* ---------- Screen 2: dashboard ---------- */
-.dash{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;min-width:0}
-.dbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line);flex-wrap:wrap}
-.dbar h2{margin:0;font-size:17px}
-.dbar .meta{color:var(--muted);font-size:13px}
-.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:600;white-space:nowrap}
-.p-ok{background:var(--ok-soft);color:var(--ok)}
-.p-warn{background:var(--warn-soft);color:var(--warn)}
-.p-danger{background:var(--danger-soft);color:var(--danger)}
-.p-info{background:var(--info-soft);color:var(--info)}
-.p-mute{background:var(--surface-2);color:var(--muted)}
+/* view B: incoming call */
+.call{background:radial-gradient(120% 70% at 50% 0%,#5b4636 0%,#2a211c 55%,#141110 100%);color:#fff;height:100%;display:flex;flex-direction:column;align-items:center;padding:70px 24px 40px;text-align:center}
+.call .sbar{color:#fff}
+.call .kind{font-size:13px;opacity:.65;margin-bottom:6px}
+.call .who{font-size:30px;font-weight:400;line-height:1.1;margin:0}
+.call .vb{display:inline-flex;gap:5px;align-items:center;font-size:12.5px;opacity:.85;margin-top:8px}
+.call .vb svg{width:14px}
+.call .ctx{margin-top:22px;background:rgba(255,255,255,.08);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.10);border-radius:18px;padding:12px 14px;text-align:left;font-size:12.5px;line-height:1.45;width:100%}
+.call .ctx b{display:block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;opacity:.55;font-weight:600;margin-bottom:4px}
+.call .timer{margin-top:14px;font-size:12px;opacity:.6}
+.call .spacer{flex:1}
+.call .row{display:flex;justify-content:space-between;width:100%;padding:0 10px}
+.call .act{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:12px;opacity:.9}
+.call .act span{width:64px;height:64px;border-radius:50%;display:grid;place-items:center}
+.call .act svg{width:26px;fill:#fff}
+.decline span{background:#eb4d3d}
+.decline svg{transform:rotate(135deg)}
+.accept span{background:#34c759;animation:nudge 1.6s ease-in-out infinite}
+@keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@media (prefers-reduced-motion:reduce){.accept span{animation:none}}
+.call .minor{display:flex;justify-content:space-between;width:100%;padding:0 22px;margin-bottom:28px;font-size:12px;opacity:.7}
 
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-bottom:1px solid var(--line)}
-@media (max-width:640px){.kpis{grid-template-columns:repeat(2,1fr)}}
-.kpi{background:var(--surface);padding:14px 18px}
-.kpi .k{font-size:12px;color:var(--muted);font-weight:500}
-.kpi .v{font-size:24px;font-weight:700;margin:2px 0;font-variant-numeric:tabular-nums}
-.kpi .c{font-size:12px;color:var(--muted)}
-.kpi .c b{color:var(--ok)}
-.kpi.hero{background:var(--brand-soft)}
-.kpi.hero .v{color:var(--brand)}
+/* view C: whatsapp */
+.wa{height:100%;background:#efe7dc;display:flex;flex-direction:column}
+.wa-top{background:var(--paper);padding:50px 14px 10px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line)}
+.wa-top .back{font-size:20px;color:#1f8f5f;line-height:1}
+.wa-top .av{width:34px;height:34px;border-radius:50%;background:var(--ink);display:grid;place-items:center}
+.wa-top .av svg{width:16px}
+.wa-top b{font-size:14px;display:flex;gap:4px;align-items:center}
+.wa-top b svg{width:13px}
+.wa-top small{display:block;font-size:11px;color:var(--ink-3)}
+.wa-body{flex:1;padding:12px 10px;display:flex;flex-direction:column;gap:6px;overflow:hidden}
+.day{align-self:center;background:rgba(255,255,255,.75);font-size:10.5px;padding:3px 9px;border-radius:7px;color:var(--ink-2);margin-bottom:4px}
+.msg{background:var(--paper);border-radius:4px 14px 14px 14px;padding:8px 10px 6px;font-size:13px;max-width:88%;box-shadow:0 1px .5px rgba(0,0,0,.12);line-height:1.4}
+.msg time{display:block;text-align:right;font-size:10px;color:var(--ink-3);margin-top:2px}
+.slots{background:var(--paper);border-radius:14px;max-width:88%;overflow:hidden;box-shadow:0 1px .5px rgba(0,0,0,.12)}
+.slots .hd{padding:8px 10px;font-size:13px;line-height:1.4}
+.slots .hd small{color:var(--ink-3);font-size:11.5px;display:block}
+.slots button{display:flex;justify-content:space-between;align-items:center;width:100%;border:0;border-top:1px solid var(--line);background:none;padding:9px 10px;font-size:13px;color:#1f7a8c;font-weight:500;text-align:left}
+.slots button span{font-size:11.5px;color:var(--ink-3);font-weight:400}
+.slots button.human{color:var(--ink-2)}
+.wa-in{background:var(--paper);padding:8px 10px 26px;display:flex;gap:8px;align-items:center}
+.wa-in div{flex:1;background:var(--paper-2);border-radius:18px;padding:8px 12px;font-size:12.5px;color:var(--ink-3)}
+.wa-in i{width:32px;height:32px;border-radius:50%;background:#1f8f5f;flex:none}
 
-.sec{padding:16px 18px;border-bottom:1px solid var(--line)}
-.sec:last-child{border-bottom:0}
-.sec h3{margin:0 0 12px;font-size:14.5px;display:flex;align-items:center;gap:8px}
-.count{background:var(--danger);color:#fff;border-radius:999px;font-size:11.5px;padding:1px 8px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
-.card{border:1px solid var(--line);border-radius:12px;padding:12px 13px;background:var(--surface);display:flex;flex-direction:column;gap:8px}
-.card.urgent{border-left:4px solid var(--danger)}
-.card.normal{border-left:4px solid var(--warn)}
-.card .row{display:flex;justify-content:space-between;align-items:center;gap:8px}
-.card .name{font-weight:600}
-.card .why{font-size:12.5px}
-.card ul{margin:0;padding-left:16px;font-size:13px;color:var(--muted)}
-.card ul li{margin:1px 0}
-.card .acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:2px}
-.card .acts button{border:1px solid var(--line);background:var(--surface-2);color:var(--text);border-radius:8px;padding:6px 10px;font:500 12.5px Inter,sans-serif;cursor:pointer}
-.card .acts button.primary{background:var(--brand);border-color:var(--brand);color:#fff}
+/* stepper under phone */
+.steps{margin:26px auto 0;max-width:330px}
+.step{display:grid;grid-template-columns:28px 1fr;gap:10px;width:100%;text-align:left;background:none;border:0;padding:10px 12px;border-radius:14px;color:var(--ink-3);transition:background .2s,color .2s}
+.step .k{width:24px;height:24px;border-radius:50%;border:1px solid var(--line-2);display:grid;place-items:center;font-size:11.5px;font-weight:600}
+.step b{display:block;font-size:13.5px;font-weight:600}
+.step small{font-size:12.5px;line-height:1.4;display:block}
+.step.on{background:var(--paper);color:var(--ink-2);box-shadow:var(--shadow)}
+.step.on b{color:var(--ink)}
+.step.on .k{background:var(--ink);border-color:var(--ink);color:#fff}
 
-.tablewrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:640px}
-th{text-align:left;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;padding:8px 10px;border-bottom:1px solid var(--line)}
-td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+/* ================= SCREEN 2: dashboard ================= */
+.win{background:var(--paper);border-radius:18px;box-shadow:var(--shadow-lg);overflow:hidden;min-width:0}
+.chrome{height:38px;background:var(--paper-2);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:7px;padding:0 14px}
+.chrome i{width:10px;height:10px;border-radius:50%;background:var(--line-2)}
+.chrome .url{margin:0 auto;font-size:11.5px;color:var(--ink-3);background:var(--paper);border-radius:7px;padding:3px 40px}
+.app{display:grid;grid-template-columns:176px 1fr;min-height:760px}
+@media (max-width:760px){.app{grid-template-columns:1fr}.side{display:none!important}}
+
+.side{border-right:1px solid var(--line);padding:16px 12px;display:flex;flex-direction:column;gap:2px;background:#fcfbf9}
+.clinic{display:flex;align-items:center;gap:9px;padding:6px 8px 14px;border-bottom:1px solid var(--line);margin-bottom:10px}
+.clinic .lg{width:30px;height:30px;border-radius:9px;background:var(--ink);display:grid;place-items:center;flex:none}
+.clinic .lg svg{width:16px}
+.clinic b{font-size:13px;display:block;line-height:1.2}
+.clinic small{font-size:11.5px;color:var(--ink-3)}
+.nv{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;font-size:13px;color:var(--ink-2)}
+.nv svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.nv.on{background:var(--paper);color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.05),0 0 0 1px var(--line)}
+.nv .badge{margin-left:auto;background:var(--accent);color:#fff;font-size:10.5px;font-weight:600;border-radius:999px;padding:0 7px;line-height:18px}
+.side .grow{flex:1}
+.pilotcard{background:var(--paper-2);border-radius:12px;padding:12px;font-size:12px;color:var(--ink-2);line-height:1.45;margin-bottom:10px}
+.pilotcard b{display:block;color:var(--ink);font-size:12.5px;margin-bottom:2px}
+.prog{height:4px;background:var(--line-2);border-radius:4px;margin-top:8px;overflow:hidden}
+.prog i{display:block;height:100%;width:50%;background:var(--ink)}
+.me{display:flex;align-items:center;gap:9px;padding:8px;border-top:1px solid var(--line);padding-top:12px}
+.av{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:11.5px;font-weight:600;flex:none}
+.me b{font-size:12.5px;display:block;line-height:1.2}
+.me small{font-size:11.5px;color:var(--ink-3)}
+
+.main{padding:22px 26px 26px;min-width:0}
+@media (max-width:520px){.main{padding:18px 14px}}
+.mhead{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+.mhead h3{margin:0;font-size:28px;line-height:1.1}
+.mhead p{margin:2px 0 0;color:var(--ink-3);font-size:13px}
+.tools{display:flex;gap:8px}
+.tbtn{border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:7px 12px;font-size:12.5px;display:flex;gap:6px;align-items:center;color:var(--ink-2)}
+.tbtn.dark{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:var(--r-md);margin-bottom:22px}
+@media (max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+.stat{padding:14px 16px;border-right:1px solid var(--line);min-width:0}
+.stat:last-child{border-right:0}
+.stat .l{font-size:12px;color:var(--ink-3);display:flex;justify-content:space-between;gap:6px}
+.stat .v{font-size:28px;font-weight:500;letter-spacing:-.02em;margin:4px 0 2px;line-height:1.1}
+.stat .v small{font-size:14px;color:var(--ink-3);font-weight:400;margin-left:2px}
+.stat .d{font-size:12px;color:var(--ink-3)}
+.stat .d b{color:var(--green);font-weight:600}
+.stat.key{background:var(--ink);color:#fff;border-radius:0 13px 13px 0}
+@media (max-width:900px){.stat.key{border-radius:0 0 13px 0}}
+.stat.key .l,.stat.key .d,.stat.key .v small{color:rgba(255,255,255,.6)}
+.stat.key .d b{color:#8fe0b5}
+.tag{font-size:10.5px;border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:0 7px;line-height:17px;white-space:nowrap}
+.mini{display:flex;gap:4px;align-items:flex-end;height:22px;margin-top:6px}
+.mini i{flex:1;border-radius:3px 3px 0 0;background:rgba(255,255,255,.18)}
+.mini i.a{background:#8fe0b5}
+
+.sect-title{display:flex;align-items:center;justify-content:space-between;margin:0 0 10px}
+.sect-title h4{margin:0;font-size:14px;display:flex;align-items:center;gap:8px}
+.sect-title h4 .c{background:var(--accent-soft);color:var(--accent);font-size:11.5px;border-radius:999px;padding:0 8px;line-height:20px}
+.sect-title span{font-size:12.5px;color:var(--ink-3)}
+
+.inbox{display:grid;grid-template-columns:250px 1fr;border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;margin-bottom:24px}
+@media (max-width:900px){.inbox{grid-template-columns:1fr}}
+.list{border-right:1px solid var(--line);background:#fcfbf9}
+@media (max-width:900px){.list{border-right:0;border-bottom:1px solid var(--line)}}
+.item{display:grid;grid-template-columns:32px 1fr auto;gap:10px;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);padding:12px 14px;position:relative}
+.item:last-child{border-bottom:0}
+.item b{font-size:13.5px;font-weight:600;display:block}
+.item small{display:block;font-size:12px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item time{font-size:11.5px;color:var(--ink-3)}
+.item.on{background:var(--paper)}
+.item.on::before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:3px;border-radius:0 3px 3px 0;background:var(--accent)}
+.reason{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;margin-top:3px}
+.reason i{width:6px;height:6px;border-radius:50%}
+.r-red{color:var(--accent)} .r-red i{background:var(--accent)}
+.r-amb{color:var(--amber)} .r-amb i{background:var(--amber)}
+.r-ink{color:var(--ink-2)} .r-ink i{background:var(--ink-3)}
+
+.detail{padding:18px 20px;min-width:0}
+.dtop{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.dtop .who{display:flex;gap:12px;align-items:center}
+.dtop .who .av{width:40px;height:40px;font-size:14px}
+.dtop h5{margin:0;font-size:17px}
+.dtop p{margin:0;font-size:12.5px;color:var(--ink-3)}
+.acts{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:8px 13px;font-size:13px;font-weight:500;display:inline-flex;gap:7px;align-items:center}
+.btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.alert{display:flex;gap:10px;align-items:flex-start;background:var(--accent-soft);border-radius:12px;padding:10px 12px;font-size:13px;margin-bottom:14px;color:#7a2a18}
+.alert.amb{background:var(--amber-soft);color:#6b4510}
+.alert.ink{background:var(--paper-2);color:var(--ink-2)}
+.alert svg{width:16px;height:16px;flex:none;margin-top:2px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+@media (max-width:520px){.facts{grid-template-columns:1fr 1fr}}
+.fact{background:var(--paper-2);border-radius:12px;padding:9px 11px}
+.fact small{display:block;font-size:11px;color:var(--ink-3)}
+.fact b{font-size:13px;font-weight:600}
+.summary{font-size:13.5px;color:var(--ink-2);margin:0 0 14px;line-height:1.55}
+.player{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:12px}
+.play{width:30px;height:30px;border-radius:50%;background:var(--ink);border:0;display:grid;place-items:center;flex:none}
+.play svg{width:11px;fill:#fff;margin-left:2px}
+.wave{flex:1;display:flex;align-items:center;gap:2px;height:28px;min-width:0;overflow:hidden}
+.wave i{flex:1;min-width:2px;border-radius:2px;background:var(--line-2)}
+.wave i.p{background:var(--ink)}
+.player time{font-size:12px;color:var(--ink-3)}
+.quote{border-left:2px solid var(--line-2);padding:2px 0 2px 12px;font-size:13px;color:var(--ink-2);margin:0}
+.quote p{margin:0 0 6px}
+.quote b{color:var(--ink);font-weight:600}
+
+table{width:100%;border-collapse:collapse;font-size:13px}
+.tw{border:1px solid var(--line);border-radius:var(--r-md);overflow-x:auto}
+.tw table{min-width:640px}
+th{white-space:nowrap;text-align:left;font-weight:500;color:var(--ink-3);font-size:12px;padding:10px 14px;border-bottom:1px solid var(--line);background:#fcfbf9}
+td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
 tr:last-child td{border-bottom:0}
-td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
-.fast{color:var(--ok);font-weight:600}
-.slow{color:var(--warn);font-weight:600}
-.trt{color:var(--muted);font-size:12px;display:block}
+.person{display:flex;align-items:center;gap:10px}
+.person .av{width:28px;height:28px;font-size:11px}
+.person small{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.2}
+.st{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;white-space:nowrap}
+.st i{width:7px;height:7px;border-radius:50%}
+.s-book i{background:var(--green)} .s-hand i{background:var(--accent)} .s-wait i{background:var(--amber)} .s-off i{background:var(--line-2)} .s-old i{background:var(--blue)}
+.fast{color:var(--green);font-weight:500}
+.slow{color:var(--accent);font-weight:500}
+td.dim{color:var(--ink-3)}
 
-.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--muted)}
-.bars{display:grid;gap:8px;margin-top:4px}
-.bar{display:grid;grid-template-columns:150px 1fr 54px;gap:10px;align-items:center;font-size:13px}
-@media (max-width:520px){.bar{grid-template-columns:96px 1fr 44px}}
-.track{height:12px;background:var(--surface-2);border-radius:6px;overflow:hidden}
-.fill{height:100%;border-radius:6px}
-.f-ai{background:var(--brand)}
-.f-ctl{background:var(--muted);opacity:.55}
+.foot{max-width:1320px;margin:0 auto;padding:0 24px 48px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--ink-3);font-size:12.5px}
 
-footer{max-width:1240px;margin:0 auto;padding:8px 16px 36px;color:var(--muted);font-size:12.5px}
+.item>span{min-width:0}
+@media (max-width:600px){
+  .intro{padding:36px 16px 20px}
+  .stage{padding:0 12px 32px;gap:16px}
+  .shot{padding:18px 12px;border-radius:22px}
+  .stat .v{font-size:22px}
+  .sect-title{flex-wrap:wrap;gap:2px 10px}
+  .foot{padding:0 16px 36px}
+}
+/* avatar colours */
+.a1{background:#f3dccf;color:#8a3b1f}.a2{background:#dbe7f5;color:#264d7d}.a3{background:#e2efe5;color:#2f6b47}.a4{background:#efe1f2;color:#6c3478}.a5{background:#f6ead0;color:#7a5a12}.a6{background:#e3e2ee;color:#3f3c70}.a7{background:#f0e0e0;color:#7d3030}
 </style>
 </head>
 <body>
 
-<header class="top">
-  <h1>HappySmile: AI voice assistant mockup</h1>
-  <p>Two screens: what happens when someone asks to be contacted, and what HappySmile sees afterwards.</p>
+<header class="intro">
+  <div>
+    <p class="eyebrow"><i></i>HappySmile · Call assistant concept</p>
+    <h1 class="serif">Every enquiry, called<br>back in <em>two minutes</em>.</h1>
+  </div>
+  <p class="lede">Two moments: what a person sees right after asking for a call, and what the front desk sees afterwards.</p>
 </header>
 
-<main class="wrap">
+<main class="stage">
 
-  <!-- ================= SCREEN 1 ================= -->
-  <section aria-labelledby="s1">
-    <p class="label" id="s1">Screen 1 · <span>The moment a person asks to be contacted</span></p>
-    <div class="phone">
-      <div class="screen">
-        <div class="status"><span>7:42 pm</span><span>4G ▮▮▮</span></div>
+  <!-- =============== SCREEN 1 =============== -->
+  <section class="shot" aria-labelledby="h1">
+    <div class="shot-head"><h2 id="h1"><span class="n">01</span>Asking for a call</h2><span>Patient's phone</span></div>
 
-        <!-- state A: form -->
-        <div class="state show site" id="st-form">
-          <div class="logo"><i></i>HappySmile Dental</div>
-          <h2>Talk to us about braces</h2>
-          <p class="sub">Free 15-minute consultation at your nearest clinic.</p>
-          <div class="field"><label>Name</label><div class="input">Priya Sharma</div></div>
-          <div class="field"><label>Mobile</label><div class="input">+91 98XXX X4210 &nbsp;<span class="pill p-ok">OTP verified</span></div></div>
-          <div class="field"><label>Interested in</label>
-            <div class="chips"><span class="chip on">Braces / aligners</span><span class="chip">Whitening</span><span class="chip">Implants</span><span class="chip">Other</span></div>
+    <div class="phone" aria-live="polite">
+      <div class="glass">
+        <div class="island"></div>
+
+        <!-- A: website -->
+        <div class="view on" id="v0">
+          <div class="sbar"><span>7:42</span><span class="ic"><svg viewBox="0 0 18 11"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="6" rx="1"/><rect x="10" y="2.5" width="3" height="8.5" rx="1"/><rect x="15" y="0" width="3" height="11" rx="1"/></svg><svg viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="15" height="8" rx="2"/></svg></span></div>
+          <div class="web">
+            <div class="nav"><span class="wordmark"><b><svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M3.5 6.5c1.2 3.6 7.8 3.6 9 0"/></svg></b>HappySmile</span><span class="menu"></span></div>
+            <h3 class="serif">Straighter teeth,<br><em>without the wait.</em></h3>
+            <p class="hero-sub">Braces and clear aligners at 12 clinics across India.</p>
+            <svg class="tooth" viewBox="0 0 100 110" fill="none"><path d="M50 14c-9-8-30-10-36 6-6 17 4 30 7 47 3 18 6 33 14 33 7 0 7-26 15-26s8 26 15 26c8 0 11-15 14-33 3-17 13-30 7-47-6-16-27-14-36-6z" fill="#fff" stroke="#e6d9c8" stroke-width="2"/><path d="M36 34c4 3 10 3 14 0" stroke="#d9573b" stroke-width="2.5" stroke-linecap="round"/></svg>
           </div>
-          <div class="field"><label>Preferred language</label>
-            <div class="chips"><span class="chip">English</span><span class="chip on">Hindi</span><span class="chip">Marathi</span><span class="chip">Tamil</span></div>
-          </div>
-          <div class="consent"><span class="box"></span><span>Call me now. <b>HappySmile's virtual assistant will call you within 2 minutes</b> to find a slot. You can ask for a person at any time.</span></div>
-          <button class="btn" onclick="go(1)">Request a call</button>
-          <p class="small">Calls only 9 am – 9 pm. Later requests get a WhatsApp message and a call next morning.</p>
-        </div>
-
-        <!-- state B: calling -->
-        <div class="state site calling" id="st-call">
-          <div class="logo" style="align-self:flex-start"><i></i>HappySmile Dental</div>
-          <div class="ring"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg></div>
-          <h3>Calling you now</h3>
-          <p>Request received 7:42:05 pm</p>
-          <p>From <b>+91 22 4XXX 1100</b></p>
-          <span class="verified">✓ HappySmile Dental · verified business</span>
-          <div class="script"><b>First thing you'll hear</b>“Namaste Priya, I'm HappySmile's virtual assistant calling about your braces enquiry. Is now a good time? You can ask for a person at any point.”</div>
-          <div class="timeline">
-            <div><span class="dot done"></span>Enquiry received</div>
-            <div><span class="dot done"></span>WhatsApp heads-up sent (“We're calling you now”)</div>
-            <div><span class="dot done"></span>Calling · attempt 1 of 3</div>
-            <div><span class="dot"></span>If no answer: WhatsApp booking link</div>
+          <div class="sheet">
+            <div class="grab"></div>
+            <h4>Get a free consultation</h4>
+            <div class="promise"><i></i>We usually call back in under 2 minutes</div>
+            <div class="f"><small>Name</small><div>Priya Sharma</div></div>
+            <div class="f"><small>Mobile</small><div>+91 98XXX X4210 <span class="ok">✓ Verified</span></div></div>
+            <div class="seg"><span>English</span><span class="on">हिन्दी</span><span>मराठी</span></div>
+            <button class="cta" onclick="show(1)">Call me now
+              <svg width="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+            <p class="fine">HappySmile's <b>virtual assistant</b> will call you. Ask for a person any time. Calls 9 am – 9 pm only.</p>
           </div>
         </div>
 
-        <!-- state C: missed -> whatsapp -->
-        <div class="state" id="st-wa">
-          <div class="wa">
-            <div class="wahead"><span class="av">H</span><div>HappySmile Dental ✓<small>Business account</small></div></div>
-            <div class="bubble">Hi Priya 👋 We just tried calling about braces. Sorry we missed you!<span class="t">7:43 pm</span></div>
-            <div class="bubble">Pick a free consultation slot at <b>HappySmile Andheri West</b> (1.8 km):<br><br>
-              • Thu 21 Nov, 11:00 am<br>• Thu 21 Nov, 6:30 pm<br>• Sat 23 Nov, 10:00 am<span class="t">7:43 pm</span></div>
-            <div class="qr">
-              <button class="primary">📅 Book a slot</button>
-              <button>📞 Call me back later</button>
-              <button>🙋 Talk to a person</button>
+        <!-- B: incoming call -->
+        <div class="view" id="v1">
+          <div class="call">
+            <div class="sbar"><span>7:43</span><span class="ic"><svg viewBox="0 0 18 11" fill="#fff"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="6" rx="1"/><rect x="10" y="2.5" width="3" height="8.5" rx="1"/><rect x="15" y="0" width="3" height="11" rx="1"/></svg></span></div>
+            <div class="kind">Incoming call · 1m 12s after request</div>
+            <p class="who serif">HappySmile Dental</p>
+            <span class="vb"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#34c759"/><path d="M5 8.2l2 2 4-4.2" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>Verified business · Virtual assistant</span>
+            <div class="ctx"><b>You'll hear first</b>“Namaste Priya, main HappySmile ki virtual assistant hoon, aapki braces enquiry ke baare mein call kar rahi hoon. Kya abhi baat kar sakte hain?”</div>
+            <div class="spacer"></div>
+            <div class="minor"><span>Remind me</span><span>Message</span></div>
+            <div class="row">
+              <button class="act decline" onclick="show(2)" style="background:none;border:0;color:#fff"><span><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg></span>Decline</button>
+              <button class="act accept" onclick="show(2)" style="background:none;border:0;color:#fff"><span><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg></span>Accept</button>
             </div>
-            <div class="bubble" style="margin-top:10px">We'll try calling once more at 8:15 pm. Reply STOP to opt out.<span class="t">7:43 pm</span></div>
+          </div>
+        </div>
+
+        <!-- C: whatsapp fallback -->
+        <div class="view" id="v2">
+          <div class="wa">
+            <div class="sbar"><span>7:44</span><span></span></div>
+            <div class="wa-top">
+              <span class="back">‹</span>
+              <span class="av"><svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M3.5 6.5c1.2 3.6 7.8 3.6 9 0"/></svg></span>
+              <div><b>HappySmile Dental <svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#25a366"/><path d="M5 8.2l2 2 4-4.2" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></b><small>Business account</small></div>
+            </div>
+            <div class="wa-body">
+              <span class="day">Today</span>
+              <div class="msg">Hi Priya, we just tried calling about braces and missed you. No problem!<time>7:44 pm</time></div>
+              <div class="slots">
+                <div class="hd">Pick a free consultation slot<small>Andheri West clinic · 1.8 km away</small></div>
+                <button>Thu 21 Nov · 11:00 am <span>Dr. Kulkarni</span></button>
+                <button>Thu 21 Nov · 6:30 pm <span>Dr. Kulkarni</span></button>
+                <button>Sat 23 Nov · 10:00 am <span>Dr. Shah</span></button>
+                <button class="human">Talk to a person instead</button>
+              </div>
+              <div class="msg">We'll try one more call at 8:15 pm. Reply STOP to opt out.<time>7:44 pm</time></div>
+            </div>
+            <div class="wa-in"><div>Message</div><i></i></div>
           </div>
         </div>
       </div>
     </div>
-    <div class="stepper" role="group" aria-label="Show state">
-      <button class="on" onclick="go(0)">1 · Enquiry</button>
-      <button onclick="go(1)">2 · Call in &lt;2 min</button>
-      <button onclick="go(2)">3 · Missed → WhatsApp</button>
+
+    <div class="steps" role="tablist" aria-label="Moments">
+      <button class="step on" role="tab" onclick="show(0)"><span class="k">1</span><span><b>Asks for a call</b><small>Verified number, language, and a clear note that an assistant will call.</small></span></button>
+      <button class="step" role="tab" onclick="show(1)"><span class="k">2</span><span><b>Call arrives in ~1 minute</b><small>From a verified business number. The first sentence says it's an assistant.</small></span></button>
+      <button class="step" role="tab" onclick="show(2)"><span class="k">3</span><span><b>Missed? WhatsApp takes over</b><small>Bookable slots plus a way to reach a person.</small></span></button>
     </div>
   </section>
 
-  <!-- ================= SCREEN 2 ================= -->
-  <section aria-labelledby="s2" style="min-width:0">
-    <p class="label" id="s2">Screen 2 · <span>What HappySmile sees afterwards (front-desk dashboard)</span></p>
-    <div class="dash">
-      <div class="dbar">
-        <div><h2>Leads today · Andheri West</h2><div class="meta">Pilot week 2 · Tue 19 Nov · updated 7:44 pm</div></div>
-        <span class="pill p-info">Pilot: AI group vs. current-process group</span>
-      </div>
+  <!-- =============== SCREEN 2 =============== -->
+  <section class="shot" aria-labelledby="h2" style="min-width:0">
+    <div class="shot-head"><h2 id="h2"><span class="n">02</span>What HappySmile sees</h2><span>Front-desk workspace</span></div>
 
-      <div class="kpis">
-        <div class="kpi"><div class="k">Median time to first call</div><div class="v">1m 48s</div><div class="c">Current process: 4h 52m</div></div>
-        <div class="kpi"><div class="k">Reached (spoke to someone)</div><div class="v">68%</div><div class="c">Current process: 61%</div></div>
-        <div class="kpi"><div class="k">Booked</div><div class="v">44%</div><div class="c">Current process: 29%</div></div>
-        <div class="kpi hero"><div class="k">Attended visits / 100 enquiries</div><div class="v">31</div><div class="c">Current process: 22 · <b>success metric</b></div></div>
-      </div>
+    <div class="win">
+      <div class="chrome"><i></i><i></i><i></i><span class="url">desk.happysmile.in/leads</span></div>
+      <div class="app">
 
-      <div class="sec">
-        <h3>Needs you <span class="count">3</span> <span style="font-weight:400;color:var(--muted);font-size:12.5px">Escalated by the assistant, with a summary</span></h3>
-        <div class="cards">
-          <div class="card urgent">
-            <div class="row"><span class="name">Rahul Mehta</span><span class="pill p-danger">Pain · call within 15 min</span></div>
-            <div class="why"><b>Why handed over:</b> reports swelling and pain for 2 days</div>
-            <ul><li>Enquired about: implants</li><li>Lower-left molar, pain 7/10</li><li>Assistant gave no advice and promised a call from staff</li></ul>
-            <div class="acts"><button class="primary">Call now</button><button>▶ Recording 1:12</button></div>
+        <aside class="side">
+          <div class="clinic"><span class="lg"><svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M3.5 6.5c1.2 3.6 7.8 3.6 9 0"/></svg></span><span><b>Andheri West</b><small>HappySmile · 1 of 12</small></span></div>
+          <div class="nv on"><svg viewBox="0 0 24 24"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5h13l3.5 7v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6z"/></svg>Leads<span class="badge">3</span></div>
+          <div class="nv"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Appointments</div>
+          <div class="nv"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call log</div>
+          <div class="nv"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>Pilot results</div>
+          <div class="nv"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z"/></svg>Escalation rules</div>
+          <div class="grow"></div>
+          <div class="pilotcard"><b>Pilot · week 2 of 4</b>Half of new leads go to the assistant, half to the usual callback.<div class="prog"><i></i></div></div>
+          <div class="me"><span class="av a5">MK</span><span><b>Meera K.</b><small>Front desk lead</small></span></div>
+        </aside>
+
+        <div class="main">
+          <div class="mhead">
+            <div><h3 class="serif">Good evening, Meera</h3><p>Tuesday, 19 November · 41 enquiries so far today</p></div>
+            <div class="tools"><button class="tbtn">Today ▾</button><button class="tbtn dark">Export</button></div>
           </div>
-          <div class="card normal">
-            <div class="row"><span class="name">Anita Desai</span><span class="pill p-warn">Price question</span></div>
-            <div class="why"><b>Why handed over:</b> wants an EMI plan and a quote for aligners</div>
-            <ul><li>Comparing with another clinic's quote</li><li>Free Sat mornings · prefers English</li></ul>
-            <div class="acts"><button class="primary">Call back</button><button>▶ Recording 2:40</button></div>
+
+          <div class="stats">
+            <div class="stat"><div class="l">Time to first call</div><div class="v num">1m 48s</div><div class="d">Usual callback: 4h 52m</div></div>
+            <div class="stat"><div class="l">Reached</div><div class="v num">68<small>%</small></div><div class="d"><b>+7 pts</b> vs usual</div></div>
+            <div class="stat"><div class="l">Booked</div><div class="v num">44<small>%</small></div><div class="d"><b>+15 pts</b> vs usual</div></div>
+            <div class="stat key"><div class="l">Attended / 100 enquiries</div><div class="v num">31<small>vs 22</small></div>
+              <div class="mini" aria-hidden="true"><i style="height:40%"></i><i class="a" style="height:55%"></i><i style="height:45%"></i><i class="a" style="height:70%"></i><i style="height:42%"></i><i class="a" style="height:66%"></i><i style="height:48%"></i><i class="a" style="height:84%"></i></div><div class="d" style="margin-top:6px"><span class="tag">North star</span> &nbsp;assistant vs usual</div></div>
           </div>
-          <div class="card normal">
-            <div class="row"><span class="name">Suresh Iyer</span><span class="pill p-warn">Asked for a person</span></div>
-            <div class="why"><b>Why handed over:</b> “I'd rather speak to someone at the clinic”</div>
-            <ul><li>Enquired about: whitening</li><li>Prefers Tamil · after 6 pm</li></ul>
-            <div class="acts"><button class="primary">Call back</button><button>▶ Recording 0:34</button></div>
+
+          <div class="sect-title"><h4>Needs you <span class="c">3</span></h4><span>Handed over by the assistant</span></div>
+          <div class="inbox">
+            <div class="list" role="tablist" aria-label="Escalations">
+              <button class="item on" data-i="0" role="tab"><span class="av a1">RM</span><span><b>Rahul Mehta</b><small>Swelling and pain for 2 days</small><span class="reason r-red"><i></i>Pain · call in 15 min</span></span><time>7:20</time></button>
+              <button class="item" data-i="1" role="tab"><span class="av a2">AD</span><span><b>Anita Desai</b><small>Wants EMI options for aligners</small><span class="reason r-amb"><i></i>Price question</span></span><time>6:31</time></button>
+              <button class="item" data-i="2" role="tab"><span class="av a3">SI</span><span><b>Suresh Iyer</b><small>“I'd rather speak to someone”</small><span class="reason r-ink"><i></i>Asked for a person</span></span><time>5:58</time></button>
+            </div>
+            <div class="detail" id="detail"></div>
+          </div>
+
+          <div class="sect-title"><h4>All leads today</h4><span>Showing 7 of 41</span></div>
+          <div class="tw">
+            <table>
+              <thead><tr><th>Person</th><th>Interested in</th><th>Enquired</th><th>First call after</th><th>Status</th><th>Next</th></tr></thead>
+              <tbody>
+                <tr><td><div class="person"><span class="av a4">PS</span><span>Priya Sharma<small>Hindi</small></span></div></td><td>Braces</td><td class="dim num">7:42 pm</td><td class="num fast">1m 12s</td><td><span class="st s-wait"><i></i>Missed · on WhatsApp</span></td><td class="dim">Retry 8:15 pm</td></tr>
+                <tr><td><div class="person"><span class="av a1">RM</span><span>Rahul Mehta<small>English</small></span></div></td><td>Implants</td><td class="dim num">7:20 pm</td><td class="num fast">1m 52s</td><td><span class="st s-hand"><i></i>Handed to you</span></td><td class="dim">Urgent call</td></tr>
+                <tr><td><div class="person"><span class="av a3">FK</span><span>Fatima Khan<small>Hindi</small></span></div></td><td>Whitening</td><td class="dim num">6:58 pm</td><td class="num fast">1m 05s</td><td><span class="st s-book"><i></i>Booked</span></td><td class="dim">Thu, 6:30 pm</td></tr>
+                <tr><td><div class="person"><span class="av a2">AD</span><span>Anita Desai<small>English</small></span></div></td><td>Aligners</td><td class="dim num">6:31 pm</td><td class="num fast">1m 41s</td><td><span class="st s-hand"><i></i>Handed to you</span></td><td class="dim">Price call</td></tr>
+                <tr><td><div class="person"><span class="av a6">VR</span><span>Vikram Rao<small>English</small></span></div></td><td>Cleaning</td><td class="dim num">5:47 pm</td><td class="num fast">2m 10s</td><td><span class="st s-book"><i></i>Booked</span></td><td class="dim">Wed, 10:00 am</td></tr>
+                <tr><td><div class="person"><span class="av a5">NJ</span><span>Neha Joshi<small>Marathi</small></span></div></td><td>Braces</td><td class="dim num">5:12 pm</td><td class="num slow">4h 38m</td><td><span class="st s-old"><i></i>Usual callback group</span></td><td class="dim">Front desk queue</td></tr>
+                <tr><td><div class="person"><span class="av a7">AN</span><span>Arjun Nair<small>English</small></span></div></td><td>Whitening</td><td class="dim num">4:40 pm</td><td class="num fast">1m 22s</td><td><span class="st s-off"><i></i>Not interested</span></td><td class="dim">Closed · price</td></tr>
+              </tbody>
+            </table>
           </div>
         </div>
-      </div>
-
-      <div class="sec">
-        <h3>All leads today</h3>
-        <div class="tablewrap">
-        <table>
-          <thead><tr><th>Enquiry</th><th>Person</th><th>Treatment</th><th>First contact</th><th>Outcome</th><th>Next step</th></tr></thead>
-          <tbody>
-            <tr><td class="num">7:42 pm</td><td>Priya Sharma<span class="trt">Hindi</span></td><td>Braces</td><td class="num fast">1m 30s</td><td><span class="pill p-mute">No answer → WhatsApp</span></td><td>Retry 8:15 pm</td></tr>
-            <tr><td class="num">7:20 pm</td><td>Rahul Mehta<span class="trt">English</span></td><td>Implants</td><td class="num fast">1m 52s</td><td><span class="pill p-danger">Handed to staff</span></td><td>Staff call · urgent</td></tr>
-            <tr><td class="num">6:58 pm</td><td>Fatima Khan<span class="trt">Hindi</span></td><td>Whitening</td><td class="num fast">1m 05s</td><td><span class="pill p-ok">Booked</span></td><td>Thu 21 Nov, 6:30 pm</td></tr>
-            <tr><td class="num">6:31 pm</td><td>Anita Desai<span class="trt">English</span></td><td>Aligners</td><td class="num fast">1m 41s</td><td><span class="pill p-warn">Handed to staff</span></td><td>Price call</td></tr>
-            <tr><td class="num">5:47 pm</td><td>Vikram Rao<span class="trt">English</span></td><td>Cleaning</td><td class="num fast">2m 10s</td><td><span class="pill p-ok">Booked</span></td><td>Wed 20 Nov, 10:00 am</td></tr>
-            <tr><td class="num">5:12 pm</td><td>Neha Joshi<span class="trt">Marathi</span></td><td>Braces</td><td class="num slow">4h 38m</td><td><span class="pill p-info">Current process</span></td><td>Front desk queue</td></tr>
-            <tr><td class="num">4:40 pm</td><td>Arjun Nair<span class="trt">English</span></td><td>Whitening</td><td class="num fast">1m 22s</td><td><span class="pill p-mute">Not interested</span></td><td>Closed · price</td></tr>
-          </tbody>
-        </table>
-        </div>
-      </div>
-
-      <div class="sec">
-        <h3>Pilot so far: attended visits per 100 enquiries</h3>
-        <div class="bars">
-          <div class="bar"><span>AI assistant group</span><div class="track"><div class="fill f-ai" style="width:62%"></div></div><b>31</b></div>
-          <div class="bar"><span>Current process group</span><div class="track"><div class="fill f-ctl" style="width:44%"></div></div><b>22</b></div>
-        </div>
-        <p class="legend" style="margin:10px 0 0">Leads are randomly split 50/50 across 3 pilot clinics · n = 1,140 enquiries · scale-up decision at week 4</p>
       </div>
     </div>
   </section>
 </main>
 
-<footer>Fictional mockup for a case-study exercise. All names, numbers and phone numbers are made up.</footer>
+<footer class="foot"><span>Concept mockup for a case study. HappySmile and all names, numbers and phone numbers are fictional.</span><span>Pilot: 3 clinics · 4 weeks · leads split 50/50</span></footer>
 
 <script>
-const states=["st-form","st-call","st-wa"];
-const btns=document.querySelectorAll(".stepper button");
-let timer;
-function go(i){
-  clearTimeout(timer);
-  states.forEach((id,j)=>document.getElementById(id).classList.toggle("show",i===j));
-  btns.forEach((b,j)=>b.classList.toggle("on",i===j));
-  if(i===1) timer=setTimeout(()=>go(2),4000);
+/* ---- screen 1 ---- */
+const views=[...document.querySelectorAll('.view')];
+const steps=[...document.querySelectorAll('.step')];
+let t;
+function show(i){
+  clearTimeout(t);
+  views.forEach((v,j)=>v.classList.toggle('on',i===j));
+  steps.forEach((s,j)=>{s.classList.toggle('on',i===j);s.setAttribute('aria-selected',i===j)});
+  if(i===1) t=setTimeout(()=>show(2),5000);
 }
+
+/* ---- screen 2 ---- */
+const ic={
+  phone:'<svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>',
+  cal:'<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>',
+  alert:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>'
+};
+const data=[
+  {av:'a1',ini:'RM',name:'Rahul Mehta',meta:'Implants · English · enquired 7:20 pm',cls:'',
+   alert:'Mentions swelling and pain for two days. The assistant gave no advice and promised a call from the clinic within 15 minutes.',
+   facts:[['Pain','7 / 10, lower left'],['Wants','Seen tomorrow'],['Free','Before 11 am']],
+   sum:'Had an implant consult elsewhere last year and didn\'t go ahead. Now has pain near the same tooth. Open to an emergency visit tomorrow morning.',
+   q:[['Rahul','“It\'s been swelling since Sunday, I can\'t really chew on that side.”'],['Assistant','“I\'m not able to give medical advice, but I\'ll get someone from the clinic to call you within 15 minutes.”']],
+   len:'1:12',btns:['Call Rahul now','Hold 9:30 am slot']},
+  {av:'a2',ini:'AD',name:'Anita Desai',meta:'Clear aligners · English · enquired 6:31 pm',cls:'amb',
+   alert:'Asked about EMI and compared us with another clinic\'s quote. Pricing beyond the published list is for staff only.',
+   facts:[['Budget','~₹1.2L'],['Wants','EMI, 12 months'],['Free','Sat mornings']],
+   sum:'Has a quote of ₹1.1L elsewhere. Likes that we\'re closer to home. Would book this Saturday if the EMI works.',
+   q:[['Anita','“The other clinic offered no-cost EMI. Can you match that?”'],['Assistant','“A colleague can talk you through payment options. Can they call you back this evening?”']],
+   len:'2:40',btns:['Call back','Send EMI details']},
+  {av:'a3',ini:'SI',name:'Suresh Iyer',meta:'Whitening · Tamil · enquired 5:58 pm',cls:'ink',
+   alert:'Asked for a person in the first 20 seconds. The assistant stopped and handed over straight away.',
+   facts:[['Language','Tamil'],['Wants','A person'],['Free','After 6 pm']],
+   sum:'No details collected. He prefers a human conversation and an evening call.',
+   q:[['Suresh','“I\'d rather speak to someone at the clinic, please.”'],['Assistant','“Of course. Someone from the clinic will call you after 6 pm today.”']],
+   len:'0:34',btns:['Call back','Assign to Tamil speaker']}
+];
+function wave(){let s='';for(let i=0;i<64;i++){const h=18+Math.round(70*Math.abs(Math.sin(i*1.7)*Math.cos(i*.43)));s+=`<i class="${i<20?'p':''}" style="height:${h}%"></i>`}return s}
+function render(i){
+  const d=data[i];
+  document.getElementById('detail').innerHTML=`
+    <div class="dtop"><div class="who"><span class="av ${d.av}">${d.ini}</span><div><h5>${d.name}</h5><p>${d.meta}</p></div></div>
+      <div class="acts"><button class="btn primary">${ic.phone}${d.btns[0]}</button><button class="btn">${ic.cal}${d.btns[1]}</button></div></div>
+    <div class="alert ${d.cls}">${ic.alert}<span>${d.alert}</span></div>
+    <div class="facts">${d.facts.map(f=>`<div class="fact"><small>${f[0]}</small><b>${f[1]}</b></div>`).join('')}</div>
+    <p class="summary">${d.sum}</p>
+    <div class="player"><button class="play" aria-label="Play recording"><svg viewBox="0 0 10 12"><path d="M0 0l10 6-10 6z"/></svg></button><div class="wave">${wave()}</div><time class="num">${d.len}</time></div>
+    <blockquote class="quote">${d.q.map(x=>`<p><b>${x[0]}:</b> ${x[1]}</p>`).join('')}</blockquote>`;
+  document.querySelectorAll('.item').forEach((b,j)=>{b.classList.toggle('on',i===j);b.setAttribute('aria-selected',i===j)});
+}
+document.querySelectorAll('.item').forEach(b=>b.addEventListener('click',()=>render(+b.dataset.i)));
+render(0);
 </script>
 </body>
 </html>
