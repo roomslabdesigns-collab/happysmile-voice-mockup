@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HappySmile Voice Assistant Mockup</title>
+<meta name="description" content="Two-screen mockup: the moment a person asks to be contacted, and what HappySmile staff see afterwards.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f6f8; --surface:#ffffff; --surface-2:#f0f3f6; --text:#14202b; --muted:#5d6b78;
+  --line:#dde3e9; --brand:#0e8a7a; --brand-soft:#e3f4f1; --warn:#b4560b; --warn-soft:#fdf0e3;
+  --danger:#b42335; --danger-soft:#fbe9ec; --ok:#1f7a3d; --ok-soft:#e5f4ea; --info:#2557a7; --info-soft:#e7eefa;
+  --phone:#0f1720; --wa:#1f8f4e;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e141a; --surface:#16202a; --surface-2:#1d2934; --text:#e7edf2; --muted:#9aa8b5;
+    --line:#2a3846; --brand:#3cc2ae; --brand-soft:#123a35; --warn:#f0a35c; --warn-soft:#3a2a17;
+    --danger:#f07a8a; --danger-soft:#3b1d23; --ok:#6fd08f; --ok-soft:#173523; --info:#86aef0; --info-soft:#1a2a45;
+    --phone:#000;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e141a; --surface:#16202a; --surface-2:#1d2934; --text:#e7edf2; --muted:#9aa8b5;
+  --line:#2a3846; --brand:#3cc2ae; --brand-soft:#123a35; --warn:#f0a35c; --warn-soft:#3a2a17;
+  --danger:#f07a8a; --danger-soft:#3b1d23; --ok:#6fd08f; --ok-soft:#173523; --info:#86aef0; --info-soft:#1a2a45;
+  --phone:#000;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 Inter,system-ui,sans-serif}
+header.top{max-width:1240px;margin:0 auto;padding:28px 16px 8px}
+header.top h1{margin:0 0 4px;font-size:22px}
+header.top p{margin:0;color:var(--muted)}
+.wrap{max-width:1240px;margin:0 auto;padding:16px;display:grid;grid-template-columns:380px 1fr;gap:28px;align-items:start}
+@media (max-width:980px){.wrap{grid-template-columns:1fr}}
+.label{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--brand);margin:0 0 10px}
+.label span{color:var(--muted);text-transform:none;letter-spacing:0;font-weight:500}
+
+/* ---------- Screen 1: phone ---------- */
+.phone{width:100%;max-width:360px;margin:0 auto;background:var(--phone);border-radius:38px;padding:12px;box-shadow:0 20px 50px rgba(0,0,0,.18)}
+.screen{background:var(--surface);border-radius:28px;min-height:690px;overflow:hidden;position:relative;display:flex;flex-direction:column}
+.status{display:flex;justify-content:space-between;padding:10px 20px 4px;font-size:12px;font-weight:600;color:var(--muted)}
+.site{padding:6px 18px 18px;flex:1;display:flex;flex-direction:column}
+.logo{display:flex;align-items:center;gap:8px;font-weight:700;color:var(--brand);margin:6px 0 14px}
+.logo i{width:26px;height:26px;border-radius:8px;background:var(--brand);display:inline-block;position:relative}
+.logo i::after{content:"";position:absolute;left:6px;right:6px;top:11px;height:6px;border:2px solid #fff;border-top:0;border-radius:0 0 10px 10px}
+.site h2{font-size:19px;margin:0 0 4px}
+.site .sub{color:var(--muted);font-size:13px;margin:0 0 14px}
+.field{margin-bottom:10px}
+.field label{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:4px}
+.input{border:1px solid var(--line);border-radius:10px;padding:9px 11px;background:var(--surface-2);font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);border-radius:999px;padding:5px 10px;font-size:12.5px;background:var(--surface)}
+.chip.on{background:var(--brand-soft);border-color:var(--brand);color:var(--brand);font-weight:600}
+.consent{display:flex;gap:8px;font-size:12px;color:var(--muted);background:var(--surface-2);border-radius:10px;padding:9px 10px;margin:4px 0 12px}
+.consent b{color:var(--text)}
+.box{width:16px;height:16px;border-radius:4px;background:var(--brand);flex:none;margin-top:1px;position:relative}
+.box::after{content:"";position:absolute;left:5px;top:2px;width:4px;height:8px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.btn{display:block;width:100%;border:0;border-radius:12px;padding:13px;font:600 15px Inter,sans-serif;background:var(--brand);color:#fff;cursor:pointer}
+.btn:focus-visible{outline:3px solid var(--info);outline-offset:2px}
+.small{font-size:11.5px;color:var(--muted);text-align:center;margin-top:8px}
+
+/* states */
+.state{display:none}
+.state.show{display:flex;flex-direction:column;flex:1}
+.calling{align-items:center;text-align:center;padding-top:30px}
+.ring{width:92px;height:92px;border-radius:50%;background:var(--brand-soft);display:grid;place-items:center;margin:10px auto 16px;position:relative}
+.ring::before,.ring::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--brand);animation:pulse 1.8s infinite}
+.ring::after{animation-delay:.9s}
+@keyframes pulse{from{transform:scale(1);opacity:.7}to{transform:scale(1.6);opacity:0}}
+@media (prefers-reduced-motion:reduce){.ring::before,.ring::after{animation:none;opacity:.3}}
+.ring svg{width:38px;height:38px;fill:var(--brand)}
+.calling h3{margin:0 0 6px;font-size:18px}
+.calling p{margin:0 0 4px;color:var(--muted);font-size:13.5px}
+.verified{display:inline-flex;gap:6px;align-items:center;margin-top:10px;font-size:12.5px;background:var(--ok-soft);color:var(--ok);border-radius:999px;padding:5px 11px;font-weight:600}
+.script{margin-top:18px;text-align:left;background:var(--surface-2);border-radius:14px;padding:12px 13px;font-size:13px;width:100%}
+.script b{display:block;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.timeline{margin-top:14px;width:100%;text-align:left;font-size:12.5px;color:var(--muted)}
+.timeline div{display:flex;gap:8px;align-items:center;padding:3px 0}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--line);flex:none}
+.dot.done{background:var(--brand)}
+
+.wa{background:#e9e2d8;flex:1;padding:12px 12px 16px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .wa{background:#0b141a}}
+:root[data-theme="dark"] .wa{background:#0b141a}
+.wahead{display:flex;align-items:center;gap:10px;background:var(--wa);color:#fff;margin:-12px -12px 12px;padding:12px 14px}
+.wahead .av{width:32px;height:32px;border-radius:50%;background:#fff;color:var(--wa);display:grid;place-items:center;font-weight:700}
+.wahead small{display:block;opacity:.85;font-size:11px}
+.bubble{background:var(--surface);border-radius:4px 14px 14px 14px;padding:10px 12px;font-size:13.5px;max-width:92%;box-shadow:0 1px 1px rgba(0,0,0,.08);margin-bottom:8px}
+.bubble .t{display:block;text-align:right;font-size:10.5px;color:var(--muted);margin-top:4px}
+.qr{display:grid;gap:6px;max-width:92%}
+.qr button{background:var(--surface);border:0;border-radius:10px;padding:10px;font:600 13.5px Inter,sans-serif;color:var(--info);cursor:pointer}
+.qr button.primary{color:var(--brand)}
+.replay{margin:10px auto 0;background:none;border:1px solid var(--line);border-radius:999px;padding:6px 14px;color:var(--muted);font:500 12.5px Inter,sans-serif;cursor:pointer}
+
+.stepper{display:flex;gap:6px;justify-content:center;margin:14px 0 0;flex-wrap:wrap}
+.stepper button{border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:6px 12px;font:500 12.5px Inter,sans-serif;cursor:pointer}
+.stepper button.on{background:var(--brand);border-color:var(--brand);color:#fff}
+
+/* ---------- Screen 2: dashboard ---------- */
+.dash{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;min-width:0}
+.dbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.dbar h2{margin:0;font-size:17px}
+.dbar .meta{color:var(--muted);font-size:13px}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:600;white-space:nowrap}
+.p-ok{background:var(--ok-soft);color:var(--ok)}
+.p-warn{background:var(--warn-soft);color:var(--warn)}
+.p-danger{background:var(--danger-soft);color:var(--danger)}
+.p-info{background:var(--info-soft);color:var(--info)}
+.p-mute{background:var(--surface-2);color:var(--muted)}
+
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-bottom:1px solid var(--line)}
+@media (max-width:640px){.kpis{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:var(--surface);padding:14px 18px}
+.kpi .k{font-size:12px;color:var(--muted);font-weight:500}
+.kpi .v{font-size:24px;font-weight:700;margin:2px 0;font-variant-numeric:tabular-nums}
+.kpi .c{font-size:12px;color:var(--muted)}
+.kpi .c b{color:var(--ok)}
+.kpi.hero{background:var(--brand-soft)}
+.kpi.hero .v{color:var(--brand)}
+
+.sec{padding:16px 18px;border-bottom:1px solid var(--line)}
+.sec:last-child{border-bottom:0}
+.sec h3{margin:0 0 12px;font-size:14.5px;display:flex;align-items:center;gap:8px}
+.count{background:var(--danger);color:#fff;border-radius:999px;font-size:11.5px;padding:1px 8px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.card{border:1px solid var(--line);border-radius:12px;padding:12px 13px;background:var(--surface);display:flex;flex-direction:column;gap:8px}
+.card.urgent{border-left:4px solid var(--danger)}
+.card.normal{border-left:4px solid var(--warn)}
+.card .row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.card .name{font-weight:600}
+.card .why{font-size:12.5px}
+.card ul{margin:0;padding-left:16px;font-size:13px;color:var(--muted)}
+.card ul li{margin:1px 0}
+.card .acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:2px}
+.card .acts button{border:1px solid var(--line);background:var(--surface-2);color:var(--text);border-radius:8px;padding:6px 10px;font:500 12.5px Inter,sans-serif;cursor:pointer}
+.card .acts button.primary{background:var(--brand);border-color:var(--brand);color:#fff}
+
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:640px}
+th{text-align:left;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;padding:8px 10px;border-bottom:1px solid var(--line)}
+td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.fast{color:var(--ok);font-weight:600}
+.slow{color:var(--warn);font-weight:600}
+.trt{color:var(--muted);font-size:12px;display:block}
+
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--muted)}
+.bars{display:grid;gap:8px;margin-top:4px}
+.bar{display:grid;grid-template-columns:150px 1fr 54px;gap:10px;align-items:center;font-size:13px}
+@media (max-width:520px){.bar{grid-template-columns:96px 1fr 44px}}
+.track{height:12px;background:var(--surface-2);border-radius:6px;overflow:hidden}
+.fill{height:100%;border-radius:6px}
+.f-ai{background:var(--brand)}
+.f-ctl{background:var(--muted);opacity:.55}
+
+footer{max-width:1240px;margin:0 auto;padding:8px 16px 36px;color:var(--muted);font-size:12.5px}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <h1>HappySmile: AI voice assistant mockup</h1>
+  <p>Two screens: what happens when someone asks to be contacted, and what HappySmile sees afterwards.</p>
+</header>
+
+<main class="wrap">
+
+  <!-- ================= SCREEN 1 ================= -->
+  <section aria-labelledby="s1">
+    <p class="label" id="s1">Screen 1 · <span>The moment a person asks to be contacted</span></p>
+    <div class="phone">
+      <div class="screen">
+        <div class="status"><span>7:42 pm</span><span>4G ▮▮▮</span></div>
+
+        <!-- state A: form -->
+        <div class="state show site" id="st-form">
+          <div class="logo"><i></i>HappySmile Dental</div>
+          <h2>Talk to us about braces</h2>
+          <p class="sub">Free 15-minute consultation at your nearest clinic.</p>
+          <div class="field"><label>Name</label><div class="input">Priya Sharma</div></div>
+          <div class="field"><label>Mobile</label><div class="input">+91 98XXX X4210 &nbsp;<span class="pill p-ok">OTP verified</span></div></div>
+          <div class="field"><label>Interested in</label>
+            <div class="chips"><span class="chip on">Braces / aligners</span><span class="chip">Whitening</span><span class="chip">Implants</span><span class="chip">Other</span></div>
+          </div>
+          <div class="field"><label>Preferred language</label>
+            <div class="chips"><span class="chip">English</span><span class="chip on">Hindi</span><span class="chip">Marathi</span><span class="chip">Tamil</span></div>
+          </div>
+          <div class="consent"><span class="box"></span><span>Call me now. <b>HappySmile's virtual assistant will call you within 2 minutes</b> to find a slot. You can ask for a person at any time.</span></div>
+          <button class="btn" onclick="go(1)">Request a call</button>
+          <p class="small">Calls only 9 am – 9 pm. Later requests get a WhatsApp message and a call next morning.</p>
+        </div>
+
+        <!-- state B: calling -->
+        <div class="state site calling" id="st-call">
+          <div class="logo" style="align-self:flex-start"><i></i>HappySmile Dental</div>
+          <div class="ring"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg></div>
+          <h3>Calling you now</h3>
+          <p>Request received 7:42:05 pm</p>
+          <p>From <b>+91 22 4XXX 1100</b></p>
+          <span class="verified">✓ HappySmile Dental · verified business</span>
+          <div class="script"><b>First thing you'll hear</b>“Namaste Priya, I'm HappySmile's virtual assistant calling about your braces enquiry. Is now a good time? You can ask for a person at any point.”</div>
+          <div class="timeline">
+            <div><span class="dot done"></span>Enquiry received</div>
+            <div><span class="dot done"></span>WhatsApp heads-up sent (“We're calling you now”)</div>
+            <div><span class="dot done"></span>Calling · attempt 1 of 3</div>
+            <div><span class="dot"></span>If no answer: WhatsApp booking link</div>
+          </div>
+        </div>
+
+        <!-- state C: missed -> whatsapp -->
+        <div class="state" id="st-wa">
+          <div class="wa">
+            <div class="wahead"><span class="av">H</span><div>HappySmile Dental ✓<small>Business account</small></div></div>
+            <div class="bubble">Hi Priya 👋 We just tried calling about braces. Sorry we missed you!<span class="t">7:43 pm</span></div>
+            <div class="bubble">Pick a free consultation slot at <b>HappySmile Andheri West</b> (1.8 km):<br><br>
+              • Thu 21 Nov, 11:00 am<br>• Thu 21 Nov, 6:30 pm<br>• Sat 23 Nov, 10:00 am<span class="t">7:43 pm</span></div>
+            <div class="qr">
+              <button class="primary">📅 Book a slot</button>
+              <button>📞 Call me back later</button>
+              <button>🙋 Talk to a person</button>
+            </div>
+            <div class="bubble" style="margin-top:10px">We'll try calling once more at 8:15 pm. Reply STOP to opt out.<span class="t">7:43 pm</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="stepper" role="group" aria-label="Show state">
+      <button class="on" onclick="go(0)">1 · Enquiry</button>
+      <button onclick="go(1)">2 · Call in &lt;2 min</button>
+      <button onclick="go(2)">3 · Missed → WhatsApp</button>
+    </div>
+  </section>
+
+  <!-- ================= SCREEN 2 ================= -->
+  <section aria-labelledby="s2" style="min-width:0">
+    <p class="label" id="s2">Screen 2 · <span>What HappySmile sees afterwards (front-desk dashboard)</span></p>
+    <div class="dash">
+      <div class="dbar">
+        <div><h2>Leads today · Andheri West</h2><div class="meta">Pilot week 2 · Tue 19 Nov · updated 7:44 pm</div></div>
+        <span class="pill p-info">Pilot: AI group vs. current-process group</span>
+      </div>
+
+      <div class="kpis">
+        <div class="kpi"><div class="k">Median time to first call</div><div class="v">1m 48s</div><div class="c">Current process: 4h 52m</div></div>
+        <div class="kpi"><div class="k">Reached (spoke to someone)</div><div class="v">68%</div><div class="c">Current process: 61%</div></div>
+        <div class="kpi"><div class="k">Booked</div><div class="v">44%</div><div class="c">Current process: 29%</div></div>
+        <div class="kpi hero"><div class="k">Attended visits / 100 enquiries</div><div class="v">31</div><div class="c">Current process: 22 · <b>success metric</b></div></div>
+      </div>
+
+      <div class="sec">
+        <h3>Needs you <span class="count">3</span> <span style="font-weight:400;color:var(--muted);font-size:12.5px">Escalated by the assistant, with a summary</span></h3>
+        <div class="cards">
+          <div class="card urgent">
+            <div class="row"><span class="name">Rahul Mehta</span><span class="pill p-danger">Pain · call within 15 min</span></div>
+            <div class="why"><b>Why handed over:</b> reports swelling and pain for 2 days</div>
+            <ul><li>Enquired about: implants</li><li>Lower-left molar, pain 7/10</li><li>Assistant gave no advice and promised a call from staff</li></ul>
+            <div class="acts"><button class="primary">Call now</button><button>▶ Recording 1:12</button></div>
+          </div>
+          <div class="card normal">
+            <div class="row"><span class="name">Anita Desai</span><span class="pill p-warn">Price question</span></div>
+            <div class="why"><b>Why handed over:</b> wants an EMI plan and a quote for aligners</div>
+            <ul><li>Comparing with another clinic's quote</li><li>Free Sat mornings · prefers English</li></ul>
+            <div class="acts"><button class="primary">Call back</button><button>▶ Recording 2:40</button></div>
+          </div>
+          <div class="card normal">
+            <div class="row"><span class="name">Suresh Iyer</span><span class="pill p-warn">Asked for a person</span></div>
+            <div class="why"><b>Why handed over:</b> “I'd rather speak to someone at the clinic”</div>
+            <ul><li>Enquired about: whitening</li><li>Prefers Tamil · after 6 pm</li></ul>
+            <div class="acts"><button class="primary">Call back</button><button>▶ Recording 0:34</button></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <h3>All leads today</h3>
+        <div class="tablewrap">
+        <table>
+          <thead><tr><th>Enquiry</th><th>Person</th><th>Treatment</th><th>First contact</th><th>Outcome</th><th>Next step</th></tr></thead>
+          <tbody>
+            <tr><td class="num">7:42 pm</td><td>Priya Sharma<span class="trt">Hindi</span></td><td>Braces</td><td class="num fast">1m 30s</td><td><span class="pill p-mute">No answer → WhatsApp</span></td><td>Retry 8:15 pm</td></tr>
+            <tr><td class="num">7:20 pm</td><td>Rahul Mehta<span class="trt">English</span></td><td>Implants</td><td class="num fast">1m 52s</td><td><span class="pill p-danger">Handed to staff</span></td><td>Staff call · urgent</td></tr>
+            <tr><td class="num">6:58 pm</td><td>Fatima Khan<span class="trt">Hindi</span></td><td>Whitening</td><td class="num fast">1m 05s</td><td><span class="pill p-ok">Booked</span></td><td>Thu 21 Nov, 6:30 pm</td></tr>
+            <tr><td class="num">6:31 pm</td><td>Anita Desai<span class="trt">English</span></td><td>Aligners</td><td class="num fast">1m 41s</td><td><span class="pill p-warn">Handed to staff</span></td><td>Price call</td></tr>
+            <tr><td class="num">5:47 pm</td><td>Vikram Rao<span class="trt">English</span></td><td>Cleaning</td><td class="num fast">2m 10s</td><td><span class="pill p-ok">Booked</span></td><td>Wed 20 Nov, 10:00 am</td></tr>
+            <tr><td class="num">5:12 pm</td><td>Neha Joshi<span class="trt">Marathi</span></td><td>Braces</td><td class="num slow">4h 38m</td><td><span class="pill p-info">Current process</span></td><td>Front desk queue</td></tr>
+            <tr><td class="num">4:40 pm</td><td>Arjun Nair<span class="trt">English</span></td><td>Whitening</td><td class="num fast">1m 22s</td><td><span class="pill p-mute">Not interested</span></td><td>Closed · price</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+
+      <div class="sec">
+        <h3>Pilot so far: attended visits per 100 enquiries</h3>
+        <div class="bars">
+          <div class="bar"><span>AI assistant group</span><div class="track"><div class="fill f-ai" style="width:62%"></div></div><b>31</b></div>
+          <div class="bar"><span>Current process group</span><div class="track"><div class="fill f-ctl" style="width:44%"></div></div><b>22</b></div>
+        </div>
+        <p class="legend" style="margin:10px 0 0">Leads are randomly split 50/50 across 3 pilot clinics · n = 1,140 enquiries · scale-up decision at week 4</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>Fictional mockup for a case-study exercise. All names, numbers and phone numbers are made up.</footer>
+
+<script>
+const states=["st-form","st-call","st-wa"];
+const btns=document.querySelectorAll(".stepper button");
+let timer;
+function go(i){
+  clearTimeout(timer);
+  states.forEach((id,j)=>document.getElementById(id).classList.toggle("show",i===j));
+  btns.forEach((b,j)=>b.classList.toggle("on",i===j));
+  if(i===1) timer=setTimeout(()=>go(2),4000);
+}
+</script>
+</body>
+</html>
